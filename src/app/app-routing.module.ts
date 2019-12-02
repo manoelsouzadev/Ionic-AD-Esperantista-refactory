@@ -32,7 +32,52 @@ const routes: Routes = [
     path: 'tutorial',
     loadChildren: () => import('./pages/tutorial/tutorial.module').then(m => m.TutorialModule),
     canLoad: [CheckTutorial]
-  }
+  },
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./pages/home/home/home.module').then(m => m.HomeModule)
+  },
+  // {
+  //   path: 'list',
+  //   loadChildren: () =>
+  //     import('./pages/list/list.module').then(m => m.ListPageModule)
+  // },
+  // {
+  //   path: 'cultos',
+  //   loadChildren: () =>
+  //     import('./pages/cultos/cultos.module').then(m => m.CultosModule)
+  // },
+  // {
+  //   path: 'login',
+  //   loadChildren: () =>
+  //     import('./pages/login/login.module').then(m => m.LoginPageModule)
+  // },
+  // {
+  //   path: 'menu-dados',
+  //   loadChildren: () =>
+  //     import('./pages/cadastro/menu-dados/menu-dados.module').then(
+  //       m => m.MenuDadosPageModule
+  //     )
+  // },
+  // {
+  //   path: 'cadastro',
+  //   loadChildren: () =>
+  //     import('./pages/cadastro/cadastro-dados/cadastro-dados.module').then(
+  //       m => m.CadastroDadosModule
+  //     )
+  // },
+  // {
+  //   path: 'secao',
+  //   loadChildren: () =>
+  //     import('./pages/cadastro/secoes-cadastro/secoes-cadastro.module').then(
+  //       m => m.SecoesCadastroModule
+  //     )
+  // },
+  { path: 'novo-culto', loadChildren: './pages/cadastro/novo-culto/novo-culto.module#NovoCultoPageModule' },
+  { path: 'atualizar-culto', loadChildren: './pages/cadastro/atualizar-culto/atualizar-culto.module#AtualizarCultoPageModule' },
+  { path: 'nova-campanha', loadChildren: './pages/cadastro/nova-campanha/nova-campanha.module#NovaCampanhaPageModule' },
+  { path: 'atualizar-campanha', loadChildren: './pages/cadastro/atualizar-campanha/atualizar-campanha.module#AtualizarCampanhaPageModule' },
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { HomeModule } from './../home/home.module';
+import { HomeModule } from './../home/home/home.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';

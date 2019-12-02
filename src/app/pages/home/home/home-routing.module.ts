@@ -1,3 +1,4 @@
+import { HomeCardDetalhesPage } from './../home-card-detalhes/home-card-detalhes.page';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -7,6 +8,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage
+  },
+  {
+    path: 'home-card-detalhes',
+    component: HomeCardDetalhesPage
   }
 ];
 

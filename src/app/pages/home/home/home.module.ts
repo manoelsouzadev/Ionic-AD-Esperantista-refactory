@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { HomePage } from './home';
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
+import { ScheduleFilterPage } from '../../schedule-filter/schedule-filter';
 import { HomePageRoutingModule } from './home-routing.module';
+import { HomeCardDetalhesPage } from '../home-card-detalhes/home-card-detalhes.page';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { HomePageRoutingModule } from './home-routing.module';
   ],
   declarations: [
     HomePage,
+    HomeCardDetalhesPage,
     ScheduleFilterPage
   ],
   entryComponents: [

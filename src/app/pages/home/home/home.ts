@@ -2,9 +2,9 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, IonList, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
 
-import { ScheduleFilterPage } from '../schedule-filter/schedule-filter';
-import { ConferenceData } from '../../providers/conference-data';
-import { UserData } from '../../providers/user-data';
+import { ScheduleFilterPage } from '../../schedule-filter/schedule-filter';
+import { ConferenceData } from '../../../providers/conference-data';
+import { UserData } from '../../../providers/user-data';
 
 @Component({
   selector: 'page-schedule',
