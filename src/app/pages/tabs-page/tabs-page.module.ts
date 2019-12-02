@@ -10,7 +10,7 @@ import { AboutModule } from '../about/about.module';
 import { MapModule } from '../map/map.module';
 import { SessionDetailModule } from '../session-detail/session-detail.module';
 import { SpeakerDetailModule } from '../speaker-detail/speaker-detail.module';
-import { SpeakerListModule } from '../speaker-list/speaker-list.module';
+import { CultosSemanaisModule } from '../cultos-semanais/cultos-semanais.module';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { SpeakerListModule } from '../speaker-list/speaker-list.module';
     HomeModule,
     SessionDetailModule,
     SpeakerDetailModule,
-    SpeakerListModule,
+    CultosSemanaisModule,
     TabsPageRoutingModule
   ],
   declarations: [
