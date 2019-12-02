@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" (click)="redirecionarCampanhasCadastradas()">
+      <ion-back-button icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Campanha</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="ion-padding">
+      <ion-card-header>
+          <ion-card-title> 
+              Alteração de Dados
+          </ion-card-title>
+        </ion-card-header>
+    <form [formGroup]="form">
+      <div class="ion-padding">
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Título</ion-label>
+          <ion-input mode="ios" formControlName="titulo"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Horário</ion-label>
+          <ion-input
+            mode="ios"
+            type="time"
+            formControlName="horario"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Data de Início</ion-label>
+          <ion-input
+            mode="ios"
+            type="date"
+            formControlName="dataInicio"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Data do Final</ion-label>
+          <ion-input
+            mode="ios"
+            type="date"
+            formControlName="dataFinal"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Dia da semana</ion-label>
+          <ion-select mode="ios" interface="popover" formControlName="dia">
+            <ion-select-option value="Domingo">Domingo</ion-select-option>
+            <ion-select-option value="Segunda-feira"
+              >Segunda-feira</ion-select-option
+            >
+            <ion-select-option value="Terça-feira"
+              >Terça-feira</ion-select-option
+            >
+            <ion-select-option value="Quarta-feira"
+              >Quarta-feira</ion-select-option
+            >
+            <ion-select-option value="Quinta-feira"
+              >Quinta-feira</ion-select-option
+            >
+            <ion-select-option value="Sexta-feira"
+              >Sexta-feira</ion-select-option
+            >
+            <ion-select-option value="Sábado">Sábado</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Descrição</ion-label>
+          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao"> </ion-textarea>
+        </ion-item>
+      </div>
+      
+      <div class="ion-padding">
+        <ion-button
+          mode="ios"
+          expand="block"
+          type="submit"
+          class="ion-no-margin"
+          (click)="updateCampanha()"
+          >Salvar<ion-icon name="send" mode="ios" slot="end"></ion-icon
+        ></ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

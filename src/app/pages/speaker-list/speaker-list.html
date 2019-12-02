@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -57,4 +57,73 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+</ion-content> -->
+
+
+<!--ion-card>
+  <ion-card-header>
+    <h5>Culto de Missões</h5>
+    <ion-card-subtitle>Quarta-feira</ion-card-subtitle>
+    <h6>Horário: 19:00h</h6>
+  </ion-card-header>
+  <ion-card-content>
+    <p>Culto realizado por determinado departamento da igreja.</p>
+  </ion-card-content>
+</!--ion-card>
+
+<ion-card-->
+<!--ion-card-header>
+    <h5>Culto de Oração e Doutrina</h5>
+    <ion-card-subtitle>Sexta-feira</ion-card-subtitle>
+    <h6>Horário: 19:00h</h6>
+  </!--ion-card-header>
+  <ion-card-content>
+    <p>Culto de oração e ensino bíblico.</p>
+  </ion-card-content>
+</ion-card-->
+
+<!--ion-card>
+  <ion-card-header>
+    <h5>Culto da Família</h5>
+    <ion-card-subtitle>Domingo</ion-card-subtitle>
+    <h6>Horário: 18:00h</h6>
+  </ion-card-header>
+  <ion-card-content>
+    <p>Culto da família.</p>
+  </ion-card-content>
+</!ion-card-->
+
+<!--
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Cultos Semanais
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>-->
+<main-header title="Cultos Semanais"></main-header>
+<ion-content>
+  <ion-card id="card" mode="ios" *ngFor="let culto of cultos">
+   <img [src]="culto.urlImagem" *ngIf="culto.urlImagem" (click)="viewImage(culto.urlImagem, culto.titulo, culto.descricao)">
+    <ion-card-header>
+      <h5><strong>{{ culto.titulo }}</strong></h5>
+      <h6>{{culto.dia}} - {{ culto.horario }}h</h6>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ culto.descricao }}</p>
+      <p>{{ culto.ceia }}</p>
+      <p>{{culto.adicional}}</p>
+      <p>{{culto.adicional2}}</p>
+      <p>{{culto.adicional3}}</p>
+      <p>{{culto.adicional4}}</p>
+      <p>{{culto.adicional5}}</p>
+      <p>{{culto.adicional6}}</p>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
+<!--<tab-menu></tab-menu>-->

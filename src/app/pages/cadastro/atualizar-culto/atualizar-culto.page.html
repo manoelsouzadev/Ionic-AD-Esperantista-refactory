@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" (click)="redirecionarCultosCadastrados()">
+      <ion-back-button icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Culto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="ion-padding">
+    <ion-card-header>
+      <ion-card-title> 
+          Alteração de Dados
+      </ion-card-title>
+    </ion-card-header>
+    <form [formGroup]="form">
+      <ion-item>
+        <ion-label mode="ios" position="stacked">Título</ion-label>
+        <ion-input mode="ios" formControlName="titulo"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label mode="ios" position="stacked">Horário</ion-label>
+        <ion-input mode="ios" type="time" formControlName="horario"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label mode="ios" position="stacked">Dia da semana</ion-label>
+        <ion-select mode="ios" interface="popover" formControlName="dia">
+          <ion-select-option value="Domingo">Domingo</ion-select-option>
+          <ion-select-option value="Segunda-feira"
+            >Segunda-feira</ion-select-option
+          >
+          <ion-select-option value="Terça-feira">Terça-feira</ion-select-option>
+          <ion-select-option value="Quarta-feira"
+            >Quarta-feira</ion-select-option
+          >
+          <ion-select-option value="Quinta-feira"
+            >Quinta-feira</ion-select-option
+          >
+          <ion-select-option value="Sexta-feira">Sexta-feira</ion-select-option>
+          <ion-select-option value="Sábado">Sábado</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label mode="ios" position="stacked">Descrição</ion-label>
+        <ion-textarea mode="ios" formControlName="descricao"> </ion-textarea>
+      </ion-item>
+
+      <ion-button
+        mode="ios"
+        expand="block"
+        type="submit"
+        class="ion-margin-bottom"
+        (click)="updateCulto()"
+        >Salvar<ion-icon name="send" mode="ios" slot="end"></ion-icon
+      ></ion-button>
+    </form>
+  </div>
+
+  <div class="ion-padding">
+    <ion-card-header>
+      <ion-card-title>
+      Alteração da Imagem
+    </ion-card-title>
+    
+    </ion-card-header>
+    <img [src]="urlImagem" *ngIf="urlImagem; else noImage"/>
+   <!-- <ion-button mode="ios" expand="block" type="submit" (click)="openGalery()"
+      >Escolher Imagem</ion-button
+    >
+    <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
+      >Salvar Imagem<ion-icon name="send" slot="end"></ion-icon
+    ></ion-button>-->
+
+    <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
+      >Alterar Imagem<ion-icon name="images" slot="end"></ion-icon
+    ></ion-button>
+  </div>
+</ion-content>
+<ng-template #noImage>
+    <p id="text-center">Não há imagem para exibir</p>
+</ng-template>

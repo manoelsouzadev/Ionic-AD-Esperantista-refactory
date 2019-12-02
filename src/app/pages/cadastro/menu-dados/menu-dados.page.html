@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Adicionar
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list *ngFor="let tech of techs">
+        <ion-item button (click)="onConsole(tech.route)">
+          <ion-icon slot="start" name="add-circle-outline" style="color: #001facf6;"></ion-icon>
+          <ion-label>
+            <h3>{{ tech.title }}</h3>
+          </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
