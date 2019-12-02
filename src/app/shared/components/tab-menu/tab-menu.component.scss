@@ -1,0 +1,40 @@
+.container {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    position: fixed;
+}
+
+// ion-icon, ion-label{
+//     color:#fff;
+//     font-weight: bolder;
+// }
+
+// ion-tab-bar {
+//     --background: #001facf6;
+// }
+
+// ion-icon:hover{
+//     color:red;
+// }
+
+// .button-hover:hover ion-icon{
+//     color: rgba(168, 164, 164, 0.932);
+//     //color: rgba(129, 127, 127, 0.932);
+// }
+
+// .button-hover:hover ion-label{
+//     color: rgba(168, 164, 164, 0.932);
+//     //color: rgba(129, 127, 127, 0.932);
+// }
+
+.button-hover:hover ion-icon{
+    color: #001facf6;
+    //color: rgba(129, 127, 127, 0.932);
+}
+
+.button-hover:hover ion-label{
+    color: #474952f6;
+    //color: rgba(129, 127, 127, 0.932);
+}
+

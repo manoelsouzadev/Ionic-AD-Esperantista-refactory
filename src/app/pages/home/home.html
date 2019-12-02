@@ -11,7 +11,7 @@
   </ion-toolbar>
 </ion-header> -->
 
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -89,4 +89,69 @@
       </ion-fab-button>
     </ion-fab-list>
   </ion-fab>
+</ion-content> -->
+
+
+<ion-header class="border-bottom">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <ion-card mode="ios" class="welcome-card" (click)="mostrarDetalhes()">
+    <img src="../../../assets/logo-AD.png" alt="" />
+    <ion-card-content>
+      <p class="formatar-texto">
+        A origem das Assembleias de Deus no Brasil está no fogo do reavivamento
+        que varreu o mundo por volta de 1900, início do Século XX, especialmente
+        na América do Norte. Os participantes desse reavivamento foram cheios do
+        Espírito Santo da mesma forma que os discípulos e os seguidores de Jesus
+        durante a Festa Judaica do Pentecostes, no início da Igreja Primitiva,
+        conforme está escrito em Atos 2. Assim, eles foram chamados de
+        “pentecostais”.
+      </p>
+      <cite id="formatar-citacao">CPAD</cite>
+    </ion-card-content>
+  </ion-card>
+
+<!--<div style="background-color: white; margin: 0;position:absolute;
+bottom:0;
+width:100%;">
+  <div style="float:left;background-color: white; width: 33.2%;  " class="ion-padding" >
+      <ion-icon style="font-size: 25px; display: block; color: rgb(133, 130, 130);
+      margin-left: auto;
+      margin-right: auto; " mode="ios"  name="home"></ion-icon>
+      <small>Home</small>
+  </div>
+  <div style="float:left;background-color: white; width: 33.2%;  " class="ion-padding">
+      <ion-icon style="font-size: 25px; display: block; color: rgb(133, 130, 130);
+      margin-left: auto;
+      margin-right: auto;" mode="ios" name="flame"></ion-icon>
+      <div style=" margin-left: auto;
+      margin-right: auto; width: 33.2%">
+      <small>Cultos</small>
+    </div>
+  </div>
+  <div style="float:left;background-color: white; width: 33.2%; " class="ion-padding">
+      <ion-icon style="font-size: 25px;  display: block; color: rgb(133, 130, 130);
+      margin-left: auto;
+      margin-right: auto;" mode="ios" name="settings"></ion-icon>
+      <small>Administrador</small>
+  </div>
+</div>-->
+
+
+
+  <!--<ion-fab horizontal="end" mode="ios" vertical="bottom" slot="fixed">
+    <ion-fab-button mode="ios" (click)="redirecionarLogin()">
+      <ion-icon mode="ios" name="settings"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>-->
 </ion-content>
+<!-- <tab-menu></tab-menu> -->
