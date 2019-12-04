@@ -1,54 +1,46 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header class="border-bottom">
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-
-    <ion-title>Login</ion-title>
+    <ion-title>
+      Administrador
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="login-logo">
-    <img src="assets/img/appicon.svg" alt="Ionic logo">
-  </div>
+    <div>
+  <form>
+    <div>
+      <div class="ion-padding">
+        <ion-icon mode="ios" name="person" id="person-icon"></ion-icon>
+      </div>
+    </div>
 
-  <form #loginForm="ngForm" novalidate>
-    <ion-list>
-      <ion-item>
-        <ion-label position="stacked" color="primary">Username</ion-label>
-        <ion-input [(ngModel)]="login.username" name="username" type="text" #username="ngModel" spellcheck="false" autocapitalize="off"
-          required>
-        </ion-input>
-      </ion-item>
+      <div id="margin-left-right">
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Senha</ion-label>
+          <ion-input
+            required
+            type="password"
+            [(ngModel)] = "usuario.senha"
+            name="senha"
+          ></ion-input>
+        </ion-item>
+      </div>
 
-      <ion-text color="danger">
-        <p [hidden]="username.valid || submitted == false" class="ion-padding-start">
-          Username is required
-        </p>
-      </ion-text>
-
-      <ion-item>
-        <ion-label position="stacked" color="primary">Password</ion-label>
-        <ion-input [(ngModel)]="login.password" name="password" type="password" #password="ngModel" required>
-        </ion-input>
-      </ion-item>
-
-      <ion-text color="danger">
-        <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
-          Password is required
-        </p>
-      </ion-text>
-    </ion-list>
-
-    <ion-row>
-      <ion-col>
-        <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Login</ion-button>
-      </ion-col>
-      <ion-col>
-        <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
-      </ion-col>
-    </ion-row>
+      <div class="ion-padding" id="button-login">
+        <ion-button
+          mode="ios"
+          expand="block"
+          type="submit"
+          class="ion-no-margin"
+          (click)="fazerLogin()"
+          >Login<ion-icon name="log-in" slot="end"></ion-icon
+        ></ion-button>
+      </div>
   </form>
-
+</div>
 </ion-content>
+<!--<tab-menu></tab-menu>-->

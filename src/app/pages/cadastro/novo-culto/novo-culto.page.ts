@@ -33,7 +33,7 @@ export class NovoCultoPage implements OnInit {
       horario: ['', Validators.required],
       dia: ['', Validators.required],
       descricao: ['', Validators.required],
-      urlImagem: ['', Validators.required]
+      urlImagem: ['']
     });
   }
 
@@ -48,7 +48,7 @@ export class NovoCultoPage implements OnInit {
    // this.downloadURL !== undefined ||
    // this.downloadURL !== ''
       /*?*/ await this.form.get('urlImagem').setValue(this.downloadURL);
-     
+
     await this.cultosSemanaisService.save(this.form.value).subscribe(
       success => {
         this.sharedModalService.presentToast('Culto salvo com sucesso!', 'medium', 'custom-modal', 1500);
@@ -71,7 +71,7 @@ export class NovoCultoPage implements OnInit {
       descricao: null
     });
     this.fileImage = null;
-    this.downloadURL = null;
+    this.downloadURL = '';
   }
 
   async openGalery() {

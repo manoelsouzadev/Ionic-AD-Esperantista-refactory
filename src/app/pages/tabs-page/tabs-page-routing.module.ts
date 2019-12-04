@@ -10,7 +10,7 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'schedule',
+        path: 'home',
         children: [
           {
             path: '',
@@ -23,7 +23,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'speakers',
+        path: 'cultos',
         children: [
           {
             path: '',
@@ -40,16 +40,16 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'map',
+        path: 'login',
         children: [
           {
             path: '',
-            loadChildren: () => import('../map/map.module').then(m => m.MapModule)
+            loadChildren: () => import('../login/login.module').then(m => m.LoginModule)
           }
         ]
       },
       {
-        path: 'about',
+        path: 'sobre',
         children: [
           {
             path: '',
@@ -59,7 +59,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/app/tabs/schedule',
+        redirectTo: '/app/tabs/home',
         pathMatch: 'full'
       }
     ]

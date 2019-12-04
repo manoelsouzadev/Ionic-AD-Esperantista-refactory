@@ -1,43 +1,66 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { SwUpdate } from '@angular/service-worker';
+import {
+  Component,
+  OnInit,
+  ViewEncapsulation,
+  ViewChildren,
+  QueryList
+} from "@angular/core";
+import { Router } from "@angular/router";
+import { SwUpdate } from "@angular/service-worker";
 
-import { MenuController, Platform, ToastController } from '@ionic/angular';
+import {
+  MenuController,
+  Platform,
+  ToastController,
+  PopoverController,
+  ActionSheetController,
+  ModalController,
+  IonRouterOutlet,
+  NavController
+} from "@ionic/angular";
 
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from "@ionic-native/splash-screen/ngx";
+import { StatusBar } from "@ionic-native/status-bar/ngx";
 
-import { Storage } from '@ionic/storage';
+import { Storage } from "@ionic/storage";
 
-import { UserData } from './providers/user-data';
+import { UserData } from "./providers/user-data";
+import { Toast } from "@ionic-native/toast/ngx";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"],
   encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
+  lastTimeBackPress = 0;
+  timePeriodToExit = 2000;
+  subscription: Subscription;
+
+  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+
   appPages = [
     {
-      title: 'Schedule',
-      url: '/app/tabs/schedule',
-      icon: 'calendar'
+      title: "Home",
+      url: "/app/tabs/home",
+      icon: "home"
     },
     {
-      title: 'Speakers',
-      url: '/app/tabs/speakers',
-      icon: 'contacts'
+      title: "Cultos",
+      url: "/app/tabs/cultos",
+      icon: "contacts"
     },
     {
-      title: 'Map',
-      url: '/app/tabs/map',
-      icon: 'map'
+      title: "Administrador",
+      url: "/app/tabs/login",
+      icon: "settings"
     },
     {
-      title: 'About',
-      url: '/app/tabs/about',
-      icon: 'information-circle'
+      title: "Sobre",
+      url: "/app/tabs/sobre",
+      icon: "information-circle"
     }
   ];
   loggedIn = false;
@@ -53,8 +76,13 @@ export class AppComponent implements OnInit {
     private userData: UserData,
     private swUpdate: SwUpdate,
     private toastCtrl: ToastController,
+    public modalCtrl: ModalController,
+    private actionSheetCtrl: ActionSheetController,
+    private popoverCtrl: PopoverController,
+    private toast: Toast
   ) {
     this.initializeApp();
+    console.log(this.router.url);
   }
 
   async ngOnInit() {
@@ -63,9 +91,9 @@ export class AppComponent implements OnInit {
 
     this.swUpdate.available.subscribe(async res => {
       const toast = await this.toastCtrl.create({
-        message: 'Update available!',
+        message: "Update available!",
         showCloseButton: true,
-        position: 'bottom',
+        position: "bottom",
         closeButtonText: `Reload`
       });
 
@@ -98,28 +126,28 @@ export class AppComponent implements OnInit {
   }
 
   listenForLoginEvents() {
-    window.addEventListener('user:login', () => {
+    window.addEventListener("user:login", () => {
       this.updateLoggedInStatus(true);
     });
 
-    window.addEventListener('user:signup', () => {
+    window.addEventListener("user:signup", () => {
       this.updateLoggedInStatus(true);
     });
 
-    window.addEventListener('user:logout', () => {
+    window.addEventListener("user:logout", () => {
       this.updateLoggedInStatus(false);
     });
   }
 
   logout() {
     this.userData.logout().then(() => {
-      return this.router.navigateByUrl('/app/tabs/schedule');
+      return this.router.navigateByUrl("/app/tabs/schedule");
     });
   }
 
   openTutorial() {
     this.menu.enable(false);
-    this.storage.set('ion_did_tutorial', false);
-    this.router.navigateByUrl('/tutorial');
+    this.storage.set("ion_did_tutorial", false);
+    this.router.navigateByUrl("/tutorial");
   }
 }

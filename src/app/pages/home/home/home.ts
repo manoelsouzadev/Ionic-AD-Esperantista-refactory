@@ -1,10 +1,11 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, IonList, LoadingController, ModalController, ToastController, Config } from '@ionic/angular';
+import { AlertController, IonList, LoadingController, ModalController, ToastController, Config, IonRouterOutlet, MenuController, PopoverController, ActionSheetController, Platform } from '@ionic/angular';
 
 import { ScheduleFilterPage } from '../../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../../providers/conference-data';
 import { UserData } from '../../../providers/user-data';
+import { Toast } from '@ionic-native/toast/ngx';
 
 @Component({
   selector: 'page-schedule',
@@ -12,6 +13,11 @@ import { UserData } from '../../../providers/user-data';
   styleUrls: ['./home.scss'],
 })
 export class HomePage implements OnInit {
+  lastTimeBackPress = 0;
+  timePeriodToExit = 2000;
+
+  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+
   // Gets a reference to the list element
   @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
 
@@ -25,15 +31,20 @@ export class HomePage implements OnInit {
   confDate: string;
 
   constructor(
+    private menu: MenuController,
+    private platform: Platform,
     public alertCtrl: AlertController,
     public confData: ConferenceData,
     public loadingCtrl: LoadingController,
-    public modalCtrl: ModalController,
     public router: Router,
     public toastCtrl: ToastController,
     public user: UserData,
-    public config: Config
-  ) { }
+    public config: Config,
+    public modalCtrl: ModalController,
+    private actionSheetCtrl: ActionSheetController,
+    private popoverCtrl: PopoverController,
+    private toast: Toast
+  ) {}
 
   ngOnInit() {
     // this.updateSchedule();

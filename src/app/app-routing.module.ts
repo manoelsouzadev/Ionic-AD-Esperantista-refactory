@@ -38,6 +38,20 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/home/home/home.module').then(m => m.HomeModule)
   },
+  {
+    path: 'menu-dados',
+    loadChildren: () =>
+      import('./pages/cadastro/menu-dados/menu-dados.module').then(
+        m => m.MenuDadosPageModule
+      )
+  },
+  {
+    path: 'secao',
+    loadChildren: () =>
+      import('./pages/cadastro/secoes-cadastro/secoes-cadastro.module').then(
+        m => m.SecoesCadastroModule
+      )
+  },
   // {
   //   path: 'list',
   //   loadChildren: () =>

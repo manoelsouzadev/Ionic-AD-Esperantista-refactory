@@ -1,13 +1,15 @@
-.login-logo {
-  padding: 20px 0;
-  min-height: 200px;
-  text-align: center;
+.map-canvas {
+  position: absolute;
+
+  height: 100%;
+  width: 100%;
+
+  background-color: transparent;
+
+  opacity: 0;
+  transition: opacity 150ms ease-in;
 }
 
-.login-logo img {
-  max-width: 150px;
-}
-
-.list {
-  margin-bottom: 0;
+.show-map {
+  opacity: 1;
 }

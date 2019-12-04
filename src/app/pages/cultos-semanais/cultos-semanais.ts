@@ -24,7 +24,9 @@ export class CultosSemanaisPage {
     private cultosSemanaisService: CultosSemanaisService,
     public modalController: ModalController,
     private sharedModalService: SharedModalService
-  ) {}
+  ) {
+    console.log(this.router.url);
+  }
 
   // ionViewDidEnter() {
   //   this.confData.getSpeakers().subscribe((speakers: any[]) => {
