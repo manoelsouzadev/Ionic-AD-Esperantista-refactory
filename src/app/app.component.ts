@@ -82,8 +82,21 @@ export class AppComponent implements OnInit {
     private toast: Toast
   ) {
     this.initializeApp();
+    this.backButtonEvent();
     console.log(this.router.url);
   }
+
+  backButtonEvent() {
+    this.platform.backButton.subscribe(() => {
+        this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+            if (this.router.url === '/app/tabs/home') {
+                navigator['app'].exitApp();
+            } else {
+                window.history.back();
+            }
+        });
+    });
+}
 
   async ngOnInit() {
     this.checkLoginStatus();
