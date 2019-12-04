@@ -3,7 +3,8 @@ import {
   OnInit,
   ViewEncapsulation,
   ViewChildren,
-  QueryList
+  QueryList,
+  OnDestroy
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { SwUpdate } from "@angular/service-worker";
@@ -82,21 +83,97 @@ export class AppComponent implements OnInit {
     private toast: Toast
   ) {
     this.initializeApp();
-    this.backButtonEvent();
+    // this.backButtonEvent();
     console.log(this.router.url);
   }
 
-  backButtonEvent() {
-    this.platform.backButton.subscribe(() => {
-        this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-            if (this.router.url === '/app/tabs/home') {
-                navigator['app'].exitApp();
-            } else {
-                window.history.back();
-            }
-        });
-    });
-}
+//   backButtonEvent() {
+//    this.subscription = this.platform.backButton.subscribeWithPriority(999999999,() => {
+//         this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+//         if (this.router.url === '/app/tabs/home') {
+//             navigator['app'].exitApp();
+//         } else {
+//             window.history.back();
+//         }
+//         });
+//     });
+// }
+
+// ionViewDidLeave(){
+//   this.subscription.unsubscribe();
+//  }
+
+
+
+
+ backButtonEvent() {
+  this.platform.backButton.subscribe(async () => {
+      // close action sheet
+      try {
+          const element = await this.actionSheetCtrl.getTop();
+          if (element) {
+              element.dismiss();
+              return;
+          }
+      } catch (error) {
+      }
+
+      // close popover
+      try {
+          const element = await this.popoverCtrl.getTop();
+          if (element) {
+              element.dismiss();
+              return;
+          }
+      } catch (error) {
+      }
+
+      // close modal
+      try {
+          const element = await this.modalCtrl.getTop();
+          if (element) {
+              element.dismiss();
+              return;
+          }
+      } catch (error) {
+          console.log(error);
+
+      }
+
+      // close side menua
+      try {
+          const element = await this.menu.getOpen();
+          if (element !== null) {
+              this.menu.close();
+          }
+
+      } catch (error) {
+
+      }
+
+      this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+          if (!(this.router.url === '/app/tabs/home')) {
+            window.history.back();
+
+          } else if (this.router.url === '/app/tabs/home') {
+              if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+                  // this.platform.exitApp(); // Exit from app
+                  navigator['app'].exitApp(); // work in ionic 4
+
+              } else {
+                  this.toast.show(
+                      `Press back again to exit App.`,
+                      '2000',
+                      'center')
+                      .subscribe(toast => {
+                          // console.log(JSON.stringify(toast));
+                      });
+                  this.lastTimeBackPress = new Date().getTime();
+              }
+          }
+      });
+  });
+ }
 
   async ngOnInit() {
     this.checkLoginStatus();
@@ -123,6 +200,7 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.backButtonEvent();
     });
   }
 

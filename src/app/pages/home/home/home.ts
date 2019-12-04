@@ -44,7 +44,7 @@ export class HomePage implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private popoverCtrl: PopoverController,
     private toast: Toast
-  ) {}
+  ) { }
 
   ngOnInit() {
     // this.updateSchedule();
