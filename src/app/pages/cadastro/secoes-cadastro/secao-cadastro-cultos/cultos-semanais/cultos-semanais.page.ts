@@ -38,20 +38,22 @@ export class CultosSemanaisPage implements OnInit {
   redirecionarMenuDados(culto){
     console.log(culto);
     this.router.navigate(['menu-dados']);
-     
+
   }
 
   redirecionarAtualizarCulto(culto){
     console.log(culto);
-  
+
     this.router.navigate(['atualizar-culto'], {
-      queryParams: { 'id': culto._id } 
+      queryParams: { 'id': culto._id }
   });
   }
-  
-  async deletarCulto(id: string, urlImagem: string) { 
+
+  async deletarCulto(id: string, urlImagem: string) {
     console.log(id);
-    await this.firebaseService.deletarImagemStorage('imagens-culto', urlImagem);
+    if(urlImagem !== null && urlImagem !== undefined && urlImagem !== ''){
+      await this.firebaseService.deletarImagemStorage('imagens-culto', urlImagem);
+    }
     await this.cultosSemanaisService.remove(id).subscribe(
       success => {
         console.log('Culto deletado com sucesso!');

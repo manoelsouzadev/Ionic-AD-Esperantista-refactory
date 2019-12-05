@@ -50,7 +50,9 @@ export class CampanhasPage implements OnInit {
   
   async deletarCampanha(id: string, urlImagem: string) { 
     console.log(id);
+    if(urlImagem !== null && urlImagem !== undefined && urlImagem !== ''){
     await this.firebaseService.deletarImagemStorage('imagens-campanha', urlImagem);
+    }
     await this.campanhasService.remove(id).subscribe(
       success => {
         console.log('Campanha deletada com sucesso!');

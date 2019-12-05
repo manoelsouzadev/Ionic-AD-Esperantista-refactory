@@ -28,6 +28,7 @@ import { Storage } from "@ionic/storage";
 import { UserData } from "./providers/user-data";
 import { Toast } from "@ionic-native/toast/ngx";
 import { Subscription } from "rxjs";
+import { SharedModalService } from './shared/services/shared-modal/shared-modal.service';
 
 @Component({
   selector: "app-root",
@@ -80,7 +81,8 @@ export class AppComponent implements OnInit {
     public modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
     private popoverCtrl: PopoverController,
-    private toast: Toast
+    private toast: Toast,
+    private sharedModalService: SharedModalService
   ) {
     this.initializeApp();
     // this.backButtonEvent();
@@ -161,13 +163,12 @@ export class AppComponent implements OnInit {
                   navigator['app'].exitApp(); // work in ionic 4
 
               } else {
-                  this.toast.show(
+                  this.sharedModalService.presentToast(
                       `Press back again to exit App.`,
-                      '2000',
-                      'center')
-                      .subscribe(toast => {
-                          // console.log(JSON.stringify(toast));
-                      });
+                      'medium',
+                      'custom-modal',
+                      2000);
+
                   this.lastTimeBackPress = new Date().getTime();
               }
           }
