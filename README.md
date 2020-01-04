@@ -3,8 +3,8 @@
 Aplicação para gerenciamento diário de Igrejas.
 
 Siga os passos abaixo:
-* Crie uma pasta 'environments' na pasta src.
-* Dentro da pasta 'environments', crie um arquivo chamado 'environment.ts' ou 'environment.prod.ts'.Com a estrutura abaixo:
+1. Crie uma pasta 'environments' na pasta src.
+2. Dentro da pasta 'environments', crie um arquivo chamado 'environment.ts' ou 'environment.prod.ts'.Com a estrutura abaixo:
 
 ~~~javascript
 export const environment = {
@@ -19,4 +19,4 @@ export const environment = {
 ~~~
 **(Neste app utilizo o arquivo com nome 'environment.prod.ts', mas você pode utilizar a primeira opção, contanto
 que você altere o nome nos locais onde este é utilizado).**
-* Este app utiliza uma api node
+2. Este app utiliza uma api node
