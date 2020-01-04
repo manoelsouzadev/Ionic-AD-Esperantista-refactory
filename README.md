@@ -1,4 +1,4 @@
-# Ionic Angular App AD Esperntista
+# Ionic Angular App AD Esperantista
 
 Aplicação para gerenciamento diário de Igrejas.
 
@@ -18,5 +18,6 @@ export const environment = {
 }
 ~~~
 **(Neste app utilizo o arquivo com nome 'environment.prod.ts', mas você pode utilizar a primeira opção, contanto
-que você altere o nome nos locais onde este é utilizado).**&nbsp;
+que você altere o nome nos locais onde este é utilizado).**
+&nbsp;
 2. Este app utiliza uma api node
