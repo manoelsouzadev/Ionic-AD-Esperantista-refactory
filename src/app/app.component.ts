@@ -82,10 +82,11 @@ export class AppComponent implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private popoverCtrl: PopoverController,
     private toast: Toast,
-    private sharedModalService: SharedModalService
+    private sharedModalService: SharedModalService,
+    private navController: NavController
   ) {
     this.initializeApp();
-    // this.backButtonEvent();
+    //this.backButtonEvent();
     console.log(this.router.url);
   }
 
@@ -154,10 +155,12 @@ export class AppComponent implements OnInit {
       }
 
       this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-          if (!(this.router.url === '/app/tabs/home')) {
-            window.history.back();
+          if (this.router.url !== '/app/tabs/home') {
+            this.navController.back();
+             /*if ( this.router.url === '/app/tabs/cultos' || this.router.url === '/app/tabs/login') {
+               this.router.navigate(['/app/tabs/home']);*/
 
-          } else if (this.router.url === '/app/tabs/home') {
+             } else if (this.router.url === '/app/tabs/home') {
               if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
                   // this.platform.exitApp(); // Exit from app
                   navigator['app'].exitApp(); // work in ionic 4
@@ -171,7 +174,12 @@ export class AppComponent implements OnInit {
 
                   this.lastTimeBackPress = new Date().getTime();
               }
-          }
+          }//else if(this.router.url === '/app/tabs/cultos'){
+          //   this.router.navigate(['/app/tabs/home']);
+
+          // }else if(this.router.url === 'app/tabs/login'){
+          //   this.router.navigate(['/app/tabs/home']);
+          // }
       });
   });
  }

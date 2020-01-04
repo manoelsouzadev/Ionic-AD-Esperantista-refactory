@@ -6,6 +6,7 @@ import { ScheduleFilterPage } from '../../schedule-filter/schedule-filter';
 import { ConferenceData } from '../../../providers/conference-data';
 import { UserData } from '../../../providers/user-data';
 import { Toast } from '@ionic-native/toast/ngx';
+import { SharedModalService } from '../../../shared/services/shared-modal/shared-modal.service';
 
 @Component({
   selector: 'page-schedule',
@@ -43,13 +44,15 @@ export class HomePage implements OnInit {
     public modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
     private popoverCtrl: PopoverController,
-    private toast: Toast
+    private toast: Toast,
+    private sharedModalService: SharedModalService
   ) { }
 
   ngOnInit() {
     // this.updateSchedule();
 
     // this.ios = this.config.get('mode') === 'ios';
+    //this.backButtonEvent();
   }
 
   // updateSchedule() {
@@ -143,6 +146,74 @@ export class HomePage implements OnInit {
   //   await loading.onWillDismiss();
   //   fab.close();
   // }
+
+  backButtonEvent() {
+      this.platform.backButton.subscribe(async () => {
+          // close action sheet
+          try {
+              const element = await this.actionSheetCtrl.getTop();
+              if (element) {
+                  element.dismiss();
+                  return;
+              }
+          } catch (error) {
+          }
+
+          // close popover
+          try {
+              const element = await this.popoverCtrl.getTop();
+              if (element) {
+                  element.dismiss();
+                  return;
+              }
+          } catch (error) {
+          }
+
+          // close modal
+          try {
+              const element = await this.modalCtrl.getTop();
+              if (element) {
+                  element.dismiss();
+                  return;
+              }
+          } catch (error) {
+              console.log(error);
+
+          }
+
+          // close side menua
+          try {
+              const element = await this.menu.getOpen();
+              if (element !== null) {
+                  this.menu.close();
+              }
+
+          } catch (error) {
+
+          }
+
+          this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+              if (this.router.url !== '/app/tabs/home') {
+               // window.history.back();
+
+              } else if (this.router.url === '/app/tabs/home') {
+                  if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+                      // this.platform.exitApp(); // Exit from app
+                      navigator['app'].exitApp(); // work in ionic 4
+
+                  } else {
+                      this.sharedModalService.presentToast(
+                          `Press back again to exit App.`,
+                          'medium',
+                          'custom-modal',
+                          2000);
+
+                      this.lastTimeBackPress = new Date().getTime();
+                  }
+              }
+          });
+      });
+     }
 
   redirecionarLogin() {
     this.router.navigate(['/login']);
