@@ -1,16 +1,20 @@
-import { CultosSemanaisService } from '../cadastro/secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service';
-import { SharedModalService } from '../../shared/services/shared-modal/shared-modal.service';
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { CultosSemanaisService } from "../cadastro/secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
+import { SharedModalService } from "../../shared/services/shared-modal/shared-modal.service";
+import { Component, ViewEncapsulation } from "@angular/core";
+import { Router } from "@angular/router";
+import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
+import {
+  ActionSheetController,
+  ModalController,
+  Platform
+} from "@ionic/angular";
 
-import { ConferenceData } from '../../providers/conference-data';
+import { ConferenceData } from "../../providers/conference-data";
 
 @Component({
-  selector: 'page-speaker-list',
-  templateUrl: 'cultos-semanais.html',
-  styleUrls: ['./cultos-semanais.scss'],
+  selector: "page-speaker-list",
+  templateUrl: "cultos-semanais.html",
+  styleUrls: ["./cultos-semanais.scss"]
 })
 export class CultosSemanaisPage {
   speakers: any[] = [];
@@ -23,7 +27,8 @@ export class CultosSemanaisPage {
     public router: Router,
     private cultosSemanaisService: CultosSemanaisService,
     public modalController: ModalController,
-    private sharedModalService: SharedModalService
+    private sharedModalService: SharedModalService,
+    private platform: Platform
   ) {
     console.log(this.router.url);
   }
@@ -107,11 +112,11 @@ export class CultosSemanaisPage {
     });
   }
 
-  async showMessageNotice(){
+  async showMessageNotice() {
     await this.sharedModalService.showMessageNotice(this.cultos);
   }
 
-  async viewImage(src: string, title: string = '', description: string = '') {
+  async viewImage(src: string, title: string = "", description: string = "") {
     await this.sharedModalService.viewImage(src, title, description);
   }
 }

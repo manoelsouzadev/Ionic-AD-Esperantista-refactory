@@ -28,7 +28,7 @@ import { Storage } from "@ionic/storage";
 import { UserData } from "./providers/user-data";
 import { Toast } from "@ionic-native/toast/ngx";
 import { Subscription } from "rxjs";
-import { SharedModalService } from './shared/services/shared-modal/shared-modal.service';
+import { SharedModalService } from "./shared/services/shared-modal/shared-modal.service";
 
 @Component({
   selector: "app-root",
@@ -90,99 +90,108 @@ export class AppComponent implements OnInit {
     console.log(this.router.url);
   }
 
-//   backButtonEvent() {
-//    this.subscription = this.platform.backButton.subscribeWithPriority(999999999,() => {
-//         this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-//         if (this.router.url === '/app/tabs/home') {
-//             navigator['app'].exitApp();
-//         } else {
-//             window.history.back();
-//         }
-//         });
-//     });
-// }
+  //   backButtonEvent() {
+  //    this.subscription = this.platform.backButton.subscribeWithPriority(999999999,() => {
+  //         this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+  //         if (this.router.url === '/app/tabs/home') {
+  //             navigator['app'].exitApp();
+  //         } else {
+  //             window.history.back();
+  //         }
+  //         });
+  //     });
+  // }
 
-// ionViewDidLeave(){
-//   this.subscription.unsubscribe();
-//  }
+  // ionViewDidLeave(){
+  //   this.subscription.unsubscribe();
+  //  }
 
-
-
-
- backButtonEvent() {
-  this.platform.backButton.subscribe(async () => {
+  backButtonEvent() {
+    this.platform.backButton.subscribe(async () => {
       // close action sheet
       try {
-          const element = await this.actionSheetCtrl.getTop();
-          if (element) {
-              element.dismiss();
-              return;
-          }
-      } catch (error) {
-      }
+        const element = await this.actionSheetCtrl.getTop();
+        if (element) {
+          element.dismiss();
+          return;
+        }
+      } catch (error) {}
 
       // close popover
       try {
-          const element = await this.popoverCtrl.getTop();
-          if (element) {
-              element.dismiss();
-              return;
-          }
-      } catch (error) {
-      }
+        const element = await this.popoverCtrl.getTop();
+        if (element) {
+          element.dismiss();
+          return;
+        }
+      } catch (error) {}
 
       // close modal
       try {
-          const element = await this.modalCtrl.getTop();
-          if (element) {
-              element.dismiss();
-              return;
-          }
+        const element = await this.modalCtrl.getTop();
+        if (element) {
+          element.dismiss();
+          return;
+        }
       } catch (error) {
-          console.log(error);
-
+        console.log(error);
       }
 
       // close side menua
       try {
-          const element = await this.menu.getOpen();
-          if (element !== null) {
-              this.menu.close();
-          }
-
-      } catch (error) {
-
-      }
+        const element = await this.menu.getOpen();
+        if (element !== null) {
+          this.menu.close();
+        }
+      } catch (error) {}
 
       this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-          if (this.router.url !== '/app/tabs/home') {
-            this.navController.back();
-             /*if ( this.router.url === '/app/tabs/cultos' || this.router.url === '/app/tabs/login') {
+        if (this.router.url === "/login") {
+        //   this.platform.backButton.subscribe(async () => {
+            // this.router.navigate(["/app/tabs/home"]);
+            window.history.back();
+        //   });
+        }
+        // if (
+        //   this.router.url === "/app/tabs/cultos" ||
+         // this.router.url === "/app/tabs/login" ||
+          // this.router.url === "/app/tabs/sobre" //||
+         // this.router.url === "/login" //||
+          //this.router.url === "/menu-dados"
+        // ) {
+        //   this.navController.back();
+          /*if ( this.router.url === '/app/tabs/cultos' || this.router.url === '/app/tabs/login') {
                this.router.navigate(['/app/tabs/home']);*/
 
-             } else if (this.router.url === '/app/tabs/home') {
-              if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-                  // this.platform.exitApp(); // Exit from app
-                  navigator['app'].exitApp(); // work in ionic 4
+          //  } else if(this.router.url === '/menu-dados'){
+          //   this.router.navigate(['/app/tabs/login']);
+       // } else
+       if (this.router.url === "/app/tabs/home") {
+          if (
+            new Date().getTime() - this.lastTimeBackPress <
+            this.timePeriodToExit
+          ) {
+            // this.platform.exitApp(); // Exit from app
+            navigator["app"].exitApp(); // work in ionic 4
+          } else {
+            this.sharedModalService.presentToast(
+              `Press back again to exit App.`,
+              "medium",
+              "custom-modal",
+              2000
+            );
 
-              } else {
-                  this.sharedModalService.presentToast(
-                      `Press back again to exit App.`,
-                      'medium',
-                      'custom-modal',
-                      2000);
+            this.lastTimeBackPress = new Date().getTime();
+          }
+        } //else if(this.router.url === '/app/tabs/cultos'){
+        //   this.router.navigate(['/app/tabs/home']);
 
-                  this.lastTimeBackPress = new Date().getTime();
-              }
-          }//else if(this.router.url === '/app/tabs/cultos'){
-          //   this.router.navigate(['/app/tabs/home']);
-
-          // }else if(this.router.url === 'app/tabs/login'){
-          //   this.router.navigate(['/app/tabs/home']);
-          // }
+        // }else if(this.router.url === 'app/tabs/login'){
+        //   this.router.navigate(['/app/tabs/home']);
+        // }
       });
-  });
- }
+    });
+  }
 
   async ngOnInit() {
     this.checkLoginStatus();

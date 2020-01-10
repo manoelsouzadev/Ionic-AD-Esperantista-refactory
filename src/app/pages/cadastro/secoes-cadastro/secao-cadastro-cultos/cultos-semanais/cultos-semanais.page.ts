@@ -1,4 +1,5 @@
 import { OnInit, Component } from '@angular/core';
+import { NavController, Platform } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CultosSemanaisService } from './cultos-semanais.service';
@@ -16,9 +17,10 @@ export class CultosSemanaisPage implements OnInit {
   constructor(
     private router: Router,
     private cultosSemanaisService: CultosSemanaisService,
-     private firebaseService: FirebaseService
-  ) {
-  }
+     private firebaseService: FirebaseService,
+     private platform: Platform,
+     private navController: NavController
+  ) {}
 
   ngOnInit() {
   }

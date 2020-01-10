@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Platform, NavController } from "@ionic/angular";
 
 @Component({
   selector: 'app-menu-dados',
@@ -65,7 +66,9 @@ export class MenuDadosPage implements OnInit {
       'color': '#000'
     },
   ];
-  constructor(private router: Router) { }
+  constructor(private router: Router, private navController: NavController, private platform: Platform) {
+
+  }
 
   ngOnInit() {
   }

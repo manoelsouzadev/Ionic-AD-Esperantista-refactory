@@ -1,7 +1,7 @@
+import { NavController, Platform, ToastController } from '@ionic/angular';
 import { OnInit, Component } from '@angular/core';
 import { Usuario } from '../../models/usuario';
 import { LoginService } from './login.service';
-import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { SharedModalService } from '../../shared/services/shared-modal/shared-modal.service';
 
@@ -17,7 +17,9 @@ export class LoginPage implements OnInit {
     private loginService: LoginService,
     private toastController: ToastController,
     private router: Router,
-    private sharedModalService: SharedModalService
+    private sharedModalService: SharedModalService,
+    private platform: Platform,
+    private navController: NavController
   ) {}
 
   ngOnInit() {}
