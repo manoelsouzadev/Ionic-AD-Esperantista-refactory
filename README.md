@@ -1,4 +1,4 @@
-# Ionic Angular App AD Esperantista
+# App AD Esperantista
 
 Aplicação para gerenciamento diário de Igrejas.
 
