@@ -24,3 +24,10 @@ export const environment = {
 3. Este app utiliza uma API node, que também pode ser encontrado no meu repositório, por nome **XXXXXXX**. Faça um **git clone** desta API e rode-a localmente com o comando **node bin/server.js**
 4. Rode este app com o comando **npm run start-dev**
 5. Utilize o app
+
+**Tecnologias utilizadas:**
+* Angular
+* Ionic
+* NodeJS
+* MongoDB
+* Firebase
