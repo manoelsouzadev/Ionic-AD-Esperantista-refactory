@@ -2,7 +2,7 @@
 
 Aplicação para gerenciamento diário de Igrejas.
 
-**Siga os passos abaixo:**
+**Para rodar a aplicação, siga os passos abaixo:**
 1. Crie uma pasta **environments** na pasta **src**.
 2. Dentro da pasta **environments**, crie um arquivo chamado **environment.ts** ou **environment.prod.ts**.**Com a estrutura abaixo:**
 
