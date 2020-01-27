@@ -1,5 +1,5 @@
-import { CultosSemanaisService } from "../cadastro/secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
-import { SharedModalService } from "../../shared/services/shared-modal/shared-modal.service";
+import { CultosSemanaisService } from "../../cadastro/secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
+import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
 import { Component, ViewEncapsulation } from "@angular/core";
 import { Router } from "@angular/router";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
@@ -9,7 +9,7 @@ import {
   Platform
 } from "@ionic/angular";
 
-import { ConferenceData } from "../../providers/conference-data";
+import { ConferenceData } from "../../../providers/conference-data";
 
 @Component({
   selector: "page-speaker-list",

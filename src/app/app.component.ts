@@ -63,6 +63,11 @@ export class AppComponent implements OnInit {
       title: "Sobre",
       url: "/app/tabs/sobre",
       icon: "information-circle"
+    },
+    {
+      title: "Campanhas",
+      url: "/campanhas",
+      icon: "flame"
     }
   ];
   loggedIn = false;
