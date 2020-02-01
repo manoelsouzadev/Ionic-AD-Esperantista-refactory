@@ -1,8 +1,7 @@
-export class Culto {
+export class Oracao {
   titulo: string;
   horario: string;
   dia: string;
   descricao: string;
-  adicional: string;
   urlImagem: string;
 }

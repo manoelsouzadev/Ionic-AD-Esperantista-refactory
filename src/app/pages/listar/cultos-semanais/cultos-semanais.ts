@@ -12,7 +12,7 @@ import {
 import { ConferenceData } from "../../../providers/conference-data";
 
 @Component({
-  selector: "page-speaker-list",
+  selector: "cultos-semanais",
   templateUrl: "cultos-semanais.html",
   styleUrls: ["./cultos-semanais.scss"]
 })

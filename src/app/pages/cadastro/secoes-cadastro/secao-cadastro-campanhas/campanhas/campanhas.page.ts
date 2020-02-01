@@ -1,3 +1,4 @@
+import { SharedModalService } from './../../../../../shared/services/shared-modal/shared-modal.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,7 +17,8 @@ export class CampanhasPage implements OnInit {
   constructor(
     private router: Router,
     private campanhasService: CampanhasService,
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private sharedModalService: SharedModalService
   ) {
   }
 
@@ -38,27 +40,37 @@ export class CampanhasPage implements OnInit {
   redirecionarMenuDados(campanha){
     console.log(campanha);
     this.router.navigate(['menu-dados']);
-     
+
   }
 
   redirecionarAtualizarCampanha(campanha){
     console.log(campanha);
     this.router.navigate(['atualizar-campanha'], {
-      queryParams: { 'id': campanha._id } 
+      queryParams: { 'id': campanha._id }
   });
   }
-  
-  async deletarCampanha(id: string, urlImagem: string) { 
+
+  async deletarCampanha(id: string, urlImagem: string) {
     console.log(id);
     if(urlImagem !== null && urlImagem !== undefined && urlImagem !== ''){
     await this.firebaseService.deletarImagemStorage('imagens-campanha', urlImagem);
     }
     await this.campanhasService.remove(id).subscribe(
       success => {
-        console.log('Campanha deletada com sucesso!');
+        this.sharedModalService.presentToast(
+          'Campanha deletada com sucesso!',
+          'medium',
+          'custom-modal',
+          1500
+        );
         this.getCampanhas();
       },
-      error => console.log('Erro ao deletar campanha!'),
+      error => this.sharedModalService.presentToast(
+        'Erro ao deletar campanha, tente novamente!',
+        'danger',
+        'custom-modal',
+        1500
+      ),
       () => console.log('Finalizado com sucesso!')
     );
   }

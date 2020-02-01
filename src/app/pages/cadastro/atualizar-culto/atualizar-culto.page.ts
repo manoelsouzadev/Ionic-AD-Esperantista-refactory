@@ -82,7 +82,7 @@ export class AtualizarCultoPage implements OnInit {
         this.loadingController.dismiss();
         //this.presentToast();
         this.sharedModalService.presentToast(
-          'Culto atualizado com sucessoo!',
+          'Culto atualizado com sucesso!',
           'medium',
           'custom-modal',
           1500

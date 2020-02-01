@@ -50,11 +50,11 @@ export class NovaCampanhaPage implements OnInit {
     await this.form.get('dia').setValue(this.form.get('dia').value + '');
     await this.campanhasService.save(this.form.value).subscribe(
       success => {
-       console.log('Campanha salvo com sucesso!');
+        this.sharedModalService.presentToast('Campanha salva com sucesso!', 'medium', 'custom-modal', 1500);
        this.loadingController.dismiss();
         this.resetarForm();
       },
-      error => console.log('Erro ao salvar campanha!'),
+      error => this.sharedModalService.presentToast('Erro ao salvar campanha. Tente novamente!', 'danger', 'custom-modal', 1500),
       () => console.log('Finalizado com sucesso!')
     );
   }

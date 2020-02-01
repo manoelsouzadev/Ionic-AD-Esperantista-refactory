@@ -9,11 +9,11 @@
 
 <ion-content fullscreen>
   <div class="ion-padding">
-      <ion-card-header>
-          <ion-card-title>
-              Alteração de Dados
-          </ion-card-title>
-        </ion-card-header>
+    <ion-card-header>
+      <ion-card-title>
+        Alteração de Dados
+      </ion-card-title>
+    </ion-card-header>
     <form [formGroup]="form">
       <div class="ion-padding">
         <ion-item>
@@ -50,7 +50,12 @@
 
         <ion-item>
           <ion-label mode="ios" position="stacked">Dia da semana</ion-label>
-          <ion-select multiple mode="ios" interface="popover" formControlName="dia">
+          <ion-select
+            multiple
+            mode="ios"
+            interface="popover"
+            formControlName="dia"
+          >
             <ion-select-option value="Domingo">Domingo</ion-select-option>
             <ion-select-option value="Segunda-feira"
               >Segunda-feira</ion-select-option
@@ -73,7 +78,8 @@
 
         <ion-item>
           <ion-label mode="ios" position="stacked">Descrição</ion-label>
-          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao"> </ion-textarea>
+          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao">
+          </ion-textarea>
         </ion-item>
       </div>
 
@@ -89,4 +95,30 @@
       </div>
     </form>
   </div>
+
+  <div class="ion-padding">
+    <ion-card-header>
+      <ion-card-title>
+        Alteração da Imagem
+      </ion-card-title>
+    </ion-card-header>
+    <img [src]="urlImagem" *ngIf="urlImagem; else noImage" />
+    <!-- <ion-button mode="ios" expand="block" type="submit" (click)="openGalery()"
+      >Escolher Imagem</ion-button
+    >
+    <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
+      >Salvar Imagem<ion-icon name="send" slot="end"></ion-icon
+    ></ion-button>-->
+
+    <ion-button
+      mode="ios"
+      expand="block"
+      type="submit"
+      (click)="alterarImagem()"
+      >Alterar Imagem<ion-icon name="images" slot="end"></ion-icon
+    ></ion-button>
+  </div>
 </ion-content>
+<ng-template #noImage>
+  <p id="text-center">Não há imagem para exibir</p>
+</ng-template>

@@ -1,7 +1,7 @@
 <main-header title="Campanhas"></main-header>
 <ion-content>
   <ion-card id="card" mode="ios" *ngFor="let campanha of campanhas">
-      <img [src]="campanha.urlImagem" *ngIf="campanha.urlImagem">
+      <img [src]="campanha.urlImagem" *ngIf="campanha.urlImagem" (click)="viewImage(campanha.urlImagem, campanha.titulo, campanha.descricao)">
     <ion-card-header>
       <h5><strong>{{ campanha.titulo }}</strong></h5>
       <h6>{{ campanha.dia }}</h6>

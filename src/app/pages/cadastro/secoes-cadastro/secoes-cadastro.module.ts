@@ -6,6 +6,7 @@ import { CampanhasPage } from './secao-cadastro-campanhas/campanhas/campanhas.pa
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../../shared/shared.module';
 import { CultosSemanaisPage } from './secao-cadastro-cultos/cultos-semanais/cultos-semanais.page';
+import { OracoesPage } from './secao-cadastro-oracoes/oracoes/oracoes.page';
 
 const routes: Routes = [
   {
@@ -15,11 +16,15 @@ const routes: Routes = [
   {
     path: 'campanhas',
     component: CampanhasPage
+  },
+  {
+    path: 'oracoes',
+    component: OracoesPage
   }
 ];
 
 @NgModule({
-  declarations: [ CultosSemanaisPage, CampanhasPage ],
+  declarations: [ CultosSemanaisPage, CampanhasPage, OracoesPage ],
   imports: [
     CommonModule,
     IonicModule,

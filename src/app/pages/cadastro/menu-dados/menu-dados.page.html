@@ -12,7 +12,7 @@
 <ion-content>
     <ion-list *ngFor="let tech of techs">
         <ion-item button (click)="onConsole(tech.route)">
-          <ion-icon slot="start" name="add-circle-outline" style="color: #001facf6;"></ion-icon>
+          <ion-icon slot="start" mode="ios" name= "{{ tech.icon }}" style="color: #001facf6;"></ion-icon>
           <ion-label>
             <h3>{{ tech.title }}</h3>
           </ion-label>

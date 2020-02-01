@@ -21,6 +21,10 @@ export class CampanhasPage implements OnInit {
       console.log("cultos this: " + this.campanhas);
       this.sharedModalService.showMessageNotice(this.campanhas);
     });
-    
+
+  }
+
+  async viewImage(src: string, title: string = "", description: string = "") {
+    await this.sharedModalService.viewImage(src, title, description);
   }
 }

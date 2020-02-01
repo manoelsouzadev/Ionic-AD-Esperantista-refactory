@@ -1,3 +1,4 @@
+import { SharedModalService } from './../../../../../shared/services/shared-modal/shared-modal.service';
 import { OnInit, Component } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
 import { FormGroup } from '@angular/forms';
@@ -19,7 +20,8 @@ export class CultosSemanaisPage implements OnInit {
     private cultosSemanaisService: CultosSemanaisService,
      private firebaseService: FirebaseService,
      private platform: Platform,
-     private navController: NavController
+     private navController: NavController,
+     private sharedModalService: SharedModalService
   ) {}
 
   ngOnInit() {
@@ -58,10 +60,20 @@ export class CultosSemanaisPage implements OnInit {
     }
     await this.cultosSemanaisService.remove(id).subscribe(
       success => {
-        console.log('Culto deletado com sucesso!');
+        this.sharedModalService.presentToast(
+          'Culto deletado com sucesso!',
+          'medium',
+          'custom-modal',
+          1500
+        );;
         this.getCultos();
       },
-      error => console.log('Erro ao deletar culto!'),
+      error => this.sharedModalService.presentToast(
+        'Erro ao deletar culto, tente novamente!',
+        'danger',
+        'custom-modal',
+        1500
+      ),
       () => console.log('Finalizado com sucesso!')
     );
   }

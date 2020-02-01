@@ -10,7 +10,7 @@ import { AboutModule } from '../about/about.module';
 import { LoginModule } from '../login/login.module';
 import { SessionDetailModule } from '../session-detail/session-detail.module';
 import { SpeakerDetailModule } from '../speaker-detail/speaker-detail.module';
-import { CultosSemanaisModule } from '../../pages/cultos/cultos-semanais/cultos-semanais.module';
+import { CultosSemanaisModule } from '../../pages/listar/cultos-semanais/cultos-semanais.module';
 
 @NgModule({
   imports: [

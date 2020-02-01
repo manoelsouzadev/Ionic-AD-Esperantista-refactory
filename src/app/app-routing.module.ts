@@ -92,7 +92,11 @@ const routes: Routes = [
   { path: 'atualizar-culto', loadChildren: './pages/cadastro/atualizar-culto/atualizar-culto.module#AtualizarCultoPageModule' },
   { path: 'nova-campanha', loadChildren: './pages/cadastro/nova-campanha/nova-campanha.module#NovaCampanhaPageModule' },
   { path: 'atualizar-campanha', loadChildren: './pages/cadastro/atualizar-campanha/atualizar-campanha.module#AtualizarCampanhaPageModule' },
-  { path: 'campanhas', loadChildren: './pages/cultos/campanhas/campanhas.module#CampanhasPageModule' }
+  { path: 'campanhas', loadChildren: './pages/listar/campanhas/campanhas.module#CampanhasPageModule' },
+  {
+    path: 'nova-oracao',
+    loadChildren: () => import('./pages/cadastro/nova-oracao/nova-oracao.module').then( m => m.NovaOracaoPageModule)
+  }
 ];
 
 @NgModule({
