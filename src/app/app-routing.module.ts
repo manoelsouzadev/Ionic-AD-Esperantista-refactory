@@ -39,7 +39,7 @@ const routes: Routes = [
       import('./pages/home/home/home.module').then(m => m.HomeModule)
   },
   {
-    path: 'menu-dados',
+    path: 'categorias',
     loadChildren: () =>
       import('./pages/cadastro/menu-dados/menu-dados.module').then(
         m => m.MenuDadosPageModule
