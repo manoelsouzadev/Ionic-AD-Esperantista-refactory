@@ -38,20 +38,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/home/home/home.module').then(m => m.HomeModule)
   },
-  {
-    path: 'categorias',
-    loadChildren: () =>
-      import('./pages/cadastro/categorias/categorias.module').then(
-        m => m.MenuDadosPageModule
-      )
-  },
-  {
-    path: 'secao',
-    loadChildren: () =>
-      import('./pages/cadastro/secoes-cadastro/secoes-cadastro.module').then(
-        m => m.SecoesCadastroModule
-      )
-  },
   // {
   //   path: 'list',
   //   loadChildren: () =>
@@ -88,14 +74,13 @@ const routes: Routes = [
   //       m => m.SecoesCadastroModule
   //     )
   // },
-  { path: 'novo-culto', loadChildren: './pages/cadastro/novo-culto/novo-culto.module#NovoCultoPageModule' },
-  { path: 'atualizar-culto', loadChildren: './pages/cadastro/atualizar-culto/atualizar-culto.module#AtualizarCultoPageModule' },
-  { path: 'nova-campanha', loadChildren: './pages/cadastro/nova-campanha/nova-campanha.module#NovaCampanhaPageModule' },
-  { path: 'atualizar-campanha', loadChildren: './pages/cadastro/atualizar-campanha/atualizar-campanha.module#AtualizarCampanhaPageModule' },
-  { path: 'campanhas', loadChildren: './pages/listar/campanhas/campanhas.module#CampanhasPageModule' },
   {
-    path: 'nova-oracao',
-    loadChildren: () => import('./pages/cadastro/nova-oracao/nova-oracao.module').then( m => m.NovaOracaoPageModule)
+    path: 'cadastro',
+    loadChildren: () => import('./pages/cadastro/cadastro.module').then(m => m.CadastroModule)
+  },
+  {
+    path: 'campanhas',
+    loadChildren: () => import('./pages/listar/campanhas/campanhas.module').then(m => m.CampanhasPageModule)
   }
 ];
 

@@ -20,6 +20,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { CadastroModule } from './pages/cadastro/cadastro.module';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     HttpClientModule,
     FormsModule,
     SharedModule,
+    CadastroModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {

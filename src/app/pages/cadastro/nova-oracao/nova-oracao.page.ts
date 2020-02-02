@@ -38,7 +38,7 @@ export class NovaOracaoPage implements OnInit {
   }
 
   redirecionarOracoesCadastradas() {
-    this.router.navigate(["/secao/oracoes"]);
+    this.router.navigate(["cadastro/secao/oracoes"]);
   }
 
   async salvarOracao() {

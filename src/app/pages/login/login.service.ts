@@ -13,7 +13,7 @@ export class LoginService {
     if(usuario.senha === '12345678'){
       console.log("funcionou!!");
       this.usuarioAutenticado = true;
-      this.router.navigate(['/categorias']);
+      this.router.navigate(['cadastro/categorias']);
     }else{
       return false;
     }

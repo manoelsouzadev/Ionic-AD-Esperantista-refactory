@@ -72,7 +72,7 @@ export class AtualizarCultoPage implements OnInit {
   }
 
   redirecionarCultosCadastrados() {
-    this.router.navigate(['/secao/cultos']);
+    this.router.navigate(['cadastro/secao/cultos']);
   }
 
   updateCulto() {

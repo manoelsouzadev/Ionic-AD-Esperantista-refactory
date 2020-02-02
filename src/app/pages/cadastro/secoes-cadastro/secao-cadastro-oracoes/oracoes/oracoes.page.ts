@@ -31,15 +31,15 @@ export class OracoesPage implements OnInit {
   }
 
   redirecionarCategorias(){
-    this.router.navigate(['/categorias']);
+    this.router.navigate(['cadastro/categorias']);
   }
 
   redirecionarNovaOracao() {
-    this.router.navigate(["/nova-oracao"]);
+    this.router.navigate(["cadastro/nova-oracao"]);
   }
 
   redirecionarAtualizarOracao(oracao){
-    this.router.navigate(['/atualizar-oracao'], {
+    this.router.navigate(['cadastro/atualizar-oracao'], {
       queryParams: { 'id': oracao._id }
   });
   }

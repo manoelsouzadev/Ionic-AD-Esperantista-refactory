@@ -34,17 +34,17 @@ export class CampanhasPage implements OnInit {
   }
 
   redirecionarNovaCampanha() {
-    this.router.navigate(['/nova-campanha']);
+    this.router.navigate(['cadastro/nova-campanha']);
   }
 
   redirecionarCategorias(){
-    this.router.navigate(['/categorias']);
+    this.router.navigate(['cadastro/categorias']);
 
   }
 
   redirecionarAtualizarCampanha(campanha){
     console.log(campanha);
-    this.router.navigate(['/atualizar-campanha'], {
+    this.router.navigate(['cadastro/atualizar-campanha'], {
       queryParams: { 'id': campanha._id }
   });
   }

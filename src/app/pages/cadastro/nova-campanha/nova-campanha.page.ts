@@ -39,7 +39,7 @@ export class NovaCampanhaPage implements OnInit {
   }
 
   redirecionarCampanhasCadastradas(){
-    this.router.navigate(['/secao/campanhas']);
+    this.router.navigate(['cadastro/secao/campanhas']);
    }
 
   async salvarCampanha() {

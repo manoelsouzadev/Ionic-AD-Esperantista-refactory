@@ -36,18 +36,18 @@ export class CultosSemanaisPage implements OnInit {
   }
 
   redirecionarNovoCulto() {
-    this.router.navigate(['/novo-culto']);
+    this.router.navigate(['cadastro/novo-culto']);
   }
 
   redirecionarCategorias(){
-    this.router.navigate(['/categorias']);
+    this.router.navigate(['cadastro/categorias']);
 
   }
 
   redirecionarAtualizarCulto(culto){
     console.log(culto);
 
-    this.router.navigate(['/atualizar-culto'], {
+    this.router.navigate(['cadastro/atualizar-culto'], {
       queryParams: { 'id': culto._id }
   });
   }
