@@ -37,15 +37,14 @@ export class CampanhasPage implements OnInit {
     this.router.navigate(['/nova-campanha']);
   }
 
-  redirecionarMenuDados(campanha){
-    console.log(campanha);
-    this.router.navigate(['menu-dados']);
+  redirecionarCategorias(){
+    this.router.navigate(['/categorias']);
 
   }
 
   redirecionarAtualizarCampanha(campanha){
     console.log(campanha);
-    this.router.navigate(['atualizar-campanha'], {
+    this.router.navigate(['/atualizar-campanha'], {
       queryParams: { 'id': campanha._id }
   });
   }

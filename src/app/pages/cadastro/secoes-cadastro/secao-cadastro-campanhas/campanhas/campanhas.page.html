@@ -1,14 +1,14 @@
 <ion-header>
     <ion-toolbar mode="ios">
-        <ion-buttons slot="start" (click)="redirecionarMenuDados()">
+        <ion-buttons slot="start" (click)="redirecionarCategorias()">
             <ion-back-button icon="arrow-back"></ion-back-button>
         </ion-buttons>
       <ion-title>Campanhas</ion-title>
     </ion-toolbar>
-  </ion-header> 
-  
+  </ion-header>
+
   <ion-content>
-    
+
     <ion-item-sliding id="item100" *ngFor="let campanha of campanhas">
       <ion-item (click)="redirecionarAtualizarCampanha(campanha)">
         <ion-label>
@@ -22,11 +22,10 @@
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
- 
+
     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
       <ion-fab-button (click)="redirecionarNovaCampanha()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </ion-content>
-  

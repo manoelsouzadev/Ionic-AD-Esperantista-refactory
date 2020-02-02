@@ -30,9 +30,8 @@ export class OracoesPage implements OnInit {
     this.oracoesService.list().subscribe(res => (this.oracoes = res));
   }
 
-  redirecionarMenuDados(culto){
-    console.log(culto);
-    this.router.navigate(['menu-dados']);
+  redirecionarCategorias(){
+    this.router.navigate(['/categorias']);
   }
 
   redirecionarNovaOracao() {
@@ -40,9 +39,7 @@ export class OracoesPage implements OnInit {
   }
 
   redirecionarAtualizarOracao(oracao){
-    console.log(oracao);
-
-    this.router.navigate(['atualizar-oracao'], {
+    this.router.navigate(['/atualizar-oracao'], {
       queryParams: { 'id': oracao._id }
   });
   }

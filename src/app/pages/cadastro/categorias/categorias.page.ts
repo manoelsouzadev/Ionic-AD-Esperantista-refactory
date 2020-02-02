@@ -4,10 +4,10 @@ import { Platform, NavController } from "@ionic/angular";
 
 @Component({
   selector: 'app-menu-dados',
-  templateUrl: './menu-dados.page.html',
-  styleUrls: ['./menu-dados.page.scss'],
+  templateUrl: './categorias.page.html',
+  styleUrls: ['./categorias.page.scss'],
 })
-export class MenuDadosPage implements OnInit {
+export class CategoriasPage implements OnInit {
   protected techs = [
     {
       'title': 'Cultos',

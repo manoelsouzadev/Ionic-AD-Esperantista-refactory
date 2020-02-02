@@ -41,7 +41,7 @@ const routes: Routes = [
   {
     path: 'categorias',
     loadChildren: () =>
-      import('./pages/cadastro/menu-dados/menu-dados.module').then(
+      import('./pages/cadastro/categorias/categorias.module').then(
         m => m.MenuDadosPageModule
       )
   },
