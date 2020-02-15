@@ -60,13 +60,15 @@ export class AtualizarCampanhaPage implements OnInit {
 
   popularForm(campanha) {
     this.id = campanha._id;
+    let diaFormatado = (campanha.dia).split(",");
+
     this.form = this.formBuilder.group({
       id: [campanha._id],
       titulo: [campanha.titulo],
       horario: [campanha.horario],
       dataInicio: [campanha.dataInicio],
       dataFinal: [campanha.dataFinal],
-      dia: [campanha.dia],
+      dia: [diaFormatado],
       descricao: [campanha.descricao],
       urlImagem: [campanha.urlImagem]
     });

@@ -59,7 +59,6 @@
   </ion-grid>
 </ion-content> -->
 
-
 <!--ion-card>
   <ion-card-header>
     <h5>Culto de Missões</h5>
@@ -106,24 +105,31 @@
   </ion-toolbar>
 </ion-header>-->
 <main-header title="Cultos Semanais"></main-header>
-<ion-content>
-  <ion-card id="card" mode="ios" *ngFor="let culto of cultos">
-   <img [src]="culto.urlImagem" *ngIf="culto.urlImagem" (click)="viewImage(culto.urlImagem, culto.titulo, culto.descricao)">
-    <ion-card-header>
-      <h5><strong>{{ culto.titulo }}</strong></h5>
-      <h6>{{culto.dia}} - {{ culto.horario }}h</h6>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ culto.descricao }}</p>
-      <p>{{ culto.ceia }}</p>
-      <p>{{culto.adicional}}</p>
-      <p>{{culto.adicional2}}</p>
-      <p>{{culto.adicional3}}</p>
-      <p>{{culto.adicional4}}</p>
-      <p>{{culto.adicional5}}</p>
-      <p>{{culto.adicional6}}</p>
-    </ion-card-content>
-  </ion-card>
+<ion-content fullscreen>
+
+    <ion-card id="card" mode="ios" *ngFor="let culto of cultos">
+        <div class="ion-padding" style="padding-left: 0; padding-top: 0; padding-right: 0;">
+      <img
+        [src]="culto.urlImagem"
+        *ngIf="culto.urlImagem"
+        (click)="viewImage(culto.urlImagem, culto.titulo, culto.descricao)"
+      />
+        </div>
+      <ion-card-header>
+        <h5><strong>{{ culto.titulo }}</strong></h5>
+        <h6>{{culto.dia}} - {{ culto.horario }}h</h6>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ culto.descricao }}</p>
+        <p>{{ culto.ceia }}</p>
+        <p>{{culto.adicional}}</p>
+        <p>{{culto.adicional2}}</p>
+        <p>{{culto.adicional3}}</p>
+        <p>{{culto.adicional4}}</p>
+        <p>{{culto.adicional5}}</p>
+        <p>{{culto.adicional6}}</p>
+      </ion-card-content>
+    </ion-card>
 
 </ion-content>
 <!--<tab-menu></tab-menu>-->

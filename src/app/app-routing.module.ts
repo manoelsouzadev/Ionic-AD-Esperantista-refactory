@@ -81,6 +81,10 @@ const routes: Routes = [
   {
     path: 'campanhas',
     loadChildren: () => import('./pages/listar/campanhas/campanhas.module').then(m => m.CampanhasPageModule)
+  },
+  {
+    path: 'listar',
+    loadChildren: () => import('./pages/listar/listar.module').then(m => m.ListarModule)
   }
 ];
 

@@ -66,8 +66,13 @@ export class AppComponent implements OnInit {
     },
     {
       title: "Campanhas",
-      url: "/campanhas",
+      url: "/listar/campanhas",
       icon: "flame"
+    },
+    {
+      title: "Orações",
+      url: "/listar/oracoes",
+      icon: "time"
     }
   ];
   loggedIn = false;
@@ -88,7 +93,7 @@ export class AppComponent implements OnInit {
     private popoverCtrl: PopoverController,
     private toast: Toast,
     private sharedModalService: SharedModalService,
-    private navController: NavController
+    private navController: NavController,
   ) {
     this.initializeApp();
     //this.backButtonEvent();
