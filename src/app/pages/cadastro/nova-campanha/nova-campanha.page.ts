@@ -46,7 +46,7 @@ export class NovaCampanhaPage implements OnInit {
     console.log(this.form.get('dia').value + '');
     await this.sharedModalService.presentLoadingWithOptions();
     await this.uploadPicture();
-    await this.form.get('urlImagem').setValue(this.downloadURL);
+    await this.form.get('urlImagem').value != '' ? this.form.get('urlImagem').setValue(this.downloadURL) : this.form.get('urlImagem').setValue('');
     await this.form.get('dia').setValue(this.form.get('dia').value + '');
     await this.campanhasService.save(this.form.value).subscribe(
       success => {
@@ -61,7 +61,7 @@ export class NovaCampanhaPage implements OnInit {
 
   resetarForm() {
     this.form.patchValue({
-      titulo: "",
+      titulo: null,
       horario: null,
       dataInicio: null,
       dataFinal: null,
@@ -70,6 +70,12 @@ export class NovaCampanhaPage implements OnInit {
     });
     this.fileImage = null;
     this.downloadURL = null;
+    this.form.get("titulo").markAsUntouched();
+    this.form.get("horario").markAsUntouched();
+    this.form.get("dataInicio").markAsUntouched();
+    this.form.get("dataFinal").markAsUntouched();
+    this.form.get("dia").markAsUntouched();
+    this.form.get("descricao").markAsUntouched();
   }
 
    async openGalery() {

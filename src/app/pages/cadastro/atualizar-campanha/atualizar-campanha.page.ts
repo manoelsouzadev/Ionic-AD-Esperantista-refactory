@@ -152,7 +152,7 @@ export class AtualizarCampanhaPage implements OnInit {
       );
       await this.uploadPicture();
       await this.form.get("urlImagem").setValue(this.downloadURL);
-
+      await this.form.get('dia').setValue(this.form.get('dia').value + '');
       await this.campanhasService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(

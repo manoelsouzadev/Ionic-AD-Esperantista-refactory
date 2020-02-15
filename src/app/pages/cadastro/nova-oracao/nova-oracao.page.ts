@@ -48,7 +48,7 @@ export class NovaOracaoPage implements OnInit {
     // this.downloadURL !== null ||
     // this.downloadURL !== undefined ||
     // this.downloadURL !== ''
-    /*?*/ await this.form.get("urlImagem").setValue(this.downloadURL);
+    /*?*/ await this.form.get('urlImagem').value != '' ? this.form.get('urlImagem').setValue(this.downloadURL) : this.form.get('urlImagem').setValue('');
     await this.form.get("dia").setValue(this.form.get("dia").value + "");
     await this.oracoesService.save(this.form.value).subscribe(
       success => {
@@ -83,6 +83,10 @@ export class NovaOracaoPage implements OnInit {
     });
     this.fileImage = null;
     this.downloadURL = "";
+    this.form.get("titulo").markAsUntouched();
+    this.form.get("horario").markAsUntouched();
+    this.form.get("dia").markAsUntouched();
+    this.form.get("descricao").markAsUntouched();
   }
 
   async openGalery() {
