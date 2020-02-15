@@ -44,11 +44,12 @@ export class NovaOracaoPage implements OnInit {
   async salvarOracao() {
     console.log(this.form.value);
     await this.sharedModalService.presentLoadingWithOptions();
-    await this.uploadPicture();
-    // this.downloadURL !== null ||
-    // this.downloadURL !== undefined ||
-    // this.downloadURL !== ''
-    /*?*/ await this.form.get('urlImagem').value != '' ? this.form.get('urlImagem').setValue(this.downloadURL) : this.form.get('urlImagem').setValue('');
+    if (this.fileImage !== undefined && this.fileImage !== null) {
+      await this.uploadPicture();
+      await this.form.get("urlImagem").setValue(this.downloadURL);
+    } else {
+      await this.form.get("urlImagem").setValue("");
+    }
     await this.form.get("dia").setValue(this.form.get("dia").value + "");
     await this.oracoesService.save(this.form.value).subscribe(
       success => {

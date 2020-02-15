@@ -20,7 +20,7 @@ export class AtualizarCampanhaPage implements OnInit {
   private id: string;
   protected urlImagem: string;
   private downloadURL: string;
-  private fileImage: string = null;
+  private fileImage: any = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -117,6 +117,7 @@ export class AtualizarCampanhaPage implements OnInit {
       descricao: null,
       urlImagem: null
     });
+    this.fileImage = null;
     this.urlImagem = null;
     this.downloadURL = null;
   }
@@ -144,12 +145,18 @@ export class AtualizarCampanhaPage implements OnInit {
 
   async alterarImagem() {
     await this.openGalery();
-    if (this.fileImage !== null) {
+    if (this.fileImage !== undefined && this.fileImage !== null) {
       await this.sharedModalService.presentLoadingWithOptions();
+      if (
+        this.form.get("urlImagem").value !== "" ||
+        this.form.get("urlImagem").value !== null ||
+        this.form.get("urlImagem").value !== undefined
+      ) {
       await this.firebaseService.deletarImagemStorage(
         "imagens-campanha",
         this.form.get("urlImagem").value
       );
+      }
       await this.uploadPicture();
       await this.form.get("urlImagem").setValue(this.downloadURL);
       await this.form.get('dia').setValue(this.form.get('dia').value + '');
