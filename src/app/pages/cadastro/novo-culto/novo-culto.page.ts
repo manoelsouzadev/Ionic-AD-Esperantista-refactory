@@ -16,7 +16,7 @@ export class NovoCultoPage implements OnInit {
   //imgPath: string;
   //fileToUpload: any;
   protected fileImage: string;
-  private downloadURL: string;
+  private downloadURL: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,11 +43,18 @@ export class NovoCultoPage implements OnInit {
 
   async salvarCulto() {
     await this.sharedModalService.presentLoadingWithOptions();
-    await this.uploadPicture();
+
    // this.downloadURL !== null ||
    // this.downloadURL !== undefined ||
    // this.downloadURL !== ''
-      /*?*/ await this.form.get('urlImagem').value != '' ? this.form.get('urlImagem').setValue(this.downloadURL) : this.form.get('urlImagem').setValue('');
+      /*?*/
+      if (this.fileImage !== undefined && this.fileImage !== null){
+        await this.uploadPicture();
+       await this.form.get('urlImagem').setValue(this.downloadURL);
+      }else{
+        await this.form.get('urlImagem').setValue('');
+      }
+
 
     await this.cultosSemanaisService.save(this.form.value).subscribe(
       success => {

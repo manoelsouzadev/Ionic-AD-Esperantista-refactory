@@ -19,7 +19,7 @@ export class AtualizarCultoPage implements OnInit {
   private id: string;
   protected urlImagem: string;
   private downloadURL: string;
-  private fileImage: string = null;
+  private fileImage: any = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -72,7 +72,7 @@ export class AtualizarCultoPage implements OnInit {
   }
 
   redirecionarCultosCadastrados() {
-    this.router.navigate(['cadastro/secao/cultos']);
+    this.router.navigate(["cadastro/secao/cultos"]);
   }
 
   updateCulto() {
@@ -82,22 +82,23 @@ export class AtualizarCultoPage implements OnInit {
         this.loadingController.dismiss();
         //this.presentToast();
         this.sharedModalService.presentToast(
-          'Culto atualizado com sucesso!',
-          'medium',
-          'custom-modal',
+          "Culto atualizado com sucesso!",
+          "medium",
+          "custom-modal",
           1500
         );
         //this.mostrarToast();
         this.resetarForm();
         this.redirecionarCultosCadastrados();
       },
-      error =>   this.sharedModalService.presentToast(
-        'Erro ao atualizar culto, tente novamente!',
-        'danger',
-        'custom-modal',
-        1500
-      ),
-      () => console.log('Finalizado com sucesso!')
+      error =>
+        this.sharedModalService.presentToast(
+          "Erro ao atualizar culto, tente novamente!",
+          "danger",
+          "custom-modal",
+          1500
+        ),
+      () => console.log("Finalizado com sucesso!")
     );
   }
 
@@ -109,6 +110,7 @@ export class AtualizarCultoPage implements OnInit {
       descricao: null,
       urlImagem: null
     });
+    this.fileImage = null;
     this.urlImagem = null;
     this.downloadURL = null;
   }
@@ -172,44 +174,52 @@ export class AtualizarCultoPage implements OnInit {
 
   async alterarImagem() {
     await this.openGalery();
-    if(this.fileImage !== null) {
-    await this.sharedModalService.presentLoadingWithOptions();
-    await this.firebaseService.deletarImagemStorage(
-      'imagens-culto',
-      this.form.get('urlImagem').value
-    );
-    await this.uploadPicture();
-    await this.form.get('urlImagem').setValue(this.downloadURL);
-
-    await this.cultosSemanaisService.save(this.form.value).subscribe(
-      success => {
-        this.sharedModalService.presentToast(
-          'Imagem alterada com sucesso!',
-          'medium',
-          'custom-modal',
-          1500
+    if (this.fileImage !== undefined && this.fileImage !== null){
+      alert(this.fileImage);
+      await this.sharedModalService.presentLoadingWithOptions();
+      if (
+        this.form.get("urlImagem").value !== "" ||
+        this.form.get("urlImagem").value !== null ||
+        this.form.get("urlImagem").value !== undefined
+      ) {
+        await this.firebaseService.deletarImagemStorage(
+          "imagens-culto",
+          this.form.get("urlImagem").value
         );
-        this.loadingController.dismiss();
-        this.resetarForm();
-        this.redirecionarCultosCadastrados();
-      },
-      error => this.sharedModalService.presentToast(
-        'Erro ao alterar imagem, tente novamente!',
-        'danger',
-        'custom-modal',
-        1500
-      ),
-      () => console.log('Finalizado com sucesso!')
-    );
-    }else{
+      }
+      await this.uploadPicture();
+      await this.form.get("urlImagem").setValue(this.downloadURL);
+
+      await this.cultosSemanaisService.save(this.form.value).subscribe(
+        success => {
+          this.sharedModalService.presentToast(
+            "Imagem alterada com sucesso!",
+            "medium",
+            "custom-modal",
+            1500
+          );
+          this.loadingController.dismiss();
+          this.resetarForm();
+          this.redirecionarCultosCadastrados();
+        },
+        error =>
+          this.sharedModalService.presentToast(
+            "Erro ao alterar imagem, tente novamente!",
+            "danger",
+            "custom-modal",
+            1500
+          ),
+        () => console.log("Finalizado com sucesso!")
+      );
+    } else {
       return;
     }
   }
 
   async uploadPicture() {
     await this.firebaseService
-      .uploadPicture('imagens-culto')
-      .then(downURL =>  this.downloadURL = downURL)
+      .uploadPicture("imagens-culto")
+      .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
 
