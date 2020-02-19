@@ -56,6 +56,10 @@ export class FirebaseService {
     return await this.fileImage;
   }
 
+  async takePhoto(){
+
+  }
+
   async uploadPicture(pasta: string) {
     if (
       await this.path === '' ||
