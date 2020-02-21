@@ -50,21 +50,36 @@
 
         <ion-item>
           <ion-label mode="ios" position="stacked">Descrição</ion-label>
-          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao"> </ion-textarea>
+          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao">
+          </ion-textarea>
         </ion-item>
         <ion-item>
-          <ion-label mode="ios" position="stacked">Selecione uma imagem</ion-label>
+          <ion-label mode="ios" position="stacked"
+            >Selecione uma imagem</ion-label
+          >
           <ion-input
-              mode="ios"
-              type="text"
-              [value] = "fileImage"
-              readonly
-            ></ion-input>
+            mode="ios"
+            type="text"
+            [value]="fileImage != null ? fileImage : fileImageCamera"
+            readonly
+          ></ion-input>
         </ion-item>
-        <ion-button mode="ios" (click)="openGalery()" expand="block">
-          Escolher Imagem<ion-icon name="images" slot="end"></ion-icon
-            >
-        </ion-button>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button mode="ios" (click)="openGalery()" expand="block">
+                Galeria<ion-icon name="images" slot="end"></ion-icon>
+              </ion-button>
+            </ion-col>
+
+            <ion-col>
+              <ion-button mode="ios" (click)="takePicture()" expand="block">
+                Câmera<ion-icon name="camera" slot="end"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </div>
       <div class="ion-padding">
         <ion-button
