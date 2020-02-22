@@ -60,7 +60,7 @@
           <ion-input
             mode="ios"
             type="text"
-            [value]="fileImage != null ? fileImage : fileImageCamera"
+            [value]="fileImage != null ? fileImage: fileImageCamera != null ? fileImageCamera : null"
             readonly
           ></ion-input>
         </ion-item>

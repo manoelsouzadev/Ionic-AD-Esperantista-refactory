@@ -15,7 +15,7 @@ export class NovoCultoPage implements OnInit {
   protected form: FormGroup;
   //imgPath: string;
   //fileToUpload: any;
-  protected fileImage: string;
+  protected fileImage: string = null;
   protected fileImageCamera: string;
   private downloadURL: string = "";
 
@@ -56,6 +56,7 @@ export class NovoCultoPage implements OnInit {
       this.fileImageCamera !== undefined &&
       this.fileImageCamera !== null
     ) {
+      alert("save form base 64 : entrou")
       await this.uploadPictureBase64();
       await this.form.get("urlImagem").setValue(this.downloadURL);
     } else {
@@ -117,10 +118,15 @@ export class NovoCultoPage implements OnInit {
   }
 
   async takePicture() {
-    this.firebaseService
+    await this.firebaseService
       .takePicture()
-      .then(file => (this.fileImageCamera = file))
-      .catch((this.fileImageCamera = null));
+      .then(file => {
+        this.fileImageCamera = file;
+        ///this.fileImage = file;
+        alert(this.fileImageCamera);
+        // this.fileImage = file;
+      })
+      .catch(this.fileImageCamera = null);
   }
 
   async uploadPictureBase64() {

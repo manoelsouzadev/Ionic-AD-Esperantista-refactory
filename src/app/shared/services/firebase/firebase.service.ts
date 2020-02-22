@@ -11,9 +11,10 @@ import { environment } from "../../../../environments/environment.prod";
 export class FirebaseService {
   public downloadURL: string;
   private path: string;
-  protected fileImage: string;
+  protected fileImage: string = null;
   protected fileUri: string;
   private photoBase64: string;
+  private msg: string = null;
   private blob: Blob;
 
   constructor(
@@ -47,7 +48,8 @@ export class FirebaseService {
             this.fileUri.substring(0, this.fileUri.lastIndexOf("/")) + "/";
         },
         err => {
-          //alert(err);
+          alert("entrou 2: " + err);
+          this.fileImage = null;
         }
       );
     } catch (error) {
@@ -69,31 +71,57 @@ export class FirebaseService {
     await this.camera
       .getPicture(options)
       .then(
-        async ImageData => {
+        ImageData => {
           //let base64Image = 'data:image/jpeg;base64,' + ImageData;
           this.photoBase64 = ImageData;
+          alert(ImageData);
+          this.msg = "IMG-" + Math.random() * 1000000;
         },
-        err => {
-          alert(err);
-        }
+        // err => {
+        //   alert("entrou: " + err);
+        //   this.msg = null;
+        // }
       )
       .catch(error => {
-        alert(error);
+        //alert(error);
+        return;
       });
-    return "IMG-" + Math.random() * 1000000;
+
+    // this.photoBase64 !== null &&
+    // this.photoBase64 !== undefined &&
+    // this.photoBase64 !== ""
+    //   ? (this.msg = "IMG-" + Math.random() * 1000000)
+    //   : (this.msg = "");
+    // alert(this.msg);
+    // if (this.msg === null || this.msg === undefined) {
+
+    // } else {
+      return await this.msg;
+    // }
   }
 
   async uploadPictureBase64(pasta: string) {
-    const filename = (await environment.guid.raw().toString()) + ".jpg";
-    const ref = await this.afStorage.ref(pasta + "/" + filename);
-    const task = await ref.putString(this.photoBase64, "base64", {
-      contentType: "image/jpg"
-    });
-    await task.ref.getDownloadURL().then(urlDownload => {
-      this.downloadURL = urlDownload;
-    });
-    await this.resetarDados();
-    return await this.downloadURL;
+    alert("start of method uploadPicturebase64: "+this.photoBase64);
+    if (
+      await this.photoBase64 === "" ||
+      await this.photoBase64 === null ||
+      await this.photoBase64 === undefined
+    ) {
+      alert("uploabase64 method: nao entrou")
+      return;
+    } else {
+      alert("entrou");
+      const filename = (await environment.guid.raw().toString()) + ".jpg";
+      const ref = await this.afStorage.ref(pasta + "/" + filename);
+      const task = await ref.putString(this.photoBase64, "base64", {
+        contentType: "image/jpg"
+      });
+      await task.ref.getDownloadURL().then(urlDownload => {
+        this.downloadURL = urlDownload;
+      });
+      await this.resetarDados();
+      return await this.downloadURL;
+    }
   }
 
   async uploadPicture(pasta: string) {
