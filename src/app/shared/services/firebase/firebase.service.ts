@@ -77,10 +77,10 @@ export class FirebaseService {
           alert(ImageData);
           this.msg = "IMG-" + Math.random() * 1000000;
         },
-        // err => {
-        //   alert("entrou: " + err);
-        //   this.msg = null;
-        // }
+        err => {
+          alert("entrou: " + err);
+          this.msg = null;
+        }
       )
       .catch(error => {
         //alert(error);

@@ -106,7 +106,10 @@ export class NovoCultoPage implements OnInit {
   async openGalery() {
     await this.firebaseService
       .openGalery()
-      .then(file => (this.fileImage = file))
+      .then(file => {
+        this.fileImageCamera;
+        this.fileImage = file;
+      })
       .catch((this.fileImage = null));
   }
 
@@ -121,8 +124,9 @@ export class NovoCultoPage implements OnInit {
     await this.firebaseService
       .takePicture()
       .then(file => {
+        this.fileImage = null;
         this.fileImageCamera = file;
-        ///this.fileImage = file;
+        //this.fileImage = file;
         alert(this.fileImageCamera);
         // this.fileImage = file;
       })
