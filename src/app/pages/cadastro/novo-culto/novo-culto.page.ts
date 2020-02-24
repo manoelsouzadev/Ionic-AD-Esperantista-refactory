@@ -16,8 +16,9 @@ export class NovoCultoPage implements OnInit {
   //imgPath: string;
   //fileToUpload: any;
   protected fileImage: string = null;
-  protected fileImageCamera: string;
+  protected fileImageCamera: string = null;
   private downloadURL: string = "";
+  private radioOption: string = "galeria";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,6 +39,17 @@ export class NovoCultoPage implements OnInit {
     });
   }
 
+  changeValue(value) {
+    this.radioOption = value;
+    if (value === "galeria") {
+      this.fileImageCamera = null;
+      this.firebaseService.resetarDados();
+    } else if (value === "camera") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    }
+  }
+
   redirecionarCultosCadastrados() {
     this.router.navigate(["cadastro/secao/cultos"]);
   }
@@ -56,7 +68,7 @@ export class NovoCultoPage implements OnInit {
       this.fileImageCamera !== undefined &&
       this.fileImageCamera !== null
     ) {
-      alert("save form base 64 : entrou")
+      alert("save form base 64 : entrou");
       await this.uploadPictureBase64();
       await this.form.get("urlImagem").setValue(this.downloadURL);
     } else {
@@ -107,7 +119,6 @@ export class NovoCultoPage implements OnInit {
     await this.firebaseService
       .openGalery()
       .then(file => {
-        this.fileImageCamera;
         this.fileImage = file;
       })
       .catch((this.fileImage = null));
@@ -124,13 +135,13 @@ export class NovoCultoPage implements OnInit {
     await this.firebaseService
       .takePicture()
       .then(file => {
-        this.fileImage = null;
+        //this.fileImage = null;
         this.fileImageCamera = file;
         //this.fileImage = file;
-        alert(this.fileImageCamera);
+        //alert(this.fileImageCamera);
         // this.fileImage = file;
       })
-      .catch(this.fileImageCamera = null);
+      .catch((this.fileImageCamera = null));
   }
 
   async uploadPictureBase64() {
