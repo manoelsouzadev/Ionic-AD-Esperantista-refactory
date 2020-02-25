@@ -175,7 +175,6 @@ export class AtualizarCultoPage implements OnInit {
   async alterarImagem() {
     await this.openGalery();
     if (this.fileImage !== undefined && this.fileImage !== null){
-      alert(this.fileImage);
       await this.sharedModalService.presentLoadingWithOptions();
       if (
         this.form.get("urlImagem").value !== "" ||

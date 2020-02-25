@@ -29,9 +29,7 @@ export class CultosSemanaisPage {
     public modalController: ModalController,
     private sharedModalService: SharedModalService,
     private platform: Platform
-  ) {
-    console.log(this.router.url);
-  }
+  ) {}
 
   // ionViewDidEnter() {
   //   this.confData.getSpeakers().subscribe((speakers: any[]) => {

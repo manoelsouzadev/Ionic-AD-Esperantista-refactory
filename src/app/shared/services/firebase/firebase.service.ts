@@ -48,7 +48,6 @@ export class FirebaseService {
             this.fileUri.substring(0, this.fileUri.lastIndexOf("/")) + "/";
         },
         err => {
-          alert("entrou 2: " + err);
           this.fileImage = null;
         }
       );
@@ -74,11 +73,9 @@ export class FirebaseService {
         ImageData => {
           //let base64Image = 'data:image/jpeg;base64,' + ImageData;
           this.photoBase64 = ImageData;
-          alert(ImageData);
           this.msg = "IMG-" + Math.random() * 1000000;
         },
         err => {
-          alert("entrou: " + err);
           this.msg = null;
         }
       )
@@ -101,16 +98,13 @@ export class FirebaseService {
   }
 
   async uploadPictureBase64(pasta: string) {
-    alert("start of method uploadPicturebase64: "+this.photoBase64);
     if (
       await this.photoBase64 === "" ||
       await this.photoBase64 === null ||
       await this.photoBase64 === undefined
     ) {
-      alert("uploabase64 method: nao entrou")
       return;
     } else {
-      alert("entrou");
       const filename = (await environment.guid.raw().toString()) + ".jpg";
       const ref = await this.afStorage.ref(pasta + "/" + filename);
       const task = await ref.putString(this.photoBase64, "base64", {
@@ -164,7 +158,6 @@ export class FirebaseService {
       url.indexOf("%") + 3,
       url.indexOf("?")
     );
-    console.log(pasta + imagemDeletar);
     await this.afStorage.ref(pasta + "/" + imagemDeletar).delete();
     return;
   }

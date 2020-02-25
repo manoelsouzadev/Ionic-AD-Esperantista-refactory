@@ -90,7 +90,7 @@
                   <ion-radio
                     slot="start"
                     checked
-                    (click)="changeValue('galeria')"
+                    (click)="changeRadioValue('galeria')"
                   ></ion-radio>
                 </ion-item>
               </ion-col>
@@ -99,7 +99,7 @@
                   <ion-label>Câmera</ion-label>
                   <ion-radio
                     slot="start"
-                    (click)="changeValue('camera')"
+                    (click)="changeRadioValue('camera')"
                   ></ion-radio>
                 </ion-item>
               </ion-col>
@@ -117,6 +117,7 @@
                 readonly
                 placeholder="Escolher imagem"
               ></ion-input>
+              <ion-button fill="clear" type="button" item-right (click)="clearInputImage('galeria')"> <ion-icon name="trash" style="font-size: 22px;"></ion-icon></ion-button>
             </ion-item>
 
             <ion-button mode="ios" (click)="openGalery()" expand="block">
@@ -135,6 +136,7 @@
                 readonly
                 placeholder="Capturar imagem"
               ></ion-input>
+              <ion-button fill="clear" type="button" item-right (click)="clearInputImage('camera')"> <ion-icon name="trash" style="font-size: 22px;"></ion-icon></ion-button>
             </ion-item>
             <ion-button mode="ios" (click)="takePicture()" expand="block">
               Câmera<ion-icon name="camera" slot="end"></ion-icon>

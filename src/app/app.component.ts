@@ -97,7 +97,6 @@ export class AppComponent implements OnInit {
   ) {
     this.initializeApp();
     //this.backButtonEvent();
-    console.log(this.router.url);
   }
 
   //   backButtonEvent() {

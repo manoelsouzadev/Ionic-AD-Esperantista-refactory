@@ -39,13 +39,23 @@ export class NovoCultoPage implements OnInit {
     });
   }
 
-  changeValue(value) {
-    this.radioOption = value;
-    if (value === "galeria") {
+  changeRadioValue(option) {
+    this.radioOption = option;
+    if (option === "galeria") {
       this.fileImageCamera = null;
       this.firebaseService.resetarDados();
-    } else if (value === "camera") {
+    } else if (option === "camera") {
       this.fileImage = null;
+      this.firebaseService.resetarDados();
+    }
+  }
+
+  clearInputImage(option) {
+    if (option === "galeria") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    } else if (option === "camera") {
+      this.fileImageCamera = null;
       this.firebaseService.resetarDados();
     }
   }
@@ -68,7 +78,6 @@ export class NovoCultoPage implements OnInit {
       this.fileImageCamera !== undefined &&
       this.fileImageCamera !== null
     ) {
-      alert("save form base 64 : entrou");
       await this.uploadPictureBase64();
       await this.form.get("urlImagem").setValue(this.downloadURL);
     } else {

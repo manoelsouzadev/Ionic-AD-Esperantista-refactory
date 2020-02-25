@@ -18,7 +18,6 @@ export class CampanhasPage implements OnInit {
   ionViewWillEnter() {
     this.campanhasService.list().subscribe(res => {
       this.campanhas = res;
-      console.log("cultos this: " + this.campanhas);
       this.sharedModalService.showMessageNotice(this.campanhas);
     });
 

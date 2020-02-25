@@ -45,15 +45,12 @@ export class CultosSemanaisPage implements OnInit {
   }
 
   redirecionarAtualizarCulto(culto){
-    console.log(culto);
-
     this.router.navigate(['cadastro/atualizar-culto'], {
       queryParams: { 'id': culto._id }
   });
   }
 
   async deletarCulto(id: string, urlImagem: string) {
-    console.log(id);
     if(urlImagem !== null && urlImagem !== undefined && urlImagem !== ''){
       await this.firebaseService.deletarImagemStorage('imagens-culto', urlImagem);
     }
