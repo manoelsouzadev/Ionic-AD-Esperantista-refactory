@@ -14,7 +14,9 @@ import { FirebaseService } from "../../../shared/services/firebase/firebase.serv
 export class NovaCampanhaPage implements OnInit {
   protected form: FormGroup;
   protected fileImage: string;
+  protected fileImageCamera: string = null;
   private downloadURL: string;
+  private radioOption: string = "galeria";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,15 +39,41 @@ export class NovaCampanhaPage implements OnInit {
     });
   }
 
+  changeRadioValue(option) {
+    this.radioOption = option;
+    if (option === "galeria") {
+      this.fileImageCamera = null;
+      this.firebaseService.resetarDados();
+    } else if (option === "camera") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    }
+  }
+
+  clearInputImage(option) {
+    if (option === "galeria") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    } else if (option === "camera") {
+      this.fileImageCamera = null;
+      this.firebaseService.resetarDados();
+    }
+  }
+
   redirecionarCampanhasCadastradas() {
     this.router.navigate(["cadastro/secao/campanhas"]);
   }
 
   async salvarCampanha() {
-    console.log(this.form.get("dia").value + "");
     await this.sharedModalService.presentLoadingWithOptions();
     if (this.fileImage !== undefined && this.fileImage !== null) {
       await this.uploadPicture();
+      await this.form.get("urlImagem").setValue(this.downloadURL);
+    } else if (
+      this.fileImageCamera !== undefined &&
+      this.fileImageCamera !== null
+    ) {
+      await this.uploadPictureBase64();
       await this.form.get("urlImagem").setValue(this.downloadURL);
     } else {
       await this.form.get("urlImagem").setValue("");
@@ -84,6 +112,7 @@ export class NovaCampanhaPage implements OnInit {
     });
     this.fileImage = null;
     this.downloadURL = null;
+    this.fileImageCamera = null;
     this.form.get("titulo").markAsUntouched();
     this.form.get("horario").markAsUntouched();
     this.form.get("dataInicio").markAsUntouched();
@@ -102,6 +131,26 @@ export class NovaCampanhaPage implements OnInit {
   async uploadPicture() {
     await this.firebaseService
       .uploadPicture("imagens-campanha")
+      .then(downURL => (this.downloadURL = downURL))
+      .catch((this.downloadURL = null));
+  }
+
+  async takePicture() {
+    await this.firebaseService
+      .takePicture()
+      .then(file => {
+        //this.fileImage = null;
+        this.fileImageCamera = file;
+        //this.fileImage = file;
+        //alert(this.fileImageCamera);
+        // this.fileImage = file;
+      })
+      .catch((this.fileImageCamera = null));
+  }
+
+  async uploadPictureBase64() {
+    await this.firebaseService
+      .uploadPictureBase64("imagens-campanha")
       .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
