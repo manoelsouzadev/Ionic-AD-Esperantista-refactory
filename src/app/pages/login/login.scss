@@ -13,3 +13,27 @@
 .show-map {
   opacity: 1;
 }
+
+#person-icon{
+  font-size: 80px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  //color: linear-gradient(115deg, #04aefd, #4586e9ec);
+  height:150px;
+  //color: rgba(168, 164, 164, 0.932);
+  color: #474747;
+}
+ion-label{
+margin-top: 10%;
+}
+#button-login{
+  margin-top: 100px;
+}
+#margin-left-right{
+margin-left: 15px;
+margin-right: 15px;
+}
+#div-linear-gradient{
+background: linear-gradient(115deg, #04aefd, #4586e9ec); height:150px;
+}
