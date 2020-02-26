@@ -143,7 +143,7 @@ export class AtualizarCampanhaPage implements OnInit {
   //   );
   // }
 
-  async alterarImagem() {
+  async alterarImagemGaleria() {
     await this.openGalery();
     if (this.fileImage !== undefined && this.fileImage !== null) {
       await this.sharedModalService.presentLoadingWithOptions();

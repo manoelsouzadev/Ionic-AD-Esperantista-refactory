@@ -20,6 +20,8 @@ export class AtualizarCultoPage implements OnInit {
   protected urlImagem: string;
   private downloadURL: string;
   private fileImage: any = null;
+  protected fileImageCamera: string = null;
+  private radioOption: string = "galeria";
 
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +52,27 @@ export class AtualizarCultoPage implements OnInit {
       descricao: ["", Validators.required],
       urlImagem: ["", Validators.required]
     });
+  }
+
+  changeRadioValue(option) {
+    this.radioOption = option;
+    if (option === "galeria") {
+      this.fileImageCamera = null;
+      this.firebaseService.resetarDados();
+    } else if (option === "camera") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    }
+  }
+
+  clearInputImage(option) {
+    if (option === "galeria") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    } else if (option === "camera") {
+      this.fileImageCamera = null;
+      this.firebaseService.resetarDados();
+    }
   }
 
   getCultoById(id) {
@@ -111,6 +134,7 @@ export class AtualizarCultoPage implements OnInit {
       urlImagem: null
     });
     this.fileImage = null;
+    this.fileImageCamera = null;
     this.urlImagem = null;
     this.downloadURL = null;
   }
@@ -172,9 +196,9 @@ export class AtualizarCultoPage implements OnInit {
   //   );
   // }
 
-  async alterarImagem() {
+  async alterarImagemGaleria() {
     await this.openGalery();
-    if (this.fileImage !== undefined && this.fileImage !== null){
+    if (this.fileImage !== undefined && this.fileImage !== null) {
       await this.sharedModalService.presentLoadingWithOptions();
       if (
         this.form.get("urlImagem").value !== "" ||
@@ -227,4 +251,67 @@ export class AtualizarCultoPage implements OnInit {
   //     console.log(toast);
   //   });
   //}
+
+  async takePicture() {
+    await this.firebaseService
+      .takePicture()
+      .then(file => {
+        //this.fileImage = null;
+        this.fileImageCamera = file;
+        //this.fileImage = file;
+        //alert(this.fileImageCamera);
+        // this.fileImage = file;
+      })
+      .catch((this.fileImageCamera = null));
+  }
+
+  async uploadPictureBase64() {
+    await this.firebaseService
+      .uploadPictureBase64("imagens-culto")
+      .then(downURL => (this.downloadURL = downURL))
+      .catch((this.downloadURL = null));
+  }
+
+  async alterarImagemCamera() {
+    await this.takePicture();
+    if (this.fileImageCamera !== undefined && this.fileImageCamera !== null) {
+      await this.sharedModalService.presentLoadingWithOptions();
+      if (
+        this.form.get("urlImagem").value !== "" ||
+        this.form.get("urlImagem").value !== null ||
+        this.form.get("urlImagem").value !== undefined
+      ) {
+        await this.firebaseService.deletarImagemStorage(
+          "imagens-culto",
+          this.form.get("urlImagem").value
+        );
+      }
+      await this.uploadPictureBase64();
+      await this.form.get("urlImagem").setValue(this.downloadURL);
+
+      await this.cultosSemanaisService.save(this.form.value).subscribe(
+        success => {
+          this.sharedModalService.presentToast(
+            "Imagem alterada com sucesso!",
+            "medium",
+            "custom-modal",
+            1500
+          );
+          this.loadingController.dismiss();
+          this.resetarForm();
+          this.redirecionarCultosCadastrados();
+        },
+        error =>
+          this.sharedModalService.presentToast(
+            "Erro ao alterar imagem, tente novamente!",
+            "danger",
+            "custom-modal",
+            1500
+          ),
+        () => console.log("Finalizado com sucesso!")
+      );
+    } else {
+      return;
+    }
+  }
 }

@@ -99,7 +99,7 @@
   <div class="ion-padding">
     <ion-card-header>
       <ion-card-title>
-        Alteração da Imagem 
+        Alteração da Imagem
       </ion-card-title>
     </ion-card-header>
     <img [src]="urlImagem" *ngIf="urlImagem; else noImage" />
@@ -114,7 +114,7 @@
       mode="ios"
       expand="block"
       type="submit"
-      (click)="alterarImagem()"
+      (click)="alterarImagemGaleria()"
       >Alterar Imagem<ion-icon name="images" slot="end"></ion-icon
     ></ion-button>
   </div>

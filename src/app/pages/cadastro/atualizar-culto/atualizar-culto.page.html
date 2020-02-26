@@ -11,7 +11,7 @@
   <div class="ion-padding">
     <ion-card-header>
       <ion-card-title>
-          Alteração de Dados
+        Alteração de Dados
       </ion-card-title>
     </ion-card-header>
     <form [formGroup]="form">
@@ -63,23 +63,68 @@
   <div class="ion-padding">
     <ion-card-header>
       <ion-card-title>
-      Alteração da Imagem
-    </ion-card-title>
-
+        Alteração da Imagem
+      </ion-card-title>
     </ion-card-header>
-    <img [src]="urlImagem" *ngIf="urlImagem; else noImage"/>
-   <!-- <ion-button mode="ios" expand="block" type="submit" (click)="openGalery()"
+    <img [src]="urlImagem" *ngIf="urlImagem; else noImage" />
+    <!-- <ion-button mode="ios" expand="block" type="submit" (click)="openGalery()"
       >Escolher Imagem</ion-button
     >
     <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
       >Salvar Imagem<ion-icon name="send" slot="end"></ion-icon
     ></ion-button>-->
 
-    <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
+    <ion-list lines="none">
+      <ion-label mode="ios" position="stacked" id="title-get-image"
+        >Obter imagem pela</ion-label
+      >
+
+      <ion-radio-group>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Galeria</ion-label>
+              <ion-radio
+                slot="start"
+                checked
+                (click)="changeRadioValue('galeria')"
+              ></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Câmera</ion-label>
+              <ion-radio
+                slot="start"
+                (click)="changeRadioValue('camera')"
+              ></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-radio-group>
+    </ion-list>
+
+    <div *ngIf="radioOption == 'galeria'" style="margin-top: -30px;">
+      <ion-list>
+        <ion-button mode="ios" (click)="alterarImagemGaleria()" expand="block">
+          Galeria<ion-icon name="images" slot="end"></ion-icon>
+        </ion-button>
+      </ion-list>
+    </div>
+
+    <div *ngIf="radioOption == 'camera'" style="margin-top: -30px;">
+      <ion-list>
+        <ion-button mode="ios" (click)="alterarImagemCamera()" expand="block">
+          Câmera<ion-icon name="camera" slot="end"></ion-icon>
+        </ion-button>
+      </ion-list>
+    </div>
+
+    <!-- <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
       >Alterar Imagem<ion-icon name="images" slot="end"></ion-icon
-    ></ion-button>
+    ></ion-button> -->
   </div>
 </ion-content>
 <ng-template #noImage>
-    <p id="text-center">Não há imagem para exibir</p>
+  <p id="text-center">Não há imagem para exibir</p>
 </ng-template>
