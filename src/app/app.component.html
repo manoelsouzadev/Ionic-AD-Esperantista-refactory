@@ -11,7 +11,7 @@
       <ion-content>
         <ion-list lines="none">
           <ion-list-header>
-            Navigate
+            Navegar
           </ion-list-header>
           <ion-menu-toggle autoHide="false" *ngFor="let p of appPages; let i = index">
             <ion-item [routerLink]="p.url" routerLinkActive="active" routerDirection="root" detail="false">
@@ -23,7 +23,7 @@
 
           </ion-menu-toggle>
         </ion-list>
-
+<!--
         <ion-list *ngIf="loggedIn" lines="none">
           <ion-list-header>
             Account
@@ -56,9 +56,9 @@
             </ion-item>
           </ion-menu-toggle>
 
-        </ion-list>
+        </ion-list> -->
 
-        <ion-list *ngIf="!loggedIn" lines="none">
+        <!-- <ion-list *ngIf="!loggedIn" lines="none">
           <ion-list-header>
             Account
           </ion-list-header>
@@ -89,7 +89,7 @@
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
-        </ion-list>
+        </ion-list> -->
 
         <ion-list lines="none">
           <ion-list-header>
@@ -98,7 +98,7 @@
           <ion-menu-toggle autoHide="false">
             <ion-item button (click)="openTutorial()" detail="false">
               <ion-icon slot="start" name="hammer"></ion-icon>
-              <ion-label>Show Tutorial</ion-label>
+              <ion-label>Mostrar Tutorial</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
