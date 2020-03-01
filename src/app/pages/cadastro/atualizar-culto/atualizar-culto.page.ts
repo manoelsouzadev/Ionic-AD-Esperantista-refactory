@@ -15,12 +15,12 @@ import { Toast } from "@ionic-native/toast/ngx";
   styleUrls: ["./atualizar-culto.page.scss"]
 })
 export class AtualizarCultoPage implements OnInit {
-  protected form: FormGroup;
+  private form: FormGroup;
   private id: string;
-  protected urlImagem: string;
+  private urlImagem: string;
   private downloadURL: string;
   private fileImage: any = null;
-  protected fileImageCamera: string = null;
+  private fileImageCamera: string = null;
   private radioOption: string = "galeria";
 
   constructor(

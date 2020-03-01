@@ -16,11 +16,13 @@ import { delay } from "rxjs/operators";
   styleUrls: ["./atualizar-campanha.page.scss"]
 })
 export class AtualizarCampanhaPage implements OnInit {
-  protected form: FormGroup;
+  private form: FormGroup;
   private id: string;
-  protected urlImagem: string;
+  private urlImagem: string;
   private downloadURL: string;
   private fileImage: any = null;
+  private radioOption: string = "galeria";
+  private fileImageCamera: string = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -54,13 +56,34 @@ export class AtualizarCampanhaPage implements OnInit {
     });
   }
 
+  changeRadioValue(option) {
+    this.radioOption = option;
+    if (option === "galeria") {
+      this.fileImageCamera = null;
+      this.firebaseService.resetarDados();
+    } else if (option === "camera") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    }
+  }
+
+  clearInputImage(option) {
+    if (option === "galeria") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    } else if (option === "camera") {
+      this.fileImageCamera = null;
+      this.firebaseService.resetarDados();
+    }
+  }
+
   getCampanhaById(id) {
     this.campanhasService.loadByID(id).subscribe(res => this.popularForm(res));
   }
 
   popularForm(campanha) {
     this.id = campanha._id;
-    let diaFormatado = (campanha.dia).split(",");
+    let diaFormatado = campanha.dia.split(",");
 
     this.form = this.formBuilder.group({
       id: [campanha._id],
@@ -79,9 +102,9 @@ export class AtualizarCampanhaPage implements OnInit {
     this.router.navigate([`cadastro/secao/campanhas`]);
   }
 
- async updateCampanha() {
+  async updateCampanha() {
     await this.sharedModalService.presentLoadingWithOptions();
-    await this.form.get('dia').setValue(this.form.get('dia').value + '');
+    await this.form.get("dia").setValue(this.form.get("dia").value + "");
     await this.campanhasService.save(this.form.value).subscribe(
       success => {
         this.loadingController.dismiss();
@@ -118,6 +141,7 @@ export class AtualizarCampanhaPage implements OnInit {
       urlImagem: null
     });
     this.fileImage = null;
+    this.fileImageCamera = null;
     this.urlImagem = null;
     this.downloadURL = null;
   }
@@ -152,14 +176,14 @@ export class AtualizarCampanhaPage implements OnInit {
         this.form.get("urlImagem").value !== null ||
         this.form.get("urlImagem").value !== undefined
       ) {
-      await this.firebaseService.deletarImagemStorage(
-        "imagens-campanha",
-        this.form.get("urlImagem").value
-      );
+        await this.firebaseService.deletarImagemStorage(
+          "imagens-campanha",
+          this.form.get("urlImagem").value
+        );
       }
       await this.uploadPicture();
       await this.form.get("urlImagem").setValue(this.downloadURL);
-      await this.form.get('dia').setValue(this.form.get('dia').value + '');
+      await this.form.get("dia").setValue(this.form.get("dia").value + "");
       await this.campanhasService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(
@@ -198,5 +222,68 @@ export class AtualizarCampanhaPage implements OnInit {
       .uploadPicture("imagens-campanha")
       .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
+  }
+
+  async takePicture() {
+    await this.firebaseService
+      .takePicture()
+      .then(file => {
+        //this.fileImage = null;
+        this.fileImageCamera = file;
+        //this.fileImage = file;
+        //alert(this.fileImageCamera);
+        // this.fileImage = file;
+      })
+      .catch((this.fileImageCamera = null));
+  }
+
+  async uploadPictureBase64() {
+    await this.firebaseService
+      .uploadPictureBase64("imagens-campanha")
+      .then(downURL => (this.downloadURL = downURL))
+      .catch((this.downloadURL = null));
+  }
+
+  async alterarImagemCamera() {
+    await this.takePicture();
+    if (this.fileImageCamera !== undefined && this.fileImageCamera !== null) {
+      await this.sharedModalService.presentLoadingWithOptions();
+      if (
+        this.form.get("urlImagem").value !== "" ||
+        this.form.get("urlImagem").value !== null ||
+        this.form.get("urlImagem").value !== undefined
+      ) {
+        await this.firebaseService.deletarImagemStorage(
+          "imagens-campanha",
+          this.form.get("urlImagem").value
+        );
+      }
+      await this.uploadPictureBase64();
+      await this.form.get("urlImagem").setValue(this.downloadURL);
+      await this.form.get("dia").setValue(this.form.get("dia").value + "");
+      await this.campanhasService.save(this.form.value).subscribe(
+        success => {
+          this.sharedModalService.presentToast(
+            "Imagem alterada com sucesso!",
+            "medium",
+            "custom-modal",
+            1500
+          );
+          this.loadingController.dismiss();
+          this.resetarForm();
+          this.redirecionarCampanhasCadastradas();
+        },
+        error =>
+          this.sharedModalService.presentToast(
+            "Erro ao alterar imagem, tente novamente!",
+            "danger",
+            "custom-modal",
+            1500
+          ),
+        () => console.log("Finalizado com sucesso!")
+      );
+    } else {
+      return;
+    }
   }
 }

@@ -110,13 +110,59 @@
       >Salvar Imagem<ion-icon name="send" slot="end"></ion-icon
     ></ion-button>-->
 
-    <ion-button
+    <ion-list lines="none">
+      <ion-label mode="ios" position="stacked" id="title-get-image"
+        >Obter imagem pela</ion-label
+      >
+
+      <ion-radio-group>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Galeria</ion-label>
+              <ion-radio
+                slot="start"
+                checked
+                (click)="changeRadioValue('galeria')"
+              ></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Câmera</ion-label>
+              <ion-radio
+                slot="start"
+                (click)="changeRadioValue('camera')"
+              ></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-radio-group>
+    </ion-list>
+
+    <div *ngIf="radioOption == 'galeria'" style="margin-top: -30px;">
+      <ion-list>
+        <ion-button mode="ios" (click)="alterarImagemGaleria()" expand="block">
+          Galeria<ion-icon name="images" slot="end"></ion-icon>
+        </ion-button>
+      </ion-list>
+    </div>
+
+    <div *ngIf="radioOption == 'camera'" style="margin-top: -30px;">
+      <ion-list>
+        <ion-button mode="ios" (click)="alterarImagemCamera()" expand="block">
+          Câmera<ion-icon name="camera" slot="end"></ion-icon>
+        </ion-button>
+      </ion-list>
+    </div>
+
+    <!-- <ion-button
       mode="ios"
       expand="block"
       type="submit"
       (click)="alterarImagemGaleria()"
       >Alterar Imagem<ion-icon name="images" slot="end"></ion-icon
-    ></ion-button>
+    ></ion-button> -->
   </div>
 </ion-content>
 <ng-template #noImage>
