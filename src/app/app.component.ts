@@ -184,7 +184,7 @@ export class AppComponent implements OnInit {
             navigator["app"].exitApp(); // work in ionic 4
           } else {
             this.sharedModalService.presentToast(
-              `Press back again to exit App.`,
+              `Pressione novamente para sair do aplicativo.`,
               "medium",
               "custom-modal",
               2000

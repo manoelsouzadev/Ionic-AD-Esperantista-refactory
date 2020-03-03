@@ -45,7 +45,6 @@ export class OracoesPage implements OnInit {
   }
 
   async deletarOracao(id: string, urlImagem: string) {
-    console.log(id);
     if(urlImagem !== null && urlImagem !== undefined && urlImagem !== ''){
       await this.firebaseService.deletarImagemStorage('imagens-oracao', urlImagem);
     }

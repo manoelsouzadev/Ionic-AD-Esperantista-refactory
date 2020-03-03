@@ -13,11 +13,13 @@ import { NovoCultoPage } from "./novo-culto/novo-culto.page";
 import { CampanhasPage } from "./secoes-cadastro/secao-cadastro-campanhas/campanhas/campanhas.page";
 import { CultosSemanaisPage } from "./secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.page";
 import { OracoesPage } from "./secoes-cadastro/secao-cadastro-oracoes/oracoes/oracoes.page";
+import { AtualizarOracaoComponent } from './atualizar-oracao/atualizar-oracao.component';
 
 @NgModule({
   declarations: [
     AtualizarCampanhaPage,
     AtualizarCultoPage,
+    AtualizarOracaoComponent,
     CategoriasPage,
     NovaCampanhaPage,
     NovaOracaoPage,

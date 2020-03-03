@@ -1,21 +1,18 @@
 import { FirebaseService } from "./../../../shared/services/firebase/firebase.service";
-import { environment } from "../../../../environments/environment.prod";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { CampanhasService } from "../secoes-cadastro/secao-cadastro-campanhas/campanhas/campanhas.service";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { LoadingController, ToastController } from "@ionic/angular";
+import { LoadingController } from "@ionic/angular";
 import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
-import { SharedHttpService } from "../../../shared/services/shared-http/shared-http.service";
-import { Toast } from "@ionic-native/toast/ngx";
-import { delay } from "rxjs/operators";
+import { OracoesService } from '../secoes-cadastro/secao-cadastro-oracoes/oracoes/oracoes.service';
 
 @Component({
-  selector: "app-atualizar-campanha",
-  templateUrl: "./atualizar-campanha.page.html",
-  styleUrls: ["./atualizar-campanha.page.scss"]
+  selector: 'atualizar-oracao',
+  templateUrl: './atualizar-oracao.component.html',
+  styleUrls: ['./atualizar-oracao.component.scss'],
 })
-export class AtualizarCampanhaPage implements OnInit {
+export class AtualizarOracaoComponent implements OnInit {
+
   private form: FormGroup;
   private id: string;
   private urlImagem: string;
@@ -27,22 +24,19 @@ export class AtualizarCampanhaPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private campanhasService: CampanhasService,
+    private oracoesService: OracoesService,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private sharedModalService: SharedModalService,
-    private sharedHttpService: SharedHttpService,
     private firebaseService: FirebaseService,
-    private toastController: ToastController,
-    private toast: Toast
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((queryParams: any) => {
       this.id = queryParams["id"];
     });
 
-    this.getCampanhaById(this.id);
+    this.getOracaoById(this.id);
 
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
@@ -76,39 +70,39 @@ export class AtualizarCampanhaPage implements OnInit {
     }
   }
 
-  getCampanhaById(id) {
-    this.campanhasService.loadByID(id).subscribe(res => this.popularForm(res));
+  getOracaoById(id) {
+    this.oracoesService.loadByID(id).subscribe(res => this.popularForm(res));
   }
 
-  popularForm(campanha) {
-    this.id = campanha._id;
-    let diaFormatado = campanha.dia.split(",");
+  popularForm(oracao) {
+    this.id = oracao._id;
+    let diaFormatado = oracao.dia.split(",");
 
     this.form = this.formBuilder.group({
-      id: [campanha._id],
-      titulo: [campanha.titulo],
-      horario: [campanha.horario],
-      dataInicio: [campanha.dataInicio],
-      dataFinal: [campanha.dataFinal],
+      id: [oracao._id],
+      titulo: [oracao.titulo],
+      horario: [oracao.horario],
+      dataInicio: [oracao.dataInicio],
+      dataFinal: [oracao.dataFinal],
       dia: [diaFormatado],
-      descricao: [campanha.descricao],
-      urlImagem: [campanha.urlImagem]
+      descricao: [oracao.descricao],
+      urlImagem: [oracao.urlImagem]
     });
-    this.urlImagem = campanha.urlImagem;
+    this.urlImagem = oracao.urlImagem;
   }
 
-  redirecionarCampanhasCadastradas() {
-    this.router.navigate([`cadastro/secao/campanhas`]);
+  redirecionarOracoesCadastradas() {
+    this.router.navigate([`cadastro/secao/oracoes`]);
   }
 
-  async updateCampanha() {
+  async updateOracao() {
     await this.sharedModalService.presentLoadingWithOptions();
     await this.form.get("dia").setValue(this.form.get("dia").value + "");
-    await this.campanhasService.save(this.form.value).subscribe(
+    await this.oracoesService.save(this.form.value).subscribe(
       success => {
         this.loadingController.dismiss();
         this.sharedModalService.presentToast(
-          "Campanha atualizada com sucesso!",
+          "Oração atualizada com sucesso!",
           "medium",
           "custom-modal",
           1500
@@ -116,11 +110,11 @@ export class AtualizarCampanhaPage implements OnInit {
         //this.presentToast();
         //this.mostrarToast();
         this.resetarForm();
-        this.redirecionarCampanhasCadastradas();
+        this.redirecionarOracoesCadastradas();
       },
       error =>
         this.sharedModalService.presentToast(
-          "Erro ao atualizar campanha, tente novamente!",
+          "Erro ao atualizar oração, tente novamente!",
           "danger",
           "custom-modal",
           1500
@@ -145,27 +139,6 @@ export class AtualizarCampanhaPage implements OnInit {
     this.downloadURL = null;
   }
 
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: "Campanha atualizada!",
-      color: "success",
-      mode: "ios",
-      position: "top",
-      cssClass: "custom-modal",
-      duration: 1500
-    });
-    toast.present();
-  }
-
-  /*Remover este método, pois está inutilizado*/
-  // mostrarToast(){
-  //   this.toast.show(`I'm a toast`, '5000', 'center').subscribe(
-  //     toast => {
-  //       console.log(toast);
-  //     }
-  //   );
-  // }
-
   async alterarImagemGaleria() {
     await this.openGalery();
     if (this.fileImage !== undefined && this.fileImage !== null) {
@@ -183,17 +156,17 @@ export class AtualizarCampanhaPage implements OnInit {
       await this.uploadPicture();
       await this.form.get("urlImagem").setValue(this.downloadURL);
       await this.form.get("dia").setValue(this.form.get("dia").value + "");
-      await this.campanhasService.save(this.form.value).subscribe(
+      await this.oracoesService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(
-            "Imagem alterada com sucesso!", 
+            "Imagem alterada com sucesso!",
             "medium",
             "custom-modal",
             1500
           );
           this.loadingController.dismiss();
           this.resetarForm();
-          this.redirecionarCampanhasCadastradas();
+          this.redirecionarOracoesCadastradas();
         },
         error =>
           this.sharedModalService.presentToast(
@@ -218,7 +191,7 @@ export class AtualizarCampanhaPage implements OnInit {
 
   async uploadPicture() {
     await this.firebaseService
-      .uploadPicture("imagens-campanha")
+      .uploadPicture("imagens-oracao")
       .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
@@ -238,7 +211,7 @@ export class AtualizarCampanhaPage implements OnInit {
 
   async uploadPictureBase64() {
     await this.firebaseService
-      .uploadPictureBase64("imagens-campanha")
+      .uploadPictureBase64("imagens-oracao")
       .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
@@ -253,14 +226,14 @@ export class AtualizarCampanhaPage implements OnInit {
         this.form.get("urlImagem").value !== undefined
       ) {
         await this.firebaseService.deletarImagemStorage(
-          "imagens-campanha",
+          "imagens-oracao",
           this.form.get("urlImagem").value
         );
       }
       await this.uploadPictureBase64();
       await this.form.get("urlImagem").setValue(this.downloadURL);
       await this.form.get("dia").setValue(this.form.get("dia").value + "");
-      await this.campanhasService.save(this.form.value).subscribe(
+      await this.oracoesService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
@@ -270,7 +243,7 @@ export class AtualizarCampanhaPage implements OnInit {
           );
           this.loadingController.dismiss();
           this.resetarForm();
-          this.redirecionarCampanhasCadastradas();
+          this.redirecionarOracoesCadastradas();
         },
         error =>
           this.sharedModalService.presentToast(
@@ -285,4 +258,5 @@ export class AtualizarCampanhaPage implements OnInit {
       return;
     }
   }
+
 }

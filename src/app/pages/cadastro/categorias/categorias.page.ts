@@ -13,21 +13,21 @@ export class CategoriasPage implements OnInit {
       'title': 'Cultos',
       'icon': 'contacts',
       'description': 'Cadastrar culto',
-      'color': '#E63135',
+      // 'color': '#E63135',
       'route': 'cadastro/secao/cultos'
      },
     {
       'title': 'Campanhas',
       'icon': 'flame',
       'description': 'Cadastrar campanha',
-      'color': '#0CA9EA',
+      // 'color': '#0CA9EA',
       'route': 'cadastro/secao/campanhas'
     },
     {
       'title': 'Orações',
       'icon': 'time',
       'description': 'Cadastrar oração',
-      'color': '#0CA9EA',
+      // 'color': '#0CA9EA',
       'route': 'cadastro/secao/oracoes'
      }
     // {

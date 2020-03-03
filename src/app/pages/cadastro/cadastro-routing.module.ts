@@ -10,6 +10,7 @@ import { NovoCultoPage } from "./novo-culto/novo-culto.page";
 import { CampanhasPage } from "./secoes-cadastro/secao-cadastro-campanhas/campanhas/campanhas.page";
 import { CultosSemanaisPage } from "./secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.page";
 import { OracoesPage } from "./secoes-cadastro/secao-cadastro-oracoes/oracoes/oracoes.page";
+import { AtualizarOracaoComponent } from './atualizar-oracao/atualizar-oracao.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: "atualizar-culto",
     component: AtualizarCultoPage
+  },
+  {
+    path: "atualizar-oracao",
+    component: AtualizarOracaoComponent
   },
   {
     path: "categorias",
