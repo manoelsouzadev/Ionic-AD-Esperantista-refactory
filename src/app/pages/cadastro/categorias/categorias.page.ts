@@ -29,6 +29,13 @@ export class CategoriasPage implements OnInit {
       'description': 'Cadastrar oração',
       // 'color': '#0CA9EA',
       'route': 'cadastro/secao/oracoes'
+     },
+     {
+      'title': 'Ensaios',
+      'icon': 'microphone',
+      'description': 'Cadastrar ensaio',
+      // 'color': '#0CA9EA',
+      'route': 'cadastro/secao/ensaios'
      }
     // {
     //   'title': 'JavaScript',

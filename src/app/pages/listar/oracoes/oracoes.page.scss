@@ -1,0 +1,29 @@
+// ion-card, ion-card-header {
+//     margin: 4px 4px 7px 4px;
+//     //color: #000;
+
+// }
+
+textarea {
+  text-rendering: auto;
+  //color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: start;
+  flex-direction: column;
+  resize: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+#text-area{
+  width: 100%;
+  border-color: #fff;
+  overflow-y: hidden;
+}
+
+ion-card-content{
+  margin-left: 4px;
+}

@@ -1,3 +1,6 @@
+import { AtualizarEnsaioPage } from "./atualizar-ensaio/atualizar-ensaio.page";
+import { NovoEnsaioPage } from "./novo-ensaio/novo-ensaio.page";
+import { EnsaiosPage } from "./secoes-cadastro/ensaios/ensaios.page";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
@@ -10,7 +13,7 @@ import { NovoCultoPage } from "./novo-culto/novo-culto.page";
 import { CampanhasPage } from "./secoes-cadastro/secao-cadastro-campanhas/campanhas/campanhas.page";
 import { CultosSemanaisPage } from "./secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.page";
 import { OracoesPage } from "./secoes-cadastro/secao-cadastro-oracoes/oracoes/oracoes.page";
-import { AtualizarOracaoComponent } from './atualizar-oracao/atualizar-oracao.component';
+import { AtualizarOracaoComponent } from "./atualizar-oracao/atualizar-oracao.component";
 
 const routes: Routes = [
   {
@@ -58,8 +61,21 @@ const routes: Routes = [
       {
         path: "oracoes",
         component: OracoesPage
+      },
+
+      {
+        path: "ensaios",
+        component: EnsaiosPage
       }
     ]
+  },
+  {
+    path: "novo-ensaio",
+    component: NovoEnsaioPage
+  },
+  {
+    path: "atualizar-ensaio",
+    component: AtualizarEnsaioPage
   }
 ];
 

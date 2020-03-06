@@ -1,3 +1,6 @@
+import { AtualizarEnsaioPage } from './atualizar-ensaio/atualizar-ensaio.page';
+import { NovoEnsaioPage } from './novo-ensaio/novo-ensaio.page';
+import { EnsaiosPage } from './secoes-cadastro/ensaios/ensaios.page';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -26,7 +29,11 @@ import { AtualizarOracaoComponent } from './atualizar-oracao/atualizar-oracao.co
     NovoCultoPage,
     CampanhasPage,
     CultosSemanaisPage,
-    OracoesPage
+    OracoesPage,
+    EnsaiosPage,
+    NovoEnsaioPage,
+    AtualizarCampanhaPage,
+    AtualizarEnsaioPage
   ],
   imports: [
     CommonModule,

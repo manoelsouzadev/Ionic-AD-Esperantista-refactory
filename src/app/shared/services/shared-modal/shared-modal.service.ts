@@ -70,11 +70,9 @@ export class SharedModalService {
   }
 
   async showMessageNotice(reuniao) {
-    console.log('show length:' + reuniao[0].dataInicio);
     let message = '';
     for (let i = 0; i < reuniao.length; i++) {
       var strDataInicial = reuniao[i].dataInicio;
-      console.log("str: " + strDataInicial);
       var strDataFinal = reuniao[i].dataFinal;
       var partesDataInicial = strDataInicial.split('-');
       var partesDataFinal = strDataFinal.split('-');

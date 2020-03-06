@@ -1,8 +1,9 @@
-import { Routes, RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { EnsaiosPage } from "./ensaios/ensaios.page";
+import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from "@angular/core";
 
-import { CampanhasPage } from './campanhas/campanhas.page';
-import { OracoesPage } from './oracoes/oracoes.page';
+import { CampanhasPage } from "./campanhas/campanhas.page";
+import { OracoesPage } from "./oracoes/oracoes.page";
 
 const routes: Routes = [
   {
@@ -10,8 +11,12 @@ const routes: Routes = [
     component: CampanhasPage
   },
   {
-    path: 'oracoes',
+    path: "oracoes",
     component: OracoesPage
+  },
+  {
+    path: "ensaios",
+    component: EnsaiosPage
   }
 ];
 

@@ -11,7 +11,6 @@ export class LoginService {
 
   fazerLogin(usuario: Usuario) {
     if(usuario.senha === '12345678'){
-      console.log("funcionou!!");
       this.usuarioAutenticado = true;
       this.router.navigate(['cadastro/categorias']);
     }else{

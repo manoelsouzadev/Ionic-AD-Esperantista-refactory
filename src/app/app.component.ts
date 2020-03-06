@@ -73,6 +73,11 @@ export class AppComponent implements OnInit {
       title: "Orações",
       url: "/listar/oracoes",
       icon: "time"
+    },
+    {
+      title: "Ensaios",
+      url: "/listar/ensaios",
+      icon: "microphone"
     }
   ];
   loggedIn = false;

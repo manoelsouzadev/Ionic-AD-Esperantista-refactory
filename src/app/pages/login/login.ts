@@ -25,7 +25,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   fazerLogin() {
-    console.log(this.usuario.senha);
     this.autenticado = this.loginService.fazerLogin(this.usuario);
 
     if (this.autenticado == false) {

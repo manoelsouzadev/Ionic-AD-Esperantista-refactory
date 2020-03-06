@@ -7,9 +7,10 @@ import { CampanhasPage } from './campanhas/campanhas.page';
 import { ListarRoutingModule } from './listar-routing.module';
 import { SharedModule } from './../../shared/shared.module';
 import { OracoesPage } from './oracoes/oracoes.page';
+import { EnsaiosPage } from './ensaios/ensaios.page';
 
 @NgModule({
-  declarations: [CampanhasPage, OracoesPage],
+  declarations: [CampanhasPage, OracoesPage, EnsaiosPage],
   imports: [
     CommonModule,
     FormsModule,

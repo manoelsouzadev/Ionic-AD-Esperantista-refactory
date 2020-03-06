@@ -1,20 +1,18 @@
-import { CultosSemanaisService } from "./../secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
+import { EnsaioService } from './../../../shared/services/ensaios/ensaios.service';
 import { FirebaseService } from "./../../../shared/services/firebase/firebase.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AtualizarCultoService } from "./atualizar-culto.service";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { LoadingController, ToastController } from "@ionic/angular";
+import { LoadingController } from "@ionic/angular";
 import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
-import { SharedHttpService } from "../../../shared/services/shared-http/shared-http.service";
-import { Toast } from "@ionic-native/toast/ngx";
 
 @Component({
-  selector: "app-atualizar-culto",
-  templateUrl: "./atualizar-culto.page.html",
-  styleUrls: ["./atualizar-culto.page.scss"]
+  selector: "atualizar-ensaio",
+  templateUrl: "./atualizar-ensaio.page.html",
+  styleUrls: ["./atualizar-ensaio.page.scss"]
 })
-export class AtualizarCultoPage implements OnInit {
+export class AtualizarEnsaioPage implements OnInit {
+
   private form: FormGroup;
   private id: string;
   private urlImagem: string;
@@ -26,24 +24,19 @@ export class AtualizarCultoPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private atualizarCultoService: AtualizarCultoService,
+    private ensaioService: EnsaioService,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private sharedModalService: SharedModalService,
-    private sharedHttpService: SharedHttpService,
-    private toastController: ToastController,
-    private toast: Toast,
     private firebaseService: FirebaseService,
-    private cultosSemanaisService: CultosSemanaisService
   ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((queryParams: any) => {
       this.id = queryParams["id"];
-      console.log(this.id);
     });
 
-    this.getCultoById(this.id);
+    this.getEnsaioById(this.id);
 
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
@@ -75,49 +68,48 @@ export class AtualizarCultoPage implements OnInit {
     }
   }
 
-  getCultoById(id) {
-    this.cultosSemanaisService
+  getEnsaioById(id) {
+    this.ensaioService
       .loadByID(id)
       .subscribe(res => this.popularForm(res));
   }
 
-  popularForm(culto) {
-    this.id = culto._id;
-   console.log(culto);
+  popularForm(ensaio) {
+    this.id = ensaio._id;
     this.form = this.formBuilder.group({
-      id: [culto._id],
-      titulo: [culto.titulo],
-      horario: [culto.horario],
-      dia: ["Segunda-feira"],
-      descricao: [culto.descricao],
-      urlImagem: [culto.urlImagem]
+      id: [ensaio._id],
+      titulo: [ensaio.titulo],
+      horario: [ensaio.horario],
+      dia: [ensaio.dia],
+      descricao: [ensaio.descricao],
+      urlImagem: [ensaio.urlImagem]
     });
-    this.urlImagem = culto.urlImagem;
+    this.urlImagem = ensaio.urlImagem;
   }
 
-  redirecionarCultosCadastrados() {
-    this.router.navigate(["cadastro/secao/cultos"]);
+  redirecionarEnsaiosCadastrados() {
+    this.router.navigate(["cadastro/secao/ensaios"]);
   }
 
-  updateCulto() {
+  updateEnsaio() {
     this.sharedModalService.presentLoadingWithOptions();
-    this.cultosSemanaisService.save(this.form.value).subscribe(
+    this.ensaioService.save(this.form.value).subscribe(
       success => {
         this.loadingController.dismiss();
         //this.presentToast();
         this.sharedModalService.presentToast(
-          "Culto atualizado com sucesso!",
+          "Ensaio atualizado com sucesso!",
           "medium",
           "custom-modal",
           1500
         );
         //this.mostrarToast();
         this.resetarForm();
-        this.redirecionarCultosCadastrados();
+        this.redirecionarEnsaiosCadastrados();
       },
       error =>
         this.sharedModalService.presentToast(
-          "Erro ao atualizar culto, tente novamente!",
+          "Erro ao atualizar ensaio, tente novamente!",
           "danger",
           "custom-modal",
           1500
@@ -207,14 +199,14 @@ export class AtualizarCultoPage implements OnInit {
         this.form.get("urlImagem").value !== undefined
       ) {
         await this.firebaseService.deletarImagemStorage(
-          "imagens-culto",
+          "imagens-ensaio",
           this.form.get("urlImagem").value
         );
       }
       await this.uploadPicture();
       await this.form.get("urlImagem").setValue(this.downloadURL);
 
-      await this.cultosSemanaisService.save(this.form.value).subscribe(
+      await this.ensaioService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
@@ -224,7 +216,7 @@ export class AtualizarCultoPage implements OnInit {
           );
           this.loadingController.dismiss();
           this.resetarForm();
-          this.redirecionarCultosCadastrados();
+          this.redirecionarEnsaiosCadastrados();
         },
         error =>
           this.sharedModalService.presentToast(
@@ -242,7 +234,7 @@ export class AtualizarCultoPage implements OnInit {
 
   async uploadPicture() {
     await this.firebaseService
-      .uploadPicture("imagens-culto")
+      .uploadPicture("imagens-ensaio")
       .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
@@ -268,7 +260,7 @@ export class AtualizarCultoPage implements OnInit {
 
   async uploadPictureBase64() {
     await this.firebaseService
-      .uploadPictureBase64("imagens-culto")
+      .uploadPictureBase64("imagens-ensaio")
       .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
@@ -283,14 +275,14 @@ export class AtualizarCultoPage implements OnInit {
         this.form.get("urlImagem").value !== undefined
       ) {
         await this.firebaseService.deletarImagemStorage(
-          "imagens-culto",
+          "imagens-ensaio",
           this.form.get("urlImagem").value
         );
       }
       await this.uploadPictureBase64();
       await this.form.get("urlImagem").setValue(this.downloadURL);
 
-      await this.cultosSemanaisService.save(this.form.value).subscribe(
+      await this.ensaioService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
@@ -300,7 +292,7 @@ export class AtualizarCultoPage implements OnInit {
           );
           this.loadingController.dismiss();
           this.resetarForm();
-          this.redirecionarCultosCadastrados();
+          this.redirecionarEnsaiosCadastrados();
         },
         error =>
           this.sharedModalService.presentToast(
