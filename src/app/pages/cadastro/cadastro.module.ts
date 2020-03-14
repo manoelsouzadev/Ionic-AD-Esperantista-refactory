@@ -1,3 +1,6 @@
+import { EventosPage } from './secoes-cadastro/eventos/eventos.page';
+import { AtualizarEventoPage } from './atualizar-evento/atualizar-evento.page';
+import { NovoEventoPage } from './novo-evento/novo-evento.page';
 import { AtualizarEnsaioPage } from './atualizar-ensaio/atualizar-ensaio.page';
 import { NovoEnsaioPage } from './novo-ensaio/novo-ensaio.page';
 import { EnsaiosPage } from './secoes-cadastro/ensaios/ensaios.page';
@@ -33,7 +36,10 @@ import { AtualizarOracaoComponent } from './atualizar-oracao/atualizar-oracao.co
     EnsaiosPage,
     NovoEnsaioPage,
     AtualizarCampanhaPage,
-    AtualizarEnsaioPage
+    AtualizarEnsaioPage,
+    NovoEventoPage,
+    EventosPage,
+    AtualizarEventoPage
   ],
   imports: [
     CommonModule,

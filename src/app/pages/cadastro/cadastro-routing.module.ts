@@ -1,3 +1,6 @@
+import { AtualizarEventoPage } from './atualizar-evento/atualizar-evento.page';
+import { EventosPage } from './secoes-cadastro/eventos/eventos.page';
+import { NovoEventoPage } from './novo-evento/novo-evento.page';
 import { AtualizarEnsaioPage } from "./atualizar-ensaio/atualizar-ensaio.page";
 import { NovoEnsaioPage } from "./novo-ensaio/novo-ensaio.page";
 import { EnsaiosPage } from "./secoes-cadastro/ensaios/ensaios.page";
@@ -66,6 +69,11 @@ const routes: Routes = [
       {
         path: "ensaios",
         component: EnsaiosPage
+      },
+
+      {
+        path: "eventos",
+        component: EventosPage
       }
     ]
   },
@@ -76,7 +84,16 @@ const routes: Routes = [
   {
     path: "atualizar-ensaio",
     component: AtualizarEnsaioPage
+  },
+  {
+    path: "novo-evento",
+    component: NovoEventoPage
+  },
+  {
+    path: 'atualizar-evento',
+    component: AtualizarEventoPage
   }
+
 ];
 
 @NgModule({

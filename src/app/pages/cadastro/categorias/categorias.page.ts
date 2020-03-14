@@ -36,6 +36,13 @@ export class CategoriasPage implements OnInit {
       'description': 'Cadastrar ensaio',
       // 'color': '#0CA9EA',
       'route': 'cadastro/secao/ensaios'
+     },
+     {
+      'title': 'Eventos',
+      'icon': 'people',
+      'description': 'Cadastrar evento',
+      // 'color': '#0CA9EA',
+      'route': 'cadastro/secao/eventos'
      }
     // {
     //   'title': 'JavaScript',

@@ -1,3 +1,4 @@
+import { EventosPage } from './eventos/eventos.page';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'oracoes',
     component: OracoesPage
+  },
+  {
+    path: 'eventos',
+    component: EventosPage
   }
 ];
 

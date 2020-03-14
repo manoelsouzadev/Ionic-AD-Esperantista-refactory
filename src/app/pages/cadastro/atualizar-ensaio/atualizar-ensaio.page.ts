@@ -1,4 +1,4 @@
-import { EnsaioService } from './../../../shared/services/ensaios/ensaios.service';
+import { EnsaiosService } from './../../../shared/services/ensaio/ensaios.service';
 import { FirebaseService } from "./../../../shared/services/firebase/firebase.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -24,7 +24,7 @@ export class AtualizarEnsaioPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private ensaioService: EnsaioService,
+    private ensaioService: EnsaiosService,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private sharedModalService: SharedModalService,

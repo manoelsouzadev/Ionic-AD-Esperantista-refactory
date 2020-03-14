@@ -1,55 +1,51 @@
-import { CultosSemanaisService } from "./../secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
+import { EventosService } from './../../../shared/services/eventos/eventos.service';
 import { FirebaseService } from "./../../../shared/services/firebase/firebase.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AtualizarCultoService } from "./atualizar-culto.service";
+import { CampanhasService } from "../secoes-cadastro/secao-cadastro-campanhas/campanhas/campanhas.service";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { LoadingController, ToastController } from "@ionic/angular";
 import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
 import { SharedHttpService } from "../../../shared/services/shared-http/shared-http.service";
 import { Toast } from "@ionic-native/toast/ngx";
-import { AlertController } from "@ionic/angular";
 
 @Component({
-  selector: "app-atualizar-culto",
-  templateUrl: "./atualizar-culto.page.html",
-  styleUrls: ["./atualizar-culto.page.scss"]
+  selector: 'atualizar-evento',
+  templateUrl: './atualizar-evento.page.html',
+  styleUrls: ['./atualizar-evento.page.scss'],
 })
-export class AtualizarCultoPage implements OnInit {
+export class AtualizarEventoPage implements OnInit {
   private form: FormGroup;
   private id: string;
   private urlImagem: string;
   private downloadURL: string;
   private fileImage: any = null;
-  private fileImageCamera: string = null;
   private radioOption: string = "galeria";
+  private fileImageCamera: string = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private atualizarCultoService: AtualizarCultoService,
+    private eventosService: EventosService,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private sharedModalService: SharedModalService,
-    private sharedHttpService: SharedHttpService,
-    private toastController: ToastController,
-    private toast: Toast,
     private firebaseService: FirebaseService,
-    private cultosSemanaisService: CultosSemanaisService,
-    private alertController: AlertController
+    private toastController: ToastController,
   ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((queryParams: any) => {
       this.id = queryParams["id"];
-      console.log(this.id);
     });
 
-    this.getCultoById(this.id);
+    this.getEventoById(this.id);
 
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
       horario: ["", Validators.required],
+      dataInicio: ["", Validators.required],
+      dataFinal: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
       urlImagem: ["", Validators.required]
@@ -77,49 +73,51 @@ export class AtualizarCultoPage implements OnInit {
     }
   }
 
-  getCultoById(id) {
-    this.cultosSemanaisService
-      .loadByID(id)
-      .subscribe(res => this.popularForm(res));
+  getEventoById(id) {
+    this.eventosService.loadByID(id).subscribe(res => this.popularForm(res));
   }
 
-  popularForm(culto) {
-    this.id = culto._id;
-    console.log(culto);
+  popularForm(evento) {
+    this.id = evento._id;
+    let diaFormatado = evento.dia.split(",");
+
     this.form = this.formBuilder.group({
-      id: [culto._id],
-      titulo: [culto.titulo],
-      horario: [culto.horario],
-      dia: [culto.dia],
-      descricao: [culto.descricao],
-      urlImagem: [culto.urlImagem]
+      id: [evento._id],
+      titulo: [evento.titulo],
+      horario: [evento.horario],
+      dataInicio: [evento.dataInicio],
+      dataFinal: [evento.dataFinal],
+      dia: [diaFormatado],
+      descricao: [evento.descricao],
+      urlImagem: [evento.urlImagem]
     });
-    this.urlImagem = culto.urlImagem;
+    this.urlImagem = evento.urlImagem;
   }
 
-  redirecionarCultosCadastrados() {
-    this.router.navigate(["cadastro/secao/cultos"]);
+  redirecionarEventosCadastradas() {
+    this.router.navigate([`cadastro/secao/eventos`]);
   }
 
-  updateCulto() {
-    this.sharedModalService.presentLoadingWithOptions();
-    this.cultosSemanaisService.save(this.form.value).subscribe(
+  async updateEvento() {
+    await this.sharedModalService.presentLoadingWithOptions();
+    await this.form.get("dia").setValue(this.form.get("dia").value + "");
+    await this.eventosService.save(this.form.value).subscribe(
       success => {
         this.loadingController.dismiss();
-        //this.presentToast();
         this.sharedModalService.presentToast(
-          "Culto atualizado com sucesso!",
+          "Evento atualizado com sucesso!",
           "medium",
           "custom-modal",
           1500
         );
+        //this.presentToast();
         //this.mostrarToast();
         this.resetarForm();
-        this.redirecionarCultosCadastrados();
+        this.redirecionarEventosCadastradas();
       },
       error =>
         this.sharedModalService.presentToast(
-          "Erro ao atualizar culto, tente novamente!",
+          "Erro ao atualizar evento, tente novamente!",
           "danger",
           "custom-modal",
           1500
@@ -132,6 +130,8 @@ export class AtualizarCultoPage implements OnInit {
     this.form.patchValue({
       titulo: null,
       horario: null,
+      dataInicio: null,
+      dataFinal: null,
       dia: null,
       descricao: null,
       urlImagem: null
@@ -142,60 +142,24 @@ export class AtualizarCultoPage implements OnInit {
     this.downloadURL = null;
   }
 
-  //Futuramente excluido
-  // async presentToast() {
-  //   const toast = await this.toastController.create({
-  //     message: "Culto atualizado!",
-  //     color: "success",
-  //     mode: "ios",
-  //     position: "top",
-  //     cssClass: "custom-modal",
-  //     duration: 1500
-  //   });
-  //   toast.present();
-  // }
-  // async openGalery() {
-  //   await this.firebaseService
-  //     .openGalery();
-  // }
-
-  async openGalery() {
-    await this.firebaseService
-      .openGalery()
-      .then(file => (this.fileImage = file))
-      .catch((this.fileImage = null));
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: "Evento atualizado!",
+      color: "success",
+      mode: "ios",
+      position: "top",
+      cssClass: "custom-modal",
+      duration: 1500
+    });
+    toast.present();
   }
 
-  // async alterarImagem() {
-  //   await this.sharedModalService.presentLoadingWithOptions();
-  //   await this.firebaseService.deletarImagemStorage(
-  //     "imagens-culto",
-  //     this.form.get('urlImagem').value
-  //   );
-  //   await this.uploadPicture();
-  //   await this.form.get("urlImagem").setValue(this.downloadURL);
-  //   //await alert("alterarImagem" + "  " + this.form.get("urlImagem").value);
-  //   //await alert("alterarImagem" + "  " + this.form.value);
-
-  //   await this.cultosSemanaisService.save(this.form.value).subscribe(
-  //     success => {
-  //       this.sharedModalService.presentToast(
-  //         "Imagem alterada com sucesso!",
-  //         "success",
-  //         "custom-modal",
-  //         1500
-  //       );
-  //       this.loadingController.dismiss();
-  //       this.resetarForm();
-  //       this.redirecionarCultosCadastrados();
-  //     },
-  //     error => this.sharedModalService.presentToast(
-  //       "Erro ao alterar imagem, tente novamente mais tarde!",
-  //       "error",
-  //       "custom-modal",
-  //       1500
-  //     ),
-  //     () => console.log("Finalizado com sucesso!")
+  /*Remover este método, pois está inutilizado*/
+  // mostrarToast(){
+  //   this.toast.show(`I'm a toast`, '5000', 'center').subscribe(
+  //     toast => {
+  //       console.log(toast);
+  //     }
   //   );
   // }
 
@@ -209,14 +173,14 @@ export class AtualizarCultoPage implements OnInit {
         this.form.get("urlImagem").value !== undefined
       ) {
         await this.firebaseService.deletarImagemStorage(
-          "imagens-culto",
+          "imagens-evento",
           this.form.get("urlImagem").value
         );
       }
       await this.uploadPicture();
       await this.form.get("urlImagem").setValue(this.downloadURL);
-
-      await this.cultosSemanaisService.save(this.form.value).subscribe(
+      await this.form.get("dia").setValue(this.form.get("dia").value + "");
+      await this.eventosService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
@@ -226,7 +190,7 @@ export class AtualizarCultoPage implements OnInit {
           );
           this.loadingController.dismiss();
           this.resetarForm();
-          this.redirecionarCultosCadastrados();
+          this.redirecionarEventosCadastradas();
         },
         error =>
           this.sharedModalService.presentToast(
@@ -242,18 +206,19 @@ export class AtualizarCultoPage implements OnInit {
     }
   }
 
+  async openGalery() {
+    await this.firebaseService
+      .openGalery()
+      .then(file => (this.fileImage = file))
+      .catch((this.fileImage = null));
+  }
+
   async uploadPicture() {
     await this.firebaseService
-      .uploadPicture("imagens-culto")
+      .uploadPicture("imagens-evento")
       .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
-
-  // mostrarToast() {
-  //   this.toast.show(`I'm a toast`, "5000", "center").subscribe(toast => {
-  //     console.log(toast);
-  //   });
-  //}
 
   async takePicture() {
     await this.firebaseService
@@ -270,7 +235,7 @@ export class AtualizarCultoPage implements OnInit {
 
   async uploadPictureBase64() {
     await this.firebaseService
-      .uploadPictureBase64("imagens-culto")
+      .uploadPictureBase64("imagens-evento")
       .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
@@ -285,14 +250,14 @@ export class AtualizarCultoPage implements OnInit {
         this.form.get("urlImagem").value !== undefined
       ) {
         await this.firebaseService.deletarImagemStorage(
-          "imagens-culto",
+          "imagens-evento",
           this.form.get("urlImagem").value
         );
       }
       await this.uploadPictureBase64();
       await this.form.get("urlImagem").setValue(this.downloadURL);
-
-      await this.cultosSemanaisService.save(this.form.value).subscribe(
+      await this.form.get("dia").setValue(this.form.get("dia").value + "");
+      await this.eventosService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
@@ -302,7 +267,7 @@ export class AtualizarCultoPage implements OnInit {
           );
           this.loadingController.dismiss();
           this.resetarForm();
-          this.redirecionarCultosCadastrados();
+          this.redirecionarEventosCadastradas();
         },
         error =>
           this.sharedModalService.presentToast(
@@ -316,47 +281,5 @@ export class AtualizarCultoPage implements OnInit {
     } else {
       return;
     }
-  }
-
-  async deletarImagem() {
-    this.sharedModalService
-      .showAlertConfirm(
-        "Confirmação",
-        "Deseja realmente excluir esta imagem?",
-        "Não",
-        "Sim"
-      )
-      .then(async del => {
-        if (del) {
-          await this.firebaseService.deletarImagemStorage(
-            "imagens-culto",
-            this.form.get("urlImagem").value
-          );
-
-          await this.form.get("urlImagem").setValue("");
-          await this.cultosSemanaisService.save(this.form.value).subscribe(
-            success => {
-              this.sharedModalService.presentToast(
-                "A imagem foi excluída!",
-                "medium",
-                "custom-modal",
-                1500
-              );
-              this.resetarForm();
-              this.redirecionarCultosCadastrados();
-            },
-            error =>
-              this.sharedModalService.presentToast(
-                "Erro ao excluir imagem, tente novamente!",
-                "danger",
-                "custom-modal",
-                1500
-              ),
-            () => console.log("Finalizado com sucesso!")
-          );
-        } else {
-          return;
-        }
-      });
   }
 }

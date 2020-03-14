@@ -1,0 +1,170 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" (click)="redirecionarEventosCadastradas()">
+      <ion-back-button icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Atualizar Evento</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="ion-padding">
+    <ion-card-header>
+      <ion-card-title>
+        Alteração de Dados
+      </ion-card-title>
+    </ion-card-header>
+    <form [formGroup]="form">
+      <div class="ion-padding">
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Título</ion-label>
+          <ion-input mode="ios" formControlName="titulo"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Horário</ion-label>
+          <ion-input
+            mode="ios"
+            type="time"
+            formControlName="horario"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Data de Início</ion-label>
+          <ion-input
+            mode="ios"
+            type="date"
+            formControlName="dataInicio"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Data do Final</ion-label>
+          <ion-input
+            mode="ios"
+            type="date"
+            formControlName="dataFinal"
+          ></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Dia da semana</ion-label>
+          <ion-select
+            multiple
+            mode="ios"
+            interface="popover"
+            formControlName="dia"
+          >
+            <ion-select-option value="Domingo">Domingo</ion-select-option>
+            <ion-select-option value=" Segunda-feira"
+              >Segunda-feira</ion-select-option
+            >
+            <ion-select-option value=" Terça-feira"
+              >Terça-feira</ion-select-option
+            >
+            <ion-select-option value=" Quarta-feira"
+              >Quarta-feira</ion-select-option
+            >
+            <ion-select-option value=" Quinta-feira"
+              >Quinta-feira</ion-select-option
+            >
+            <ion-select-option value=" Sexta-feira"
+              >Sexta-feira</ion-select-option
+            >
+            <ion-select-option value=" Sábado">Sábado</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Descrição</ion-label>
+          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao">
+          </ion-textarea>
+        </ion-item>
+      </div>
+
+      <div class="ion-padding">
+        <ion-button
+          mode="ios"
+          expand="block"
+          type="submit"
+          class="ion-no-margin"
+          (click)="updateEvento()"
+          >Salvar<ion-icon name="send" mode="ios" slot="end"></ion-icon
+        ></ion-button>
+      </div>
+    </form>
+  </div>
+
+  <div class="ion-padding">
+    <ion-card-header>
+      <ion-card-title>
+        Alteração da Imagem
+      </ion-card-title>
+    </ion-card-header>
+    <img [src]="urlImagem" *ngIf="urlImagem; else noImage" />
+    <!-- <ion-button mode="ios" expand="block" type="submit" (click)="openGalery()"
+      >Escolher Imagem</ion-button
+    >
+    <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
+      >Salvar Imagem<ion-icon name="send" slot="end"></ion-icon
+    ></ion-button>-->
+
+    <ion-list lines="none">
+      <ion-label mode="ios" position="stacked" id="title-get-image"
+        >Obter imagem pela</ion-label
+      >
+
+      <ion-radio-group>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Galeria</ion-label>
+              <ion-radio
+                slot="start"
+                checked
+                (click)="changeRadioValue('galeria')"
+              ></ion-radio>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Câmera</ion-label>
+              <ion-radio
+                slot="start"
+                (click)="changeRadioValue('camera')"
+              ></ion-radio>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-radio-group>
+    </ion-list>
+
+    <div *ngIf="radioOption == 'galeria'" style="margin-top: -30px;">
+      <ion-list>
+        <ion-button mode="ios" (click)="alterarImagemGaleria()" expand="block">
+          Galeria<ion-icon name="images" slot="end"></ion-icon>
+        </ion-button>
+      </ion-list>
+    </div>
+
+    <div *ngIf="radioOption == 'camera'" style="margin-top: -30px;">
+      <ion-list>
+        <ion-button mode="ios" (click)="alterarImagemCamera()" expand="block">
+          Câmera<ion-icon name="camera" slot="end"></ion-icon>
+        </ion-button>
+      </ion-list>
+    </div>
+
+    <!-- <ion-button
+      mode="ios"
+      expand="block"
+      type="submit"
+      (click)="alterarImagemGaleria()"
+      >Alterar Imagem<ion-icon name="images" slot="end"></ion-icon
+    ></ion-button> -->
+  </div>
+</ion-content>
+<ng-template #noImage>
+  <p id="text-center">Não há imagem para exibir</p>
+</ng-template>
