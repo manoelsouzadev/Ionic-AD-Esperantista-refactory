@@ -27,7 +27,12 @@
 
         <ion-item>
           <ion-label mode="ios" position="stacked">Dia da semana</ion-label>
-          <ion-select multiple mode="ios" interface="popover" formControlName="dia">
+          <ion-select
+            multiple
+            mode="ios"
+            interface="popover"
+            formControlName="dia"
+          >
             <ion-select-option value="Domingo">Domingo</ion-select-option>
             <ion-select-option value=" Segunda-feira"
               >Segunda-feira</ion-select-option
@@ -50,9 +55,10 @@
 
         <ion-item>
           <ion-label mode="ios" position="stacked">Descrição</ion-label>
-          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao"> </ion-textarea>
+          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao">
+          </ion-textarea>
         </ion-item>
-        <ion-item>
+        <!-- <ion-item>
           <ion-label mode="ios" position="stacked">Selecione uma imagem</ion-label>
           <ion-input
               mode="ios"
@@ -60,18 +66,102 @@
               [value] = "fileImage"
               readonly
             ></ion-input>
-        </ion-item>
-        <ion-button mode="ios" (click)="openGalery()" expand="block">
-          Escolher Imagem<ion-icon name="images" slot="end"></ion-icon
+        </ion-item> -->
+
+        <ion-list lines="none">
+          <ion-item class="label-image">
+            <ion-label mode="ios" position="stacked" id="label-text-top"
+              >Obter imagem pela</ion-label
             >
-        </ion-button>
+          </ion-item>
+          <ion-radio-group>
+            <ion-row>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Galeria</ion-label>
+                  <ion-radio
+                    slot="start"
+                    checked
+                    (click)="changeRadioValue('galeria')"
+                  ></ion-radio>
+                </ion-item>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-label>Câmera</ion-label>
+                  <ion-radio
+                    slot="start"
+                    (click)="changeRadioValue('camera')"
+                  ></ion-radio>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-radio-group>
+        </ion-list>
+
+        <div *ngIf="radioOption == 'galeria'" style="margin-top: -30px;">
+          <ion-list>
+            <ion-item>
+              <ion-input
+                mode="ios"
+                type="text"
+                [value]="fileImage"
+                readonly
+                placeholder="Escolher imagem"
+              ></ion-input>
+              <ion-button
+                fill="clear"
+                type="button"
+                item-right
+                (click)="clearInputImage('galeria')"
+                *ngIf="fileImage"
+              >
+                <ion-icon name="trash" style="font-size: 22px;"></ion-icon
+              ></ion-button>
+            </ion-item>
+
+            <ion-button mode="ios" (click)="openGalery()" expand="block">
+              Galeria<ion-icon name="images" slot="end"></ion-icon>
+            </ion-button>
+          </ion-list>
+        </div>
+
+        <div *ngIf="radioOption == 'camera'" style="margin-top: -30px;">
+          <ion-list>
+            <ion-item>
+              <ion-input
+                mode="ios"
+                type="text"
+                [value]="fileImageCamera"
+                readonly
+                placeholder="Capturar imagem"
+              ></ion-input>
+              <ion-button
+                fill="clear"
+                type="button"
+                item-right
+                (click)="clearInputImage('camera')"
+                *ngIf="fileImageCamera"
+              >
+                <ion-icon name="trash" style="font-size: 22px;"></ion-icon
+              ></ion-button>
+            </ion-item>
+            <ion-button mode="ios" (click)="takePicture()" expand="block">
+              Câmera<ion-icon name="camera" slot="end"></ion-icon>
+            </ion-button>
+          </ion-list>
+        </div>
+
+        <!-- <ion-button mode="ios" (click)="openGalery()" expand="block">
+          Escolher Imagem<ion-icon name="images" slot="end"></ion-icon>
+        </ion-button>-->
       </div>
       <div class="ion-padding">
         <ion-button
           mode="ios"
           expand="block"
           type="submit"
-          class="ion-no-margin"
+          class="ion-no-margin btn-salvar"
           (click)="salvarOracao()"
           >Salvar<ion-icon name="send" mode="ios" slot="end"></ion-icon
         ></ion-button>

@@ -103,6 +103,17 @@
       </ion-card-title>
     </ion-card-header>
     <img [src]="urlImagem" *ngIf="urlImagem; else noImage" />
+
+    <ion-list *ngIf="urlImagem">
+      <ion-button
+        mode="ios"
+        (click)="deletarImagem()"
+        expand="block"
+        fill="clear"
+      >
+        Excluir<ion-icon name="trash" slot="end"></ion-icon>
+      </ion-button>
+    </ion-list>
     <!-- <ion-button mode="ios" expand="block" type="submit" (click)="openGalery()"
       >Escolher Imagem</ion-button
     >
@@ -111,9 +122,11 @@
     ></ion-button>-->
 
     <ion-list lines="none">
-      <ion-label mode="ios" position="stacked" id="title-get-image"
-        >Obter imagem pela</ion-label
-      >
+      <ion-item class="label-image">
+        <ion-label mode="ios" position="stacked"
+          >Obter imagem pela</ion-label
+        >
+      </ion-item>
 
       <ion-radio-group>
         <ion-row>
@@ -168,3 +181,4 @@
 <ng-template #noImage>
   <p id="text-center">Não há imagem para exibir</p>
 </ng-template>
+

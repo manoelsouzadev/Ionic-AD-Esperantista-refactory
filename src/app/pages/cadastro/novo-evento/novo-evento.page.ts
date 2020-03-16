@@ -35,6 +35,7 @@ export class NovoEventoPage implements OnInit {
       dataInicio: ["", Validators.required],
       dataFinal: ["", Validators.required],
       dia: ["", Validators.required],
+      tipo: ["Interno", Validators.required],
       descricao: ["", Validators.required],
       urlImagem: ["", Validators.required]
     });

@@ -107,27 +107,32 @@
 <main-header title="Cultos Semanais"></main-header>
 <ion-content>
   <ion-card id="card" mode="ios" *ngFor="let culto of cultos">
-    <img
-      [src]="culto.urlImagem"
-      *ngIf="culto.urlImagem"
-      (click)="viewImage(culto.urlImagem, culto.titulo, culto.descricao)"
-    />
+    <div *ngIf="cultos; else noData">
+      <img
+        [src]="culto.urlImagem"
+        *ngIf="culto.urlImagem"
+        (click)="viewImage(culto.urlImagem, culto.titulo, culto.descricao)"
+      />
 
-    <ion-card-header>
-      <h5><strong>{{ culto.titulo }}</strong></h5>
-      <!-- <h6>{{culto.dia}} - {{ culto.horario }}h</h6> -->
-      <h6>{{culto.dia}} - {{ culto.horario }}h</h6>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ culto.descricao }}</p>
-      <p>{{ culto.ceia }}</p>
-      <p>{{culto.adicional}}</p>
-      <p>{{culto.adicional2}}</p>
-      <p>{{culto.adicional3}}</p>
-      <p>{{culto.adicional4}}</p>
-      <p>{{culto.adicional5}}</p>
-      <p>{{culto.adicional6}}</p>
-    </ion-card-content>
+      <ion-card-header>
+        <h5><strong>{{ culto.titulo }}</strong></h5>
+        <!-- <h6>{{culto.dia}} - {{ culto.horario }}h</h6> -->
+        <h6>{{culto.dia}} - {{ culto.horario }}h</h6>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ culto.descricao }}</p>
+        <p>{{ culto.ceia }}</p>
+        <p>{{culto.adicional}}</p>
+        <p>{{culto.adicional2}}</p>
+        <p>{{culto.adicional3}}</p>
+        <p>{{culto.adicional4}}</p>
+        <p>{{culto.adicional5}}</p>
+        <p>{{culto.adicional6}}</p>
+      </ion-card-content>
+    </div>
   </ion-card>
 </ion-content>
 <!--<tab-menu></tab-menu>-->
+<ng-template #noData>
+  <ion-text id="text-center">Não há cultos para exibir</ion-text>
+</ng-template>

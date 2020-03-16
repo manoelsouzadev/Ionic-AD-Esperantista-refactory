@@ -24,7 +24,6 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-
 /*
  * App CSS
  * ----------------------------------------------------------------------------
@@ -33,6 +32,13 @@
  */
 
 @import "./app/app.scss";
-.btn-salvar{
-  margin-top: 50px;
+
+:root {
+  .label-image {
+    margin-bottom: -14px;
+  }
+
+  .btn-salvar {
+    margin-top: 50px;
+  }
 }

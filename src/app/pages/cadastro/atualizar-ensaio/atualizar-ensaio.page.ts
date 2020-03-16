@@ -1,4 +1,4 @@
-import { EnsaiosService } from './../../../shared/services/ensaio/ensaios.service';
+import { EnsaiosService } from "./../../../shared/services/ensaio/ensaios.service";
 import { FirebaseService } from "./../../../shared/services/firebase/firebase.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -12,7 +12,6 @@ import { SharedModalService } from "../../../shared/services/shared-modal/shared
   styleUrls: ["./atualizar-ensaio.page.scss"]
 })
 export class AtualizarEnsaioPage implements OnInit {
-
   private form: FormGroup;
   private id: string;
   private urlImagem: string;
@@ -28,7 +27,7 @@ export class AtualizarEnsaioPage implements OnInit {
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private sharedModalService: SharedModalService,
-    private firebaseService: FirebaseService,
+    private firebaseService: FirebaseService
   ) {}
 
   ngOnInit() {
@@ -69,9 +68,7 @@ export class AtualizarEnsaioPage implements OnInit {
   }
 
   getEnsaioById(id) {
-    this.ensaioService
-      .loadByID(id)
-      .subscribe(res => this.popularForm(res));
+    this.ensaioService.loadByID(id).subscribe(res => this.popularForm(res));
   }
 
   popularForm(ensaio) {
@@ -306,5 +303,47 @@ export class AtualizarEnsaioPage implements OnInit {
     } else {
       return;
     }
+  }
+
+  async deletarImagem() {
+    this.sharedModalService
+      .showAlertConfirm(
+        "Confirmação",
+        "Deseja realmente excluir esta imagem?",
+        "Não",
+        "Sim"
+      )
+      .then(async del => {
+        if (del) {
+          await this.firebaseService.deletarImagemStorage(
+            "imagens-ensaio",
+            this.form.get("urlImagem").value
+          );
+
+          await this.form.get("urlImagem").setValue("");
+          await this.ensaioService.save(this.form.value).subscribe(
+            success => {
+              this.sharedModalService.presentToast(
+                "A imagem foi excluída!",
+                "medium",
+                "custom-modal",
+                1500
+              );
+              this.resetarForm();
+              this.redirecionarEnsaiosCadastrados();
+            },
+            error =>
+              this.sharedModalService.presentToast(
+                "Erro ao excluir imagem, tente novamente!",
+                "danger",
+                "custom-modal",
+                1500
+              ),
+            () => console.log("Finalizado com sucesso!")
+          );
+        } else {
+          return;
+        }
+      });
   }
 }

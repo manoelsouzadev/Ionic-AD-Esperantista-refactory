@@ -4,15 +4,14 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { LoadingController } from "@ionic/angular";
 import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
-import { OracoesService } from '../secoes-cadastro/secao-cadastro-oracoes/oracoes/oracoes.service';
+import { OracoesService } from "../secoes-cadastro/secao-cadastro-oracoes/oracoes/oracoes.service";
 
 @Component({
-  selector: 'atualizar-oracao',
-  templateUrl: './atualizar-oracao.component.html',
-  styleUrls: ['./atualizar-oracao.component.scss'],
+  selector: "atualizar-oracao",
+  templateUrl: "./atualizar-oracao.component.html",
+  styleUrls: ["./atualizar-oracao.component.scss"]
 })
 export class AtualizarOracaoComponent implements OnInit {
-
   private form: FormGroup;
   private id: string;
   private urlImagem: string;
@@ -28,8 +27,8 @@ export class AtualizarOracaoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private sharedModalService: SharedModalService,
-    private firebaseService: FirebaseService,
-  ) { }
+    private firebaseService: FirebaseService
+  ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((queryParams: any) => {
@@ -259,4 +258,46 @@ export class AtualizarOracaoComponent implements OnInit {
     }
   }
 
+  async deletarImagem() {
+    this.sharedModalService
+      .showAlertConfirm(
+        "Confirmação",
+        "Deseja realmente excluir esta imagem?",
+        "Não",
+        "Sim"
+      )
+      .then(async del => {
+        if (del) {
+          await this.firebaseService.deletarImagemStorage(
+            "imagens-oracao",
+            this.form.get("urlImagem").value
+          );
+
+          await this.form.get("urlImagem").setValue("");
+          await this.form.get("dia").setValue(this.form.get("dia").value + "");
+          await this.oracoesService.save(this.form.value).subscribe(
+            success => {
+              this.sharedModalService.presentToast(
+                "A imagem foi excluída!",
+                "medium",
+                "custom-modal",
+                1500
+              );
+              this.resetarForm();
+              this.redirecionarOracoesCadastradas();
+            },
+            error =>
+              this.sharedModalService.presentToast(
+                "Erro ao excluir imagem, tente novamente!",
+                "danger",
+                "custom-modal",
+                1500
+              ),
+            () => console.log("Finalizado com sucesso!")
+          );
+        } else {
+          return;
+        }
+      });
+  }
 }

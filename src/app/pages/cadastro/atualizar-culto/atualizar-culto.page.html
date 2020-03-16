@@ -69,7 +69,12 @@
     <img [src]="urlImagem" *ngIf="urlImagem; else noImage" />
 
     <ion-list *ngIf="urlImagem">
-      <ion-button mode="ios" (click)="deletarImagem()" expand="block" fill="clear">
+      <ion-button
+        mode="ios"
+        (click)="deletarImagem()"
+        expand="block"
+        fill="clear"
+      >
         Excluir<ion-icon name="trash" slot="end"></ion-icon>
       </ion-button>
     </ion-list>
@@ -81,10 +86,11 @@
     ></ion-button>-->
 
     <ion-list lines="none">
-      <ion-label mode="ios" position="stacked" id="title-get-image"
-        >Obter imagem pela</ion-label
-      >
-
+      <ion-item class="label-image">
+        <ion-label mode="ios" position="stacked"
+          >Obter imagem pela</ion-label
+        >
+      </ion-item>
       <ion-radio-group>
         <ion-row>
           <ion-col>
@@ -125,9 +131,6 @@
         </ion-button>
       </ion-list>
     </div>
-
-
-
 
     <!-- <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
       >Alterar Imagem<ion-icon name="images" slot="end"></ion-icon

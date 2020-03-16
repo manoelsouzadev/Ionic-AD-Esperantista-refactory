@@ -30,7 +30,8 @@
           <ion-input
             mode="ios"
             type="date"
-            required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
+            required
+            pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"
             formControlName="dataInicio"
           ></ion-input>
         </ion-item>
@@ -46,7 +47,12 @@
 
         <ion-item>
           <ion-label mode="ios" position="stacked">Dia da semana</ion-label>
-          <ion-select multiple mode="ios" interface="popover" formControlName="dia">
+          <ion-select
+            multiple
+            mode="ios"
+            interface="popover"
+            formControlName="dia"
+          >
             <ion-select-option value="Domingo">Domingo</ion-select-option>
             <ion-select-option value=" Segunda-feira"
               >Segunda-feira</ion-select-option
@@ -69,15 +75,16 @@
 
         <ion-item>
           <ion-label mode="ios" position="stacked">Descrição</ion-label>
-          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao"> </ion-textarea>
+          <ion-textarea class="ion-wrap" mode="ios" formControlName="descricao">
+          </ion-textarea>
         </ion-item>
 
-
-
         <ion-list lines="none">
-          <ion-label mode="ios" position="stacked" id="title-get-image"
-            >Obter imagem pela</ion-label
-          >
+          <ion-item class="label-image">
+            <ion-label mode="ios" position="stacked"
+              >Obter imagem pela</ion-label
+            >
+          </ion-item>
 
           <ion-radio-group>
             <ion-row>
@@ -114,7 +121,15 @@
                 readonly
                 placeholder="Escolher imagem"
               ></ion-input>
-              <ion-button fill="clear" type="button" item-right (click)="clearInputImage('galeria')"> <ion-icon name="trash" style="font-size: 22px;"></ion-icon></ion-button>
+              <ion-button
+                fill="clear"
+                type="button"
+                item-right
+                (click)="clearInputImage('galeria')"
+                *ngIf="fileImage"
+              >
+                <ion-icon name="trash" style="font-size: 22px;"></ion-icon
+              ></ion-button>
             </ion-item>
 
             <ion-button mode="ios" (click)="openGalery()" expand="block">
@@ -133,7 +148,15 @@
                 readonly
                 placeholder="Capturar imagem"
               ></ion-input>
-              <ion-button fill="clear" type="button" item-right (click)="clearInputImage('camera')"> <ion-icon name="trash" style="font-size: 22px;"></ion-icon></ion-button>
+              <ion-button
+                fill="clear"
+                type="button"
+                item-right
+                (click)="clearInputImage('camera')"
+                *ngIf="fileImageCamera"
+              >
+                <ion-icon name="trash" style="font-size: 22px;"></ion-icon
+              ></ion-button>
             </ion-item>
             <ion-button mode="ios" (click)="takePicture()" expand="block">
               Câmera<ion-icon name="camera" slot="end"></ion-icon>
@@ -168,4 +191,3 @@
     </form>
   </div>
 </ion-content>
-

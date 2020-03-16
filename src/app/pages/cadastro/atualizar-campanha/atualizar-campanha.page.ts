@@ -186,7 +186,7 @@ export class AtualizarCampanhaPage implements OnInit {
       await this.campanhasService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(
-            "Imagem alterada com sucesso!", 
+            "Imagem alterada com sucesso!",
             "medium",
             "custom-modal",
             1500
@@ -284,5 +284,48 @@ export class AtualizarCampanhaPage implements OnInit {
     } else {
       return;
     }
+  }
+
+  async deletarImagem() {
+    this.sharedModalService
+      .showAlertConfirm(
+        "Confirmação",
+        "Deseja realmente excluir esta imagem?",
+        "Não",
+        "Sim"
+      )
+      .then(async del => {
+        if (del) {
+          await this.firebaseService.deletarImagemStorage(
+            "imagens-campanha",
+            this.form.get("urlImagem").value
+          );
+
+          await this.form.get("urlImagem").setValue("");
+          await this.form.get("dia").setValue(this.form.get("dia").value + "");
+          await this.campanhasService.save(this.form.value).subscribe(
+            success => {
+              this.sharedModalService.presentToast(
+                "A imagem foi excluída!",
+                "medium",
+                "custom-modal",
+                1500
+              );
+              this.resetarForm();
+              this.redirecionarCampanhasCadastradas();
+            },
+            error =>
+              this.sharedModalService.presentToast(
+                "Erro ao excluir imagem, tente novamente!",
+                "danger",
+                "custom-modal",
+                1500
+              ),
+            () => console.log("Finalizado com sucesso!")
+          );
+        } else {
+          return;
+        }
+      });
   }
 }

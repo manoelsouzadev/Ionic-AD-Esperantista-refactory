@@ -94,7 +94,7 @@ export class AtualizarEventoPage implements OnInit {
     this.urlImagem = evento.urlImagem;
   }
 
-  redirecionarEventosCadastradas() {
+  redirecionarEventosCadastrados() {
     this.router.navigate([`cadastro/secao/eventos`]);
   }
 
@@ -113,7 +113,7 @@ export class AtualizarEventoPage implements OnInit {
         //this.presentToast();
         //this.mostrarToast();
         this.resetarForm();
-        this.redirecionarEventosCadastradas();
+        this.redirecionarEventosCadastrados();
       },
       error =>
         this.sharedModalService.presentToast(
@@ -190,7 +190,7 @@ export class AtualizarEventoPage implements OnInit {
           );
           this.loadingController.dismiss();
           this.resetarForm();
-          this.redirecionarEventosCadastradas();
+          this.redirecionarEventosCadastrados();
         },
         error =>
           this.sharedModalService.presentToast(
@@ -267,7 +267,7 @@ export class AtualizarEventoPage implements OnInit {
           );
           this.loadingController.dismiss();
           this.resetarForm();
-          this.redirecionarEventosCadastradas();
+          this.redirecionarEventosCadastrados();
         },
         error =>
           this.sharedModalService.presentToast(
@@ -281,5 +281,48 @@ export class AtualizarEventoPage implements OnInit {
     } else {
       return;
     }
+  }
+
+  async deletarImagem() {
+    this.sharedModalService
+      .showAlertConfirm(
+        "Confirmação",
+        "Deseja realmente excluir esta imagem?",
+        "Não",
+        "Sim"
+      )
+      .then(async del => {
+        if (del) {
+          await this.firebaseService.deletarImagemStorage(
+            "imagens-evento",
+            this.form.get("urlImagem").value
+          );
+
+          await this.form.get("urlImagem").setValue("");
+          await this.form.get("dia").setValue(this.form.get("dia").value + "");
+          await this.eventosService.save(this.form.value).subscribe(
+            success => {
+              this.sharedModalService.presentToast(
+                "A imagem foi excluída!",
+                "medium",
+                "custom-modal",
+                1500
+              );
+              this.resetarForm();
+              this.redirecionarEventosCadastrados();
+            },
+            error =>
+              this.sharedModalService.presentToast(
+                "Erro ao excluir imagem, tente novamente!",
+                "danger",
+                "custom-modal",
+                1500
+              ),
+            () => console.log("Finalizado com sucesso!")
+          );
+        } else {
+          return;
+        }
+      });
   }
 }

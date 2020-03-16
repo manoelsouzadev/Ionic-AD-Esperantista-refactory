@@ -17,6 +17,8 @@ export class NovaOracaoPage implements OnInit {
   //fileToUpload: any;
   protected fileImage: string;
   private downloadURL: string;
+  private fileImageCamera: string = null;
+  private radioOption: string = "galeria";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,6 +37,27 @@ export class NovaOracaoPage implements OnInit {
       descricao: ["", Validators.required],
       urlImagem: [""]
     });
+  }
+
+  changeRadioValue(option) {
+    this.radioOption = option;
+    if (option === "galeria") {
+      this.fileImageCamera = null;
+      this.firebaseService.resetarDados();
+    } else if (option === "camera") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    }
+  }
+
+  clearInputImage(option) {
+    if (option === "galeria") {
+      this.fileImage = null;
+      this.firebaseService.resetarDados();
+    } else if (option === "camera") {
+      this.fileImageCamera = null;
+      this.firebaseService.resetarDados();
+    }
   }
 
   redirecionarOracoesCadastradas() {
@@ -83,7 +106,8 @@ export class NovaOracaoPage implements OnInit {
       descricao: null
     });
     this.fileImage = null;
-    this.downloadURL = "";
+    this.downloadURL = null;
+    this.fileImageCamera = null;
     this.form.get("titulo").markAsUntouched();
     this.form.get("horario").markAsUntouched();
     this.form.get("dia").markAsUntouched();
@@ -100,6 +124,26 @@ export class NovaOracaoPage implements OnInit {
   async uploadPicture() {
     await this.firebaseService
       .uploadPicture("imagens-oracao")
+      .then(downURL => (this.downloadURL = downURL))
+      .catch((this.downloadURL = null));
+  }
+
+  async takePicture() {
+    await this.firebaseService
+      .takePicture()
+      .then(file => {
+        //this.fileImage = null;
+        this.fileImageCamera = file;
+        //this.fileImage = file;
+        //alert(this.fileImageCamera);
+        // this.fileImage = file;
+      })
+      .catch((this.fileImageCamera = null));
+  }
+
+  async uploadPictureBase64() {
+    await this.firebaseService
+      .uploadPictureBase64("imagens-oracao")
       .then(downURL => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
