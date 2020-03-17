@@ -1,5 +1,12 @@
 <main-header title="Campanhas"></main-header>
 <ion-content>
+
+  <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/campanhas')">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+
   <ion-card id="card" mode="ios" *ngFor="let campanha of campanhas">
       <img [src]="campanha.urlImagem" *ngIf="campanha.urlImagem" (click)="viewImage(campanha.urlImagem, campanha.titulo, campanha.descricao)">
     <ion-card-header>

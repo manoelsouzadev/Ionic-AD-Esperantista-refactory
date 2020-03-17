@@ -1,3 +1,4 @@
+import { SharedHttpService } from "./../shared-http/shared-http.service";
 import { Injectable } from "@angular/core";
 import {
   LoadingController,
@@ -15,7 +16,8 @@ export class SharedModalService {
     private loadingController: LoadingController,
     private modalController: ModalController,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private sharedHttpService: SharedHttpService
   ) {}
 
   async presentToast(
@@ -131,7 +133,12 @@ export class SharedModalService {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  private async confirmationAlert(header: string, message: string, textButton1: string, textButton2: string): Promise<boolean> {
+  private async confirmationAlert(
+    header: string,
+    message: string,
+    textButton1: string,
+    textButton2: string
+  ): Promise<boolean> {
     let resolveFunction: (confirm: boolean) => void;
     const promise = new Promise<boolean>(resolve => {
       resolveFunction = resolve;
@@ -155,7 +162,12 @@ export class SharedModalService {
     return promise;
   }
 
-  public async showAlertConfirm(header: string, message: string, textButton1: string, textButton2: string) {
+  public async showAlertConfirm(
+    header: string,
+    message: string,
+    textButton1: string,
+    textButton2: string
+  ) {
     const confirm = await this.confirmationAlert(
       header,
       message,
@@ -163,10 +175,10 @@ export class SharedModalService {
       textButton2
     );
     if (confirm) {
-      console.log('Deleted');
+      console.log("Deleted");
       return true;
     } else {
-      console.log('Canceled');
+      console.log("Canceled");
       return false;
     }
   }
