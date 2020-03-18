@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { OracoesService } from './../../cadastro/secoes-cadastro/secao-cadastro-oracoes/oracoes/oracoes.service';
 import { SharedModalService } from './../../../shared/services/shared-modal/shared-modal.service';
+import { SharedHttpService } from './../../../shared/services/shared-http/shared-http.service';
 
 @Component({
   selector: 'oracoes',
@@ -13,6 +14,7 @@ export class OracoesPage implements OnInit {
 
   constructor(
     private sharedModalService: SharedModalService,
+    private sharedHttpService: SharedHttpService,
     private oracoesService: OracoesService
   ) {
   }
@@ -31,6 +33,15 @@ export class OracoesPage implements OnInit {
 
   async viewImage(src: string, title: string = "", description: string = "") {
     await this.sharedModalService.viewImage(src, title, description);
+  }
+
+  doRefresh(event, endpoint) {
+    this.sharedHttpService
+      .getData(endpoint)
+      .subscribe(data => (this.oracoes = data));
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
 }
 

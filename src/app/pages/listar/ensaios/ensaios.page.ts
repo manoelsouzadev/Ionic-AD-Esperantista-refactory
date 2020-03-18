@@ -8,6 +8,8 @@ import {
   ModalController,
   Platform
 } from "@ionic/angular";
+import { SharedHttpService } from "../../../shared/services/shared-http/shared-http.service";
+
 
 @Component({
   selector: "ensaios",
@@ -25,6 +27,7 @@ export class EnsaiosPage implements OnInit {
     private ensaiosService: EnsaiosService,
     public modalController: ModalController,
     private sharedModalService: SharedModalService,
+    private sharedHttpService: SharedHttpService,
     private platform: Platform
   ) {}
 
@@ -113,5 +116,14 @@ export class EnsaiosPage implements OnInit {
 
   async viewImage(src: string, title: string = "", description: string = "") {
     await this.sharedModalService.viewImage(src, title, description);
+  }
+
+  doRefresh(event, endpoint) {
+    this.sharedHttpService
+      .getData(endpoint)
+      .subscribe(data => (this.ensaios = data));
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
 }

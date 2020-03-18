@@ -105,7 +105,10 @@
   </ion-toolbar>
 </ion-header>-->
 <main-header title="Ensaios"></main-header>
-<ion-content fullscreen>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/ensaios')">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-card id="card" mode="ios" *ngFor="let ensaio of ensaios">
     <img
       [src]="ensaio.urlImagem"

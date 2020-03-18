@@ -1,5 +1,3 @@
-import { CultosSemanaisService } from "../../cadastro/secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
-import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
 import { Component, ViewEncapsulation } from "@angular/core";
 import { Router } from "@angular/router";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
@@ -10,6 +8,9 @@ import {
 } from "@ionic/angular";
 
 import { ConferenceData } from "../../../providers/conference-data";
+import { SharedHttpService } from "../../../shared/services/shared-http/shared-http.service";
+import { CultosSemanaisService } from "../../cadastro/secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
+import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
 
 @Component({
   selector: "cultos-semanais",
@@ -28,6 +29,7 @@ export class CultosSemanaisPage {
     private cultosSemanaisService: CultosSemanaisService,
     public modalController: ModalController,
     private sharedModalService: SharedModalService,
+    private sharedHttpService: SharedHttpService,
     private platform: Platform
   ) {}
 
@@ -116,5 +118,14 @@ export class CultosSemanaisPage {
 
   async viewImage(src: string, title: string = "", description: string = "") {
     await this.sharedModalService.viewImage(src, title, description);
+  }
+
+  doRefresh(event, endpoint) {
+    this.sharedHttpService
+      .getData(endpoint)
+      .subscribe(data => (this.cultos = data));
+    setTimeout(() => {
+      event.target.complete();
+    }, 2000);
   }
 }
