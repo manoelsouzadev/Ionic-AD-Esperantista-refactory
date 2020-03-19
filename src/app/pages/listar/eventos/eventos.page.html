@@ -1,0 +1,20 @@
+<main-header title="Eventos"></main-header>
+<ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/eventos')">
+      <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+
+  <ion-card id="card" mode="ios" *ngFor="let evento of eventos">
+      <img [src]="evento.urlImagem" *ngIf="evento.urlImagem" (click)="viewImage(evento.urlImagem, evento.titulo, evento.descricao)">
+    <ion-card-header>
+      <h5><strong>{{ evento.titulo }}</strong></h5>
+      <h6>{{ evento.dia }}</h6>
+      <h6>{{ evento.dataInicio | date:'dd/MM/yyyy' }} a {{ evento.dataFinal | date:'dd/MM/yyyy' }} - {{ evento.horario }}h</h6>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ evento.descricao }}</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
