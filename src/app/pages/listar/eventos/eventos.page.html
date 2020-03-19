@@ -9,7 +9,6 @@
       <img [src]="evento.urlImagem" *ngIf="evento.urlImagem" (click)="viewImage(evento.urlImagem, evento.titulo, evento.descricao)">
     <ion-card-header>
       <h5><strong>{{ evento.titulo }}</strong></h5>
-      <h6>{{ evento.dia }}</h6>
       <h6>{{ evento.dataInicio | date:'dd/MM/yyyy' }} a {{ evento.dataFinal | date:'dd/MM/yyyy' }} - {{ evento.horario }}h</h6>
     </ion-card-header>
     <ion-card-content>

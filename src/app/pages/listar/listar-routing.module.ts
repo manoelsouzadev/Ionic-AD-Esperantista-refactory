@@ -1,3 +1,4 @@
+import { EscolherTipoEventoPage } from './escolher-tipo-evento/escolher-tipo-evento.page';
 import { Routes, RouterModule } from "@angular/router";
 import { NgModule } from "@angular/core";
 
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: 'eventos',
     component: EventosPage
+  },
+  {
+    path: 'tipo-evento',
+    component: EscolherTipoEventoPage
   }
 ];
 

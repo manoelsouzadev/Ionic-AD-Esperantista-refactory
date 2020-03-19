@@ -1,3 +1,4 @@
+import { EscolherTipoEventoPage } from './escolher-tipo-evento/escolher-tipo-evento.page';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -11,7 +12,7 @@ import { EnsaiosPage } from "./ensaios/ensaios.page";
 import { EventosPage } from "./eventos/eventos.page";
 
 @NgModule({
-  declarations: [CampanhasPage, OracoesPage, EnsaiosPage, EventosPage],
+  declarations: [CampanhasPage, OracoesPage, EnsaiosPage, EventosPage, EscolherTipoEventoPage],
   imports: [
     CommonModule,
     FormsModule,

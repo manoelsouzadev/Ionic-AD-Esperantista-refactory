@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: "Eventos",
-      url: "/listar/eventos",
+      url: "/listar/tipo-evento",
       icon: "people"
     }
   ];
