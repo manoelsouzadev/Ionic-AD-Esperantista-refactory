@@ -83,7 +83,7 @@ export class NovoEnsaioPage implements OnInit {
     } else {
       await this.form.get("urlImagem").setValue("");
     }
-
+    await this.form.get("dia").setValue(this.form.get("dia").value + "");
     await this.ensaiosService.save(this.form.value).subscribe(
       success => {
         this.sharedModalService.presentToast(

@@ -31,6 +31,11 @@
         </ion-item>
 
         <ion-item>
+          <ion-label mode="ios" position="stacked">Local</ion-label>
+          <ion-input mode="ios" formControlName="local"></ion-input>
+        </ion-item>
+
+        <ion-item>
           <ion-label mode="ios" position="stacked">Data de Início</ion-label>
           <ion-input
             mode="ios"
@@ -82,6 +87,30 @@
           </ion-textarea>
         </ion-item>
       </div>
+
+      <ion-list lines="none">
+        <ion-item class="label-image">
+        <ion-label mode="ios" position="stacked"
+          >Tipo</ion-label
+        >
+        </ion-item>
+        <ion-radio-group formControlName="tipo" value="Interno">
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label>Interno</ion-label>
+                <ion-radio slot="start" value="Interno"></ion-radio>
+              </ion-item>
+            </ion-col>
+            <ion-col>
+              <ion-item>
+                <ion-label>Externo</ion-label>
+                <ion-radio slot="start" value="Externo"></ion-radio>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-radio-group>
+      </ion-list>
 
       <div class="ion-padding">
         <ion-button

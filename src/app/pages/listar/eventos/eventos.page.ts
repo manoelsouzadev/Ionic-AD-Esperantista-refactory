@@ -1,4 +1,4 @@
-import { Evento } from './../../../models/eventos';
+import { Evento } from './../../../models/evento';
 import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 
@@ -14,6 +14,7 @@ import { EventosService } from "./../../../shared/services/eventos/eventos.servi
 export class EventosPage implements OnInit {
   private eventos: Evento[];
   private eventType: string;
+  private title: string;
 
   constructor(
     private eventosService: EventosService,
@@ -33,6 +34,8 @@ export class EventosPage implements OnInit {
       this.eventos = res;
       this.sharedModalService.showMessageNotice(this.eventos);
     });
+
+    this.title = this.eventType == 'Interno' ? 'Eventos Internos' : 'Eventos Externos';
   }
 
   async viewImage(src: string, title: string = "", description: string = "") {

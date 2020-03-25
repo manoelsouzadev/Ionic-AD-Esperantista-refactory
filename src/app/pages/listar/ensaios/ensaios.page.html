@@ -107,7 +107,7 @@
 <main-header title="Ensaios"></main-header>
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/ensaios')">
-    <ion-refresher-content></ion-refresher-content>
+    <ion-refresher-content refreshing-spinner="dots" refreshing-text="Atualizando" pulling-text="Puxe para atualizar"></ion-refresher-content>
   </ion-refresher>
   <ion-card id="card" mode="ios" *ngFor="let ensaio of ensaios">
     <img

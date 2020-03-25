@@ -2,7 +2,7 @@
 <main-header title="Orações"></main-header>
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/oracoes')">
-    <ion-refresher-content></ion-refresher-content>
+    <ion-refresher-content refreshing-spinner="dots" refreshing-text="Atualizando" pulling-text="Puxe para atualizar"></ion-refresher-content>
   </ion-refresher>
   <ion-card id="card" mode="ios" *ngFor="let oracao of oracoes">
    <img [src]="oracao.urlImagem" *ngIf="oracao.urlImagem" (click)="viewImage(oracao.urlImagem, oracao.titulo, oracao.descricao)">

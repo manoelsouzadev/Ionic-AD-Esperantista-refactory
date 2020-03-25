@@ -73,11 +73,12 @@ export class AtualizarEnsaioPage implements OnInit {
 
   popularForm(ensaio) {
     this.id = ensaio._id;
+    let diaFormatado = ensaio.dia.split(",");
     this.form = this.formBuilder.group({
       id: [ensaio._id],
       titulo: [ensaio.titulo],
       horario: [ensaio.horario],
-      dia: [ensaio.dia],
+      dia: [diaFormatado],
       descricao: [ensaio.descricao],
       urlImagem: [ensaio.urlImagem]
     });
@@ -278,7 +279,7 @@ export class AtualizarEnsaioPage implements OnInit {
       }
       await this.uploadPictureBase64();
       await this.form.get("urlImagem").setValue(this.downloadURL);
-
+      await this.form.get("dia").setValue(this.form.get("dia").value + "");
       await this.ensaioService.save(this.form.value).subscribe(
         success => {
           this.sharedModalService.presentToast(

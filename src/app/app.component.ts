@@ -8,7 +8,6 @@ import {
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { SwUpdate } from "@angular/service-worker";
-
 import {
   MenuController,
   Platform,
@@ -19,16 +18,15 @@ import {
   IonRouterOutlet,
   NavController
 } from "@ionic/angular";
-
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
-
 import { Storage } from "@ionic/storage";
 
 import { UserData } from "./providers/user-data";
 import { Toast } from "@ionic-native/toast/ngx";
 import { Subscription } from "rxjs";
 import { SharedModalService } from "./shared/services/shared-modal/shared-modal.service";
+import { SharedColorService } from "./shared/services/shared-color/shared-color.service";
 
 @Component({
   selector: "app-root",
@@ -55,16 +53,6 @@ export class AppComponent implements OnInit {
       icon: "contacts"
     },
     {
-      title: "Administrador",
-      url: "/app/tabs/login",
-      icon: "settings"
-    },
-    {
-      title: "Sobre",
-      url: "/app/tabs/sobre",
-      icon: "information-circle"
-    },
-    {
       title: "Campanhas",
       url: "/listar/campanhas",
       icon: "flame"
@@ -83,10 +71,22 @@ export class AppComponent implements OnInit {
       title: "Eventos",
       url: "/listar/tipo-evento",
       icon: "people"
+    },
+    {
+      title: "Administrador",
+      url: "/app/tabs/login",
+      icon: "settings"
+    },
+    {
+      title: "Sobre",
+      url: "/app/tabs/sobre",
+      icon: "information-circle"
     }
   ];
   loggedIn = false;
   dark = false;
+
+
 
   constructor(
     private menu: MenuController,
@@ -104,6 +104,7 @@ export class AppComponent implements OnInit {
     private toast: Toast,
     private sharedModalService: SharedModalService,
     private navController: NavController,
+    private sharedColorService: SharedColorService
   ) {
     this.initializeApp();
     //this.backButtonEvent();
@@ -166,26 +167,26 @@ export class AppComponent implements OnInit {
 
       this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
         if (this.router.url === "/login") {
-        //   this.platform.backButton.subscribe(async () => {
-            // this.router.navigate(["/app/tabs/home"]);
-            window.history.back();
-        //   });
+          //   this.platform.backButton.subscribe(async () => {
+          // this.router.navigate(["/app/tabs/home"]);
+          window.history.back();
+          //   });
         }
         // if (
         //   this.router.url === "/app/tabs/cultos" ||
-         // this.router.url === "/app/tabs/login" ||
-          // this.router.url === "/app/tabs/sobre" //||
-         // this.router.url === "/login" //||
-          //this.router.url === "/menu-dados"
+        // this.router.url === "/app/tabs/login" ||
+        // this.router.url === "/app/tabs/sobre" //||
+        // this.router.url === "/login" //||
+        //this.router.url === "/menu-dados"
         // ) {
         //   this.navController.back();
-          /*if ( this.router.url === '/app/tabs/cultos' || this.router.url === '/app/tabs/login') {
+        /*if ( this.router.url === '/app/tabs/cultos' || this.router.url === '/app/tabs/login') {
                this.router.navigate(['/app/tabs/home']);*/
 
-          //  } else if(this.router.url === '/menu-dados'){
-          //   this.router.navigate(['/app/tabs/login']);
-       // } else
-       if (this.router.url === "/app/tabs/home") {
+        //  } else if(this.router.url === '/menu-dados'){
+        //   this.router.navigate(['/app/tabs/login']);
+        // } else
+        if (this.router.url === "/app/tabs/home") {
           if (
             new Date().getTime() - this.lastTimeBackPress <
             this.timePeriodToExit
@@ -278,4 +279,9 @@ export class AppComponent implements OnInit {
     this.storage.set("ion_did_tutorial", false);
     this.router.navigateByUrl("/tutorial");
   }
+
+  switchTheme() {
+    this.sharedColorService.getThemeColor(this.dark);
+  }
+
 }

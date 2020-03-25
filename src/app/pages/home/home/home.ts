@@ -1,17 +1,35 @@
-import { Component, ViewChild, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { Router } from '@angular/router';
-import { AlertController, IonList, LoadingController, ModalController, ToastController, Config, IonRouterOutlet, MenuController, PopoverController, ActionSheetController, Platform } from '@ionic/angular';
+import {
+  Component,
+  ViewChild,
+  OnInit,
+  ViewChildren,
+  QueryList
+} from "@angular/core";
+import { Router } from "@angular/router";
+import {
+  AlertController,
+  IonList,
+  LoadingController,
+  ModalController,
+  ToastController,
+  Config,
+  IonRouterOutlet,
+  MenuController,
+  PopoverController,
+  ActionSheetController,
+  Platform
+} from "@ionic/angular";
 
-import { ScheduleFilterPage } from '../../schedule-filter/schedule-filter';
-import { ConferenceData } from '../../../providers/conference-data';
-import { UserData } from '../../../providers/user-data';
-import { Toast } from '@ionic-native/toast/ngx';
-import { SharedModalService } from '../../../shared/services/shared-modal/shared-modal.service';
+import { ScheduleFilterPage } from "../../schedule-filter/schedule-filter";
+import { ConferenceData } from "../../../providers/conference-data";
+import { UserData } from "../../../providers/user-data";
+import { Toast } from "@ionic-native/toast/ngx";
+import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
 
 @Component({
-  selector: 'page-schedule',
-  templateUrl: 'home.html',
-  styleUrls: ['./home.scss'],
+  selector: "page-schedule",
+  templateUrl: "home.html",
+  styleUrls: ["./home.scss"]
 })
 export class HomePage implements OnInit {
   lastTimeBackPress = 0;
@@ -20,12 +38,12 @@ export class HomePage implements OnInit {
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
 
   // Gets a reference to the list element
-  @ViewChild('scheduleList', { static: true }) scheduleList: IonList;
+  @ViewChild("scheduleList", { static: true }) scheduleList: IonList;
 
   ios: boolean;
   dayIndex = 0;
-  queryText = '';
-  segment = 'all';
+  queryText = "";
+  segment = "all";
   excludeTracks: any = [];
   shownSessions: any = [];
   groups: any = [];
@@ -46,11 +64,10 @@ export class HomePage implements OnInit {
     private popoverCtrl: PopoverController,
     private toast: Toast,
     private sharedModalService: SharedModalService
-  ) { }
+  ) {}
 
   ngOnInit() {
     // this.updateSchedule();
-
     // this.ios = this.config.get('mode') === 'ios';
     //this.backButtonEvent();
   }
@@ -148,78 +165,74 @@ export class HomePage implements OnInit {
   // }
 
   backButtonEvent() {
-      this.platform.backButton.subscribe(async () => {
-          // close action sheet
-          try {
-              const element = await this.actionSheetCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
+    this.platform.backButton.subscribe(async () => {
+      // close action sheet
+      try {
+        const element = await this.actionSheetCtrl.getTop();
+        if (element) {
+          element.dismiss();
+          return;
+        }
+      } catch (error) {}
+
+      // close popover
+      try {
+        const element = await this.popoverCtrl.getTop();
+        if (element) {
+          element.dismiss();
+          return;
+        }
+      } catch (error) {}
+
+      // close modal
+      try {
+        const element = await this.modalCtrl.getTop();
+        if (element) {
+          element.dismiss();
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+
+      // close side menua
+      try {
+        const element = await this.menu.getOpen();
+        if (element !== null) {
+          this.menu.close();
+        }
+      } catch (error) {}
+
+      this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+        if (this.router.url !== "/app/tabs/home") {
+          // window.history.back();
+        } else if (this.router.url === "/app/tabs/home") {
+          if (
+            new Date().getTime() - this.lastTimeBackPress <
+            this.timePeriodToExit
+          ) {
+            // this.platform.exitApp(); // Exit from app
+            navigator["app"].exitApp(); // work in ionic 4
+          } else {
+            this.sharedModalService.presentToast(
+              `Press back again to exit App.`,
+              "medium",
+              "custom-modal",
+              2000
+            );
+
+            this.lastTimeBackPress = new Date().getTime();
           }
-
-          // close popover
-          try {
-              const element = await this.popoverCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-          }
-
-          // close modal
-          try {
-              const element = await this.modalCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-              console.log(error);
-
-          }
-
-          // close side menua
-          try {
-              const element = await this.menu.getOpen();
-              if (element !== null) {
-                  this.menu.close();
-              }
-
-          } catch (error) {
-
-          }
-
-          this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-              if (this.router.url !== '/app/tabs/home') {
-               // window.history.back();
-
-              } else if (this.router.url === '/app/tabs/home') {
-                  if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-                      // this.platform.exitApp(); // Exit from app
-                      navigator['app'].exitApp(); // work in ionic 4
-
-                  } else {
-                      this.sharedModalService.presentToast(
-                          `Press back again to exit App.`,
-                          'medium',
-                          'custom-modal',
-                          2000);
-
-                      this.lastTimeBackPress = new Date().getTime();
-                  }
-              }
-          });
+        }
       });
-     }
+    });
+  }
 
   redirecionarLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(["/login"]);
   }
 
   mostrarDetalhes() {
-    this.router.navigate(['/home/home-card-detalhes']);
+    this.router.navigate(["/home/home-card-detalhes"]);
   }
 }

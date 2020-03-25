@@ -32,6 +32,7 @@ export class NovoEventoPage implements OnInit {
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
       horario: ["", Validators.required],
+      local: ["", Validators.required],
       dataInicio: ["", Validators.required],
       dataFinal: ["", Validators.required],
       dia: ["", Validators.required],
@@ -107,6 +108,7 @@ export class NovoEventoPage implements OnInit {
     this.form.patchValue({
       titulo: null,
       horario: null,
+      local: null,
       dataInicio: null,
       dataFinal: null,
       dia: null,

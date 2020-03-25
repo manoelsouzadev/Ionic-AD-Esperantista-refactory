@@ -44,6 +44,8 @@ export class AtualizarEventoPage implements OnInit {
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
       horario: ["", Validators.required],
+      local: ["", Validators.required],
+      tipo: ["", Validators.required],
       dataInicio: ["", Validators.required],
       dataFinal: ["", Validators.required],
       dia: ["", Validators.required],
@@ -80,11 +82,12 @@ export class AtualizarEventoPage implements OnInit {
   popularForm(evento) {
     this.id = evento._id;
     let diaFormatado = evento.dia.split(",");
-
     this.form = this.formBuilder.group({
       id: [evento._id],
       titulo: [evento.titulo],
       horario: [evento.horario],
+      local: [evento.local],
+      tipo: [evento.tipo],
       dataInicio: [evento.dataInicio],
       dataFinal: [evento.dataFinal],
       dia: [diaFormatado],
@@ -130,6 +133,7 @@ export class AtualizarEventoPage implements OnInit {
     this.form.patchValue({
       titulo: null,
       horario: null,
+      local: null,
       dataInicio: null,
       dataFinal: null,
       dia: null,
