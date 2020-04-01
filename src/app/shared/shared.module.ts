@@ -5,10 +5,11 @@ import { IonicModule } from '@ionic/angular';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { TabMenuComponent } from './components/tab-menu/tab-menu.component';
 import { ImageViewerComponent } from './components/image-viewer/image-viewer.component';
+import { LottieAnimationViewModule } from 'ng-lottie';
 
 @NgModule({
   declarations: [ MainHeaderComponent, TabMenuComponent, ImageViewerComponent ],
-  imports: [ CommonModule, IonicModule, FormsModule],
-  exports: [ MainHeaderComponent, TabMenuComponent ]
+  imports: [ CommonModule, IonicModule, FormsModule, LottieAnimationViewModule.forRoot()],
+  exports: [ MainHeaderComponent, TabMenuComponent, LottieAnimationViewModule]
 })
 export class SharedModule {}

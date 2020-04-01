@@ -1,19 +1,22 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ViewChild, ViewEncapsulation } from "@angular/core";
+import { Router } from "@angular/router";
 
-import { MenuController, IonSlides } from '@ionic/angular';
+import { MenuController, IonSlides } from "@ionic/angular";
 
-import { Storage } from '@ionic/storage';
+import { Storage } from "@ionic/storage";
 
 @Component({
-  selector: 'page-tutorial',
-  templateUrl: 'tutorial.html',
-  styleUrls: ['./tutorial.scss'],
+  selector: "page-tutorial",
+  templateUrl: "tutorial.html",
+  styleUrls: ["./tutorial.scss"]
 })
 export class TutorialPage {
-  showSkip = true;
+  private showSkip: boolean = true;
+  private lottieConfig: Object;
+  private anim: any;
+  private animationSpeed: number = 1;
 
-  @ViewChild('slides', { static: true }) slides: IonSlides;
+  @ViewChild("slides", { static: true }) slides: IonSlides;
 
   constructor(
     public menu: MenuController,
@@ -21,10 +24,19 @@ export class TutorialPage {
     public storage: Storage
   ) {}
 
+  ngOnInit() {
+    this.lottieConfig = {
+      path: "assets/animations/happy-emoji.json",
+      renderer: "canvas",
+      autoplay: true,
+      loop: true
+    };
+  }
+
   startApp() {
     this.router
-      .navigateByUrl('/app/tabs/home', { replaceUrl: true })
-      .then(() => this.storage.set('ion_did_tutorial', true));
+      .navigateByUrl("/app/tabs/home", { replaceUrl: true })
+      .then(() => this.storage.set("ion_did_tutorial", true));
   }
 
   onSlideChangeStart(event) {
@@ -34,9 +46,9 @@ export class TutorialPage {
   }
 
   ionViewWillEnter() {
-    this.storage.get('ion_did_tutorial').then(res => {
+    this.storage.get("ion_did_tutorial").then(res => {
       if (res === true) {
-        this.router.navigateByUrl('/app/tabs/home', { replaceUrl: true });
+        this.router.navigateByUrl("/app/tabs/home", { replaceUrl: true });
       }
     });
 

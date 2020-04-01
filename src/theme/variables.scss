@@ -23,7 +23,8 @@
  :root {
   --ion-toolbar-background: var(--ion-color-primary);
   --ion-toolbar-color: #fff;
-  --color-text-menu: var(--ion-color-primary);
+  --color-text-redirect: var(--ion-color-primary);
+  --color-link: var(--ion-color-primary);
 
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -299,7 +300,8 @@
   .color-tab-bar{
     --background: #222428;
   }
-  --color-text-menu: #3880ff;
+  --color-text-redirect: #3880ff;
+  --color-link: #fff;
 
   //--ion-color-primary: #428cff;
   --ion-color-primary: #222428;

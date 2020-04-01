@@ -1,20 +1,33 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">Pular</ion-button>
+      <ion-button
+        (click)="startApp()"
+        [hidden]="!showSkip"
+        class="text-color"
+        >Pular</ion-button
+      >
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
+  <ion-slides
+    #slides
+    (ionSlideWillChange)="onSlideChangeStart($event)"
+    pager="false"
+  >
     <ion-slide>
-      <ion-icon src="../../../assets/img/calendar-silde-1.svg" style="font-size: 100px;"></ion-icon>
+      <ion-icon
+        src="../../../assets/img/calendar-silde-1.svg"
+        style="font-size: 100px;"
+      ></ion-icon>
       <h2 class="slide-title">
-       <b>Bem Vindo!</b>
+        <b>Bem Vindo!</b>
       </h2>
       <p>
-        Com este app você fica informado de tudo o que acontece no <b>Templo Esperantista</b>.
+        Com este app você fica informado de tudo o que acontece no
+        <b>Templo Esperantista</b>.
       </p>
     </ion-slide>
 
@@ -35,10 +48,20 @@
     </ion-slide> -->
 
     <ion-slide>
-      <ion-icon src="../../../assets/img/checked-slide-2.svg" style="font-size: 100px;"></ion-icon>
-      <h2 class="slide-title">Preparado para continuar?</h2>
-      <ion-button fill="clear" (click)="startApp()">
-        Continuar
+      <ion-icon
+        src="../../../assets/img/checked-slide-2.svg"
+        style="font-size: 100px;"
+      ></ion-icon>
+      <h2 class="slide-title">O que você precisa saber.</h2>
+      <p>Cultos, campanhas, eventos, e muito mais...</p>
+    </ion-slide>
+
+    <ion-slide>
+      <lottie-animation-view [options]="lottieConfig" [width]="200">
+      </lottie-animation-view>
+      <h2 class="slide-title">Vamos lá?</h2>
+      <ion-button fill="clear" class="text-color" (click)="startApp()">
+       Continuar
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>
     </ion-slide>
