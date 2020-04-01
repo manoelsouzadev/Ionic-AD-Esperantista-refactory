@@ -86,7 +86,7 @@ export class NovoEventoPage implements OnInit {
       success => {
         this.sharedModalService.presentToast(
           "Evento salvo com sucesso!",
-          "medium",
+          "dark",
           "custom-modal",
           1500
         );

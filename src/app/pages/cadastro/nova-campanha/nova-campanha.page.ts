@@ -83,7 +83,7 @@ export class NovaCampanhaPage implements OnInit {
       success => {
         this.sharedModalService.presentToast(
           "Campanha salva com sucesso!",
-          "medium",
+          "dark",
           "custom-modal",
           1500
         );

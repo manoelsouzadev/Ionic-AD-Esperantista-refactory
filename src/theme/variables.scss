@@ -23,6 +23,7 @@
  :root {
   --ion-toolbar-background: var(--ion-color-primary);
   --ion-toolbar-color: #fff;
+  --color-text-menu: var(--ion-color-primary);
 
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -289,7 +290,7 @@
   ion-refresher-content{
     padding-top: 25px;
     padding-bottom: 120px;
-    color: white;
+    //color: white;
     background-color: #121212;
   }
 
@@ -298,8 +299,10 @@
   .color-tab-bar{
     --background: #222428;
   }
+  --color-text-menu: #3880ff;
 
-  --ion-color-primary: #428cff;
+  //--ion-color-primary: #428cff;
+  --ion-color-primary: #222428;
   --ion-color-primary-rgb: 66,140,255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255,255,255;

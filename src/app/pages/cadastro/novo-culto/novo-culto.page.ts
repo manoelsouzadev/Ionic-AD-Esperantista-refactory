@@ -88,7 +88,7 @@ export class NovoCultoPage implements OnInit {
       success => {
         this.sharedModalService.presentToast(
           "Culto salvo com sucesso!",
-          "medium",
+          "dark",
           "custom-modal",
           1500
         );

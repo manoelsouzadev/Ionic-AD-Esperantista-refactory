@@ -42,7 +42,6 @@ export class AtualizarCultoPage implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((queryParams: any) => {
       this.id = queryParams["id"];
-      console.log(this.id);
     });
 
     this.getCultoById(this.id);
@@ -85,7 +84,6 @@ export class AtualizarCultoPage implements OnInit {
 
   popularForm(culto) {
     this.id = culto._id;
-    console.log(culto);
     this.form = this.formBuilder.group({
       id: [culto._id],
       titulo: [culto.titulo],
@@ -109,7 +107,7 @@ export class AtualizarCultoPage implements OnInit {
         //this.presentToast();
         this.sharedModalService.presentToast(
           "Culto atualizado com sucesso!",
-          "medium",
+          "dark",
           "custom-modal",
           1500
         );
@@ -220,7 +218,7 @@ export class AtualizarCultoPage implements OnInit {
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
-            "medium",
+            "dark",
             "custom-modal",
             1500
           );

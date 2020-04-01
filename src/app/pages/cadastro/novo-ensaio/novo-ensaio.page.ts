@@ -88,7 +88,7 @@ export class NovoEnsaioPage implements OnInit {
       success => {
         this.sharedModalService.presentToast(
           "Ensaio salvo com sucesso!",
-          "medium",
+          "dark",
           "custom-modal",
           1500
         );

@@ -1,7 +1,7 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">Skip</ion-button>
+      <ion-button color='primary' (click)="startApp()" [hidden]="!showSkip">Pular</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -9,19 +9,16 @@
 <ion-content fullscreen>
   <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="false">
     <ion-slide>
-      <img src="assets/img/ica-slidebox-img-1.png" class="slide-image" />
+      <ion-icon src="../../../assets/img/calendar-silde-1.svg" style="font-size: 100px;"></ion-icon>
       <h2 class="slide-title">
-        Welcome to
-        <b>ICA</b>
+       <b>Bem Vindo!</b>
       </h2>
       <p>
-        The
-        <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration of proper code
-        use.
+        Com este app você fica informado de tudo o que acontece no <b>Templo Esperantista</b>.
       </p>
     </ion-slide>
 
-    <ion-slide>
+    <!-- <ion-slide>
       <img src="assets/img/ica-slidebox-img-2.png" class="slide-image" />
       <h2 class="slide-title">What is Ionic?</h2>
       <p>
@@ -35,13 +32,13 @@
       <p>
         <b>Ionic Appflow</b> is a powerful set of services and features built on top of Ionic Framework that brings a totally new
         level of app development agility to mobile dev teams.</p>
-    </ion-slide>
+    </ion-slide> -->
 
     <ion-slide>
-      <img src="assets/img/ica-slidebox-img-4.png" class="slide-image" />
-      <h2 class="slide-title">Ready to Play?</h2>
+      <ion-icon src="../../../assets/img/checked-slide-2.svg" style="font-size: 100px;"></ion-icon>
+      <h2 class="slide-title">Preparado para continuar?</h2>
       <ion-button fill="clear" (click)="startApp()">
-        Continue
+        Continuar
         <ion-icon slot="end" name="arrow-forward"></ion-icon>
       </ion-button>
     </ion-slide>

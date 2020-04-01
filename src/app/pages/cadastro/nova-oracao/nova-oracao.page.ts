@@ -78,7 +78,7 @@ export class NovaOracaoPage implements OnInit {
       success => {
         this.sharedModalService.presentToast(
           "Oração salva com sucesso!",
-          "medium",
+          "dark",
           "custom-modal",
           1500
         );

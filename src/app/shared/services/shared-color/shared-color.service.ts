@@ -7,9 +7,6 @@ export class SharedColorService {
   constructor() {}
 
   getThemeColor(themeSwitch?: boolean) {
-    if (themeSwitch == null) {
-      themeSwitch = false;
-    }
     return themeSwitch;
   }
 }

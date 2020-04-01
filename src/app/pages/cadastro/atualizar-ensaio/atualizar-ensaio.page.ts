@@ -97,7 +97,7 @@ export class AtualizarEnsaioPage implements OnInit {
         //this.presentToast();
         this.sharedModalService.presentToast(
           "Ensaio atualizado com sucesso!",
-          "medium",
+          "dark",
           "custom-modal",
           1500
         );
@@ -208,7 +208,7 @@ export class AtualizarEnsaioPage implements OnInit {
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
-            "medium",
+            "dark",
             "custom-modal",
             1500
           );

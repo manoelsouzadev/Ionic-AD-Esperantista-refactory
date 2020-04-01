@@ -97,7 +97,7 @@ export class SharedModalService {
             " começa hoje, às " +
             reuniao[i].horario +
             " horas, e termina hoje.",
-          "medium",
+          "dark",
           "custom-modal",
           4000
         );
@@ -110,7 +110,7 @@ export class SharedModalService {
             " começa hoje, às " +
             reuniao[i].horario +
             " horas.",
-          "medium",
+          "dark",
           "custom-modal",
           4000
         );
@@ -120,7 +120,7 @@ export class SharedModalService {
         //this.callToast(reuniao[i].titulo + ' termina hoje.');
         this.presentToast(
           reuniao[i].titulo + " termina hoje.",
-          "medium",
+          "dark",
           "custom-modal",
           4000
         );

@@ -109,7 +109,7 @@ export class AtualizarEventoPage implements OnInit {
         this.loadingController.dismiss();
         this.sharedModalService.presentToast(
           "Evento atualizado com sucesso!",
-          "medium",
+          "dark",
           "custom-modal",
           1500
         );
@@ -188,7 +188,7 @@ export class AtualizarEventoPage implements OnInit {
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
-            "medium",
+            "dark",
             "custom-modal",
             1500
           );
