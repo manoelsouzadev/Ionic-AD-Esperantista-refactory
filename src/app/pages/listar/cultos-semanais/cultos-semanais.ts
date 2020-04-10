@@ -11,6 +11,7 @@ import { ConferenceData } from "../../../providers/conference-data";
 import { SharedHttpService } from "../../../shared/services/shared-http/shared-http.service";
 import { CultosSemanaisService } from "../../cadastro/secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
 import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: "cultos-semanais",
@@ -20,6 +21,9 @@ import { SharedModalService } from "../../../shared/services/shared-modal/shared
 export class CultosSemanaisPage {
   speakers: any[] = [];
   protected cultos: any[];
+  private showData: boolean;
+  private message: string = "Carregando...";
+  private showNoData: boolean = false;
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -109,8 +113,23 @@ export class CultosSemanaisPage {
   async ionViewWillEnter() {
     await this.cultosSemanaisService.list().subscribe(res => {
       this.cultos = res;
+      this.showData = res.length === 0 ? false : true;
+      if (this.showData === false){
+        this.showData = true;
+         this.sleep(1100).then(res => this.showNoData = true);
+
+        this.message = "Não há cultos para exibir no momento.";
+      }else {
+        this.showNoData = false;
+      }
+      this.sharedModalService.showMessageNoticeByDayOfWeek(this.cultos);
     });
   }
+
+  sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
 
   async showMessageNotice() {
     await this.sharedModalService.showMessageNotice(this.cultos);

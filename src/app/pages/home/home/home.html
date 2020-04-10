@@ -103,7 +103,29 @@
 </ion-header>
 
 <ion-content>
-  <ion-card button mode="ios" class="welcome-card" (click)="mostrarDetalhes()">
+
+  <lottie-animation
+      class="alignment"
+      animationName="two-people.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="550"
+    ></lottie-animation>
+    <ion-card-content>
+      <p class="text-style">
+        A origem das Assembleias de Deus no Brasil está no fogo do reavivamento
+        que varreu o mundo por volta de 1900, início do Século XX, especialmente
+        na América do Norte. Os participantes desse reavivamento foram cheios do
+        Espírito Santo da mesma forma que os discípulos e os seguidores de Jesus
+        durante a Festa Judaica do Pentecostes, no início da Igreja Primitiva,
+        conforme está escrito em Atos 2. Assim, eles foram chamados de
+        “pentecostais”.
+      </p>
+      <!-- <cite id="formatar-citacao">CPAD</cite> -->
+    </ion-card-content>
+
+  <!-- <ion-card button mode="ios" class="welcome-card" (click)="mostrarDetalhes()">
     <img src="../../../assets/img/AD_logo.png" alt="" />
     <ion-card-content>
       <p class="text-style">
@@ -117,7 +139,7 @@
       </p>
       <cite id="formatar-citacao">CPAD</cite>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
   <!--<div style="background-color: white; margin: 0;position:absolute;
 bottom:0;

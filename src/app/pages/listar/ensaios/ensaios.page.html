@@ -107,23 +107,53 @@
 <main-header title="Ensaios"></main-header>
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/ensaios')">
-    <ion-refresher-content refreshing-spinner="dots" refreshing-text="Atualizando" pulling-text="Puxe para atualizar"></ion-refresher-content>
+    <ion-refresher-content
+      refreshing-spinner="dots"
+      refreshing-text="Atualizando"
+      pulling-text="Puxe para atualizar"
+    ></ion-refresher-content>
   </ion-refresher>
-  <ion-card id="card" mode="ios" *ngFor="let ensaio of ensaios">
-    <img
-      [src]="ensaio.urlImagem"
-      *ngIf="ensaio.urlImagem"
-      (click)="viewImage(ensaio.urlImagem, ensaio.titulo, ensaio.descricao)"
-    />
+  <ng-container *ngIf="showData; else noData">
+    <ion-card id="card" mode="ios" *ngFor="let ensaio of ensaios">
+      <img
+        [src]="ensaio.urlImagem"
+        *ngIf="ensaio.urlImagem"
+        (click)="viewImage(ensaio.urlImagem, ensaio.titulo, ensaio.descricao)"
+      />
 
-    <ion-card-header>
-      <h5><strong>{{ ensaio.titulo }}</strong></h5>
-      <!-- <h6>{{ensaio.dia}} - {{ ensaio.horario }}h</h6> -->
-      <h6>{{ensaio.dia}} - {{ ensaio.horario }}h</h6>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ ensaio.descricao }}</p>
-    </ion-card-content>
-  </ion-card>
+      <ion-card-header>
+        <h5><strong>{{ ensaio.titulo }}</strong></h5>
+        <!-- <h6>{{ensaio.dia}} - {{ ensaio.horario }}h</h6> -->
+        <h6>{{ensaio.dia}} - {{ ensaio.horario }}h</h6>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ ensaio.descricao }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-template #noData>
+    <lottie-animation
+      class="animation-alignment"
+      animationName="happy-emoji.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-template>
+
+  <ng-container *ngIf="showNoData">
+    <lottie-animation
+      class="animation-alignment"
+      animationName="no-data.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-container>
 </ion-content>
 <!--<tab-menu></tab-menu>-->

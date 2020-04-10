@@ -8,22 +8,48 @@
     ></ion-refresher-content>
   </ion-refresher>
 
-  <ion-card id="card" mode="ios" *ngFor="let campanha of campanhas">
-    <img
-      [src]="campanha.urlImagem"
-      *ngIf="campanha.urlImagem"
-      (click)="viewImage(campanha.urlImagem, campanha.titulo, campanha.descricao)"
-    />
-    <ion-card-header>
-      <h5><strong>{{ campanha.titulo }}</strong></h5>
-      <h6>{{ campanha.dia }}</h6>
-      <h6>
-        {{ campanha.dataInicio | date:'dd/MM/yyyy' }} a {{ campanha.dataFinal |
-        date:'dd/MM/yyyy' }} - {{ campanha.horario }}h
-      </h6>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ campanha.descricao }}</p>
-    </ion-card-content>
-  </ion-card>
+  <ng-container *ngIf="showData; else noData">
+    <ion-card id="card" mode="ios" *ngFor="let campanha of campanhas">
+      <img
+        [src]="campanha.urlImagem"
+        *ngIf="campanha.urlImagem"
+        (click)="viewImage(campanha.urlImagem, campanha.titulo, campanha.descricao)"
+      />
+      <ion-card-header>
+        <h5><strong>{{ campanha.titulo }}</strong></h5>
+        <h6>{{ campanha.dia }}</h6>
+        <h6>
+          {{ campanha.dataInicio | date:'dd/MM/yyyy' }} a {{ campanha.dataFinal
+          | date:'dd/MM/yyyy' }} - {{ campanha.horario }}h
+        </h6>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ campanha.descricao }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <ng-template #noData>
+    <lottie-animation
+      class="animation-alignment"
+      animationName="happy-emoji.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-template>
+
+  <ng-container *ngIf="showNoData">
+    <lottie-animation
+      class="animation-alignment"
+      animationName="no-data.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-container>
 </ion-content>

@@ -1,26 +1,58 @@
-
 <main-header title="Orações"></main-header>
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/oracoes')">
-    <ion-refresher-content refreshing-spinner="dots" refreshing-text="Atualizando" pulling-text="Puxe para atualizar"></ion-refresher-content>
+    <ion-refresher-content
+      refreshing-spinner="dots"
+      refreshing-text="Atualizando"
+      pulling-text="Puxe para atualizar"
+    ></ion-refresher-content>
   </ion-refresher>
-  <ion-card id="card" mode="ios" *ngFor="let oracao of oracoes">
-   <img [src]="oracao.urlImagem" *ngIf="oracao.urlImagem" (click)="viewImage(oracao.urlImagem, oracao.titulo, oracao.descricao)">
-    <ion-card-header>
-      <h5><strong>{{ oracao.titulo }}</strong></h5>
-      <h6>{{oracao.dia}} - {{ oracao.horario }}h</h6>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ oracao.descricao }}</p>
-      <p>{{ oracao.ceia }}</p>
-      <p>{{oracao.adicional}}</p>
-      <p>{{oracao.adicional2}}</p>
-      <p>{{oracao.adicional3}}</p>
-      <p>{{oracao.adicional4}}</p>
-      <p>{{oracao.adicional5}}</p>
-      <p>{{oracao.adicional6}}</p>
-    </ion-card-content>
-  </ion-card>
+  <ng-container *ngIf="showData; else noData">
+    <ion-card id="card" mode="ios" *ngFor="let oracao of oracoes">
+      <img
+        [src]="oracao.urlImagem"
+        *ngIf="oracao.urlImagem"
+        (click)="viewImage(oracao.urlImagem, oracao.titulo, oracao.descricao)"
+      />
+      <ion-card-header>
+        <h5><strong>{{ oracao.titulo }}</strong></h5>
+        <h6>{{oracao.dia}} - {{ oracao.horario }}h</h6>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ oracao.descricao }}</p>
+        <p>{{ oracao.ceia }}</p>
+        <p>{{oracao.adicional}}</p>
+        <p>{{oracao.adicional2}}</p>
+        <p>{{oracao.adicional3}}</p>
+        <p>{{oracao.adicional4}}</p>
+        <p>{{oracao.adicional5}}</p>
+        <p>{{oracao.adicional6}}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
 
+  <ng-template #noData>
+    <lottie-animation
+      class="animation-alignment"
+      animationName="happy-emoji.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-template>
+
+  <ng-container *ngIf="showNoData">
+    <lottie-animation
+      class="animation-alignment"
+      animationName="no-data.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-container>
 </ion-content>
 <!--<tab-menu></tab-menu>-->

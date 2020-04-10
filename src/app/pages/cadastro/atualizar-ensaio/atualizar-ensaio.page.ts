@@ -89,8 +89,9 @@ export class AtualizarEnsaioPage implements OnInit {
     this.router.navigate(["cadastro/secao/ensaios"]);
   }
 
-  updateEnsaio() {
-    this.sharedModalService.presentLoadingWithOptions();
+  async updateEnsaio() {
+    await this.sharedModalService.presentLoadingWithOptions();
+    await this.form.get("dia").setValue(this.form.get("dia").value + "");
     this.ensaioService.save(this.form.value).subscribe(
       success => {
         this.loadingController.dismiss();
@@ -284,7 +285,7 @@ export class AtualizarEnsaioPage implements OnInit {
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
-            "medium",
+            "dark",
             "custom-modal",
             1500
           );
@@ -326,7 +327,7 @@ export class AtualizarEnsaioPage implements OnInit {
             success => {
               this.sharedModalService.presentToast(
                 "A imagem foi excluída!",
-                "medium",
+                "dark",
                 "custom-modal",
                 1500
               );

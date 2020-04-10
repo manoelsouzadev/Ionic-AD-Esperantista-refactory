@@ -264,7 +264,7 @@ export class AtualizarCampanhaPage implements OnInit {
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
-            "medium",
+            "dark",
             "custom-modal",
             1500
           );
@@ -307,7 +307,7 @@ export class AtualizarCampanhaPage implements OnInit {
             success => {
               this.sharedModalService.presentToast(
                 "A imagem foi excluída!",
-                "medium",
+                "dark",
                 "custom-modal",
                 1500
               );

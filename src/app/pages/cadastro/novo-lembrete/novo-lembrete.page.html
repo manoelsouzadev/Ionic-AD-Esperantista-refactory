@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" (click)="redirecionarLembretesCadastrados()">
+      <ion-back-button icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Novo Lembrete</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="ion-padding">
+    <form [formGroup]="form">
+    <td-text-editor style="color: rgb(116, 116, 116); background: white;"
+    formControlName="texto"
+    ></td-text-editor>
+  </form>
+  </div>
+
+  <div class="ion-padding">
+    <ion-button
+      mode="ios"
+      expand="block"
+      type="submit"
+      class="ion-no-margin btn-salvar"
+      (click)="salvarLembrete()"
+      >Salvar<ion-icon name="send" mode="ios" slot="end"></ion-icon
+    ></ion-button>
+  </div>
+</ion-content>

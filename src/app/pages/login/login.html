@@ -10,13 +10,13 @@
 </ion-header>
 
 <ion-content>
-    <div>
-  <form>
-    <div>
-      <div class="ion-padding">
-        <ion-icon mode="ios" name="person" id="person-icon"></ion-icon>
+  <div>
+    <form>
+      <div>
+        <div class="ion-padding">
+          <lottie-animation animationName="lock-unlocking.json" renderer="canvas" autoplay=true loop=true size=300></lottie-animation>
+        </div>
       </div>
-    </div>
 
       <div id="margin-left-right">
         <ion-item>
@@ -24,7 +24,7 @@
           <ion-input
             required
             type="password"
-            [(ngModel)] = "usuario.senha"
+            [(ngModel)]="usuario.senha"
             name="senha"
           ></ion-input>
         </ion-item>
@@ -40,7 +40,7 @@
           >Login<ion-icon name="log-in" slot="end"></ion-icon
         ></ion-button>
       </div>
-  </form>
-</div>
+    </form>
+  </div>
 </ion-content>
 <!--<tab-menu></tab-menu>-->

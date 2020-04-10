@@ -19,6 +19,9 @@ import { SharedHttpService } from "../../../shared/services/shared-http/shared-h
 export class EnsaiosPage implements OnInit {
 
   protected ensaios: any[];
+  private showData: boolean;
+  private message: string = "Carregando...";
+  private showNoData: boolean = false;
 
   constructor(
     public actionSheetCtrl: ActionSheetController,
@@ -107,11 +110,21 @@ export class EnsaiosPage implements OnInit {
   async ionViewWillEnter() {
     await this.ensaiosService.list().subscribe(res => {
       this.ensaios = res;
+      this.showData = res.length === 0 ? false : true;
+      if (this.showData === false){
+        this.showData = true;
+         this.sleep(1100).then(res => this.showNoData = true);
+
+        this.message = "Não há ensaios para exibir no momento.";
+      }else {
+        this.showNoData = false;
+      }
+      this.sharedModalService.showMesageNoticeByListDayOfWeek(this.ensaios);
     });
   }
 
-  async showMessageNotice() {
-    await this.sharedModalService.showMessageNotice(this.ensaios);
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async viewImage(src: string, title: string = "", description: string = "") {

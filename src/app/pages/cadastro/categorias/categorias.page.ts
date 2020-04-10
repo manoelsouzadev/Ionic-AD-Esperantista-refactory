@@ -43,7 +43,14 @@ export class CategoriasPage implements OnInit {
       'description': 'Cadastrar evento',
       // 'color': '#0CA9EA',
       'route': 'cadastro/secao/eventos'
-     }
+     },
+     {
+      'title': 'Lembretes',
+      'icon': 'today',
+      'description': 'Cadastrar lembretes',
+      // 'color': '#0CA9EA',
+      'route': 'cadastro/secao/lembretes'
+     },
     // {
     //   'title': 'JavaScript',
     //   'icon': 'javascript',

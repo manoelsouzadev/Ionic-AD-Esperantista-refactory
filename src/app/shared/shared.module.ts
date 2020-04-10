@@ -1,3 +1,4 @@
+import { LottieAnimationComponent } from './components/lottie-animation/lottie-animation.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,8 +9,8 @@ import { ImageViewerComponent } from './components/image-viewer/image-viewer.com
 import { LottieAnimationViewModule } from 'ng-lottie';
 
 @NgModule({
-  declarations: [ MainHeaderComponent, TabMenuComponent, ImageViewerComponent ],
+  declarations: [ MainHeaderComponent, TabMenuComponent, ImageViewerComponent, LottieAnimationComponent ],
   imports: [ CommonModule, IonicModule, FormsModule, LottieAnimationViewModule.forRoot()],
-  exports: [ MainHeaderComponent, TabMenuComponent, LottieAnimationViewModule]
+  exports: [ MainHeaderComponent, TabMenuComponent, LottieAnimationComponent, LottieAnimationViewModule]
 })
 export class SharedModule {}

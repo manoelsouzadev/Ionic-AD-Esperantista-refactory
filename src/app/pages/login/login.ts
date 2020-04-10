@@ -11,16 +11,12 @@ import { SharedModalService } from '../../shared/services/shared-modal/shared-mo
   styleUrls: ['./login.scss'],
 })
 export class LoginPage implements OnInit {
-  protected usuario: Usuario = new Usuario();
+  private usuario: Usuario = new Usuario();
   private autenticado: boolean;
+
   constructor(
     private loginService: LoginService,
-    private toastController: ToastController,
-    private router: Router,
-    private sharedModalService: SharedModalService,
-    private platform: Platform,
-    private navController: NavController
-  ) {}
+    private sharedModalService: SharedModalService) {}
 
   ngOnInit() {}
 

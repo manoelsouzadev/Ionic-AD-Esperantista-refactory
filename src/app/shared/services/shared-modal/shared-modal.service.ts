@@ -3,15 +3,25 @@ import { Injectable } from "@angular/core";
 import {
   LoadingController,
   ToastController,
-  ModalController
+  ModalController,
 } from "@ionic/angular";
 import { ImageViewerComponent } from "../../../shared/components/image-viewer/image-viewer.component";
 import { AlertController } from "@ionic/angular";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class SharedModalService {
+  private semana = [
+    " Domingo",
+    " Segunda-feira",
+    " Terça-feira",
+    " Quarta-feira",
+    " Quinta-feira",
+    " Sexta-feira",
+    " Sábado",
+  ];
+
   constructor(
     private loadingController: LoadingController,
     private modalController: ModalController,
@@ -32,7 +42,7 @@ export class SharedModalService {
       mode: "ios",
       position: "top",
       cssClass: cssClassModal,
-      duration: durationModal
+      duration: durationModal,
     });
     toast.present();
   }
@@ -42,7 +52,7 @@ export class SharedModalService {
       message: "Por favor, espere...",
       translucent: true,
       duration: 5000,
-      cssClass: "custom-class custom-loading"
+      cssClass: "custom-class custom-loading",
     });
     return await loading.present();
   }
@@ -53,11 +63,11 @@ export class SharedModalService {
       componentProps: {
         imgSource: src,
         imgTitle: title,
-        imgDescription: description
+        imgDescription: description,
       },
       cssClass: "modal-fullscreen",
       keyboardClose: true,
-      showBackdrop: true
+      showBackdrop: true,
     });
 
     return await modal.present();
@@ -68,11 +78,10 @@ export class SharedModalService {
     await this.delay(5000);
   }
 
-  async showMessageNotice(reuniao) {
-    let message = "";
-    for (let i = 0; i < reuniao.length; i++) {
-      var strDataInicial = reuniao[i].dataInicio;
-      var strDataFinal = reuniao[i].dataFinal;
+  async showMessageNotice(data) {
+    for (let i = 0; i < data.length; i++) {
+      var strDataInicial = data[i].dataInicio;
+      var strDataFinal = data[i].dataFinal;
       var partesDataInicial = strDataInicial.split("-");
       var partesDataFinal = strDataFinal.split("-");
       var dataAtual = new Date().toDateString();
@@ -93,9 +102,9 @@ export class SharedModalService {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas, e termina hoje.');
         this.presentToast(
-          reuniao[i].titulo +
+          data[i].titulo +
             " começa hoje, às " +
-            reuniao[i].horario +
+            data[i].horario +
             " horas, e termina hoje.",
           "dark",
           "custom-modal",
@@ -106,10 +115,7 @@ export class SharedModalService {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas.');
         this.presentToast(
-          reuniao[i].titulo +
-            " começa hoje, às " +
-            reuniao[i].horario +
-            " horas.",
+          data[i].titulo + " começa hoje, às " + data[i].horario + " horas.",
           "dark",
           "custom-modal",
           4000
@@ -119,7 +125,7 @@ export class SharedModalService {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' termina hoje.');
         this.presentToast(
-          reuniao[i].titulo + " termina hoje.",
+          data[i].titulo + " termina hoje.",
           "dark",
           "custom-modal",
           4000
@@ -130,7 +136,7 @@ export class SharedModalService {
   }
 
   async delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   private async confirmationAlert(
@@ -140,7 +146,7 @@ export class SharedModalService {
     textButton2: string
   ): Promise<boolean> {
     let resolveFunction: (confirm: boolean) => void;
-    const promise = new Promise<boolean>(resolve => {
+    const promise = new Promise<boolean>((resolve) => {
       resolveFunction = resolve;
     });
     const alert = await this.alertController.create({
@@ -150,13 +156,13 @@ export class SharedModalService {
       buttons: [
         {
           text: textButton1,
-          handler: () => resolveFunction(false)
+          handler: () => resolveFunction(false),
         },
         {
           text: textButton2,
-          handler: () => resolveFunction(true)
-        }
-      ]
+          handler: () => resolveFunction(true),
+        },
+      ],
     });
     await alert.present();
     return promise;
@@ -180,6 +186,102 @@ export class SharedModalService {
     } else {
       console.log("Canceled");
       return false;
+    }
+  }
+
+  private async titleAlert(
+    header: string,
+    message: string,
+    textButton1: string,
+    textButton2: string,
+    inputValue?: string
+  ): Promise<string> {
+    let resolveFunction: (title: string) => void;
+    const promise = new Promise<string>((resolve) => {
+      resolveFunction = resolve;
+    });
+    const alert = await this.alertController.create({
+      header: header,
+      subHeader: message,
+      backdropDismiss: false,
+      inputs: [
+        {
+          name: "title",
+          type: "text",
+          placeholder: "Título",
+          value: inputValue !== "" ? inputValue : ""
+        },
+      ],
+      buttons: [
+        {
+          text: textButton1,
+          handler: () => {
+            return "";
+          },
+        },
+        {
+          text: textButton2,
+          handler: (alertData) => resolveFunction(alertData.title),
+        },
+      ],
+    });
+    await alert.present();
+    return promise;
+  }
+
+  public async showAlertTitle(
+    header: string,
+    message: string,
+    textButton1: string,
+    textButton2: string,
+    inputValue?: string
+  ) {
+    const title = await this.titleAlert(
+      header,
+      message,
+      textButton1,
+      textButton2,
+      inputValue
+    );
+    if (!(title === "")) {
+      console.log("título: " + title);
+      return title;
+    } else {
+      console.log("título: " + title);
+      return title;
+    }
+  }
+
+  async showMessageNoticeByDayOfWeek(data) {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].dia === this.semana[new Date().getDay()].trim()) {
+        this.presentToast(
+          `${data[i].titulo} é hoje.`,
+          "dark",
+          "custom-modal",
+          4000
+        );
+        await this.delay(5000);
+      }
+    }
+  }
+
+  async showMesageNoticeByListDayOfWeek(data) {
+
+    for (let i = 0; i < data.length; i++) {
+      var title = await data[i].titulo;
+      var days = await data[i].dia.split(",");
+      for (let j = 0; j < days.length; j++) {
+        if (days[j].trim() === this.semana[new Date().getDay()].trim()) {
+          await this.presentToast(
+            `${title} é hoje, às ${days[j].horario}.`,
+            "dark",
+            "custom-modal",
+            4000
+          );
+          await this.delay(5000);
+        }
+      }
     }
   }
 }

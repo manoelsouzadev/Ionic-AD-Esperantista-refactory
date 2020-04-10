@@ -1,20 +1,55 @@
 <main-header title="{{ title }}"></main-header>
 <ion-content>
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/eventos')">
-      <ion-refresher-content refreshing-spinner="dots" refreshing-text="Atualizando" pulling-text="Puxe para atualizar"></ion-refresher-content>
-    </ion-refresher>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/eventos')">
+    <ion-refresher-content
+      refreshing-spinner="dots"
+      refreshing-text="Atualizando"
+      pulling-text="Puxe para atualizar"
+    ></ion-refresher-content>
+  </ion-refresher>
 
+  <ng-container *ngIf="showData; else noData">
+    <ion-card id="card" mode="ios" *ngFor="let evento of eventos">
+      <img
+        [src]="evento.urlImagem"
+        *ngIf="evento.urlImagem"
+        (click)="viewImage(evento.urlImagem, evento.titulo, evento.descricao)"
+      />
+      <ion-card-header>
+        <h5><strong>{{ evento.titulo }}</strong></h5>
+        <h6 *ngIf="evento.tipo == 'Externo'">{{ evento.local }}</h6>
+        <h6>
+          {{ evento.dataInicio | date:'dd/MM/yyyy' }} a {{ evento.dataFinal |
+          date:'dd/MM/yyyy' }} - {{ evento.horario }}h
+        </h6>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ evento.descricao }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
 
-  <ion-card id="card" mode="ios" *ngFor="let evento of eventos">
-      <img [src]="evento.urlImagem" *ngIf="evento.urlImagem" (click)="viewImage(evento.urlImagem, evento.titulo, evento.descricao)">
-    <ion-card-header>
-      <h5><strong>{{ evento.titulo }}</strong></h5>
-      <h6 *ngIf="evento.tipo == 'Externo'">{{ evento.local }}</h6>
-      <h6>{{ evento.dataInicio | date:'dd/MM/yyyy' }} a {{ evento.dataFinal | date:'dd/MM/yyyy' }} - {{ evento.horario }}h</h6>
-    </ion-card-header>
-    <ion-card-content>
-      <p>{{ evento.descricao }}</p>
-    </ion-card-content>
-  </ion-card>
+  <ng-template #noData>
+    <lottie-animation
+      class="animation-alignment"
+      animationName="happy-emoji.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-template>
 
+  <ng-container *ngIf="showNoData">
+    <lottie-animation
+      class="animation-alignment"
+      animationName="no-data.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-container>
 </ion-content>

@@ -15,6 +15,9 @@ export class EventosPage implements OnInit {
   private eventos: Evento[];
   private eventType: string;
   private title: string;
+  private showData: boolean;
+  private message: string = "Carregando...";
+  private showNoData: boolean = false;
 
   constructor(
     private eventosService: EventosService,
@@ -32,10 +35,23 @@ export class EventosPage implements OnInit {
 
     this.eventosService.getEventsByType(this.eventType).subscribe(res => {
       this.eventos = res;
+      this.showData = res.length === 0 ? false : true;
+      if (this.showData === false){
+         this.showData = true;
+         this.sleep(1100).then(res => this.showNoData = true);
+
+        this.message = "Não há eventos para exibir no momento.";
+      }else {
+        this.showNoData = false;
+      }
       this.sharedModalService.showMessageNotice(this.eventos);
     });
 
     this.title = this.eventType == 'Interno' ? 'Eventos Internos' : 'Eventos Externos';
+  }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async viewImage(src: string, title: string = "", description: string = "") {

@@ -1,9 +1,3 @@
-import { EventosPage } from './secoes-cadastro/eventos/eventos.page';
-import { AtualizarEventoPage } from './atualizar-evento/atualizar-evento.page';
-import { NovoEventoPage } from './novo-evento/novo-evento.page';
-import { AtualizarEnsaioPage } from './atualizar-ensaio/atualizar-ensaio.page';
-import { NovoEnsaioPage } from './novo-ensaio/novo-ensaio.page';
-import { EnsaiosPage } from './secoes-cadastro/ensaios/ensaios.page';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -20,6 +14,16 @@ import { CampanhasPage } from "./secoes-cadastro/secao-cadastro-campanhas/campan
 import { CultosSemanaisPage } from "./secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.page";
 import { OracoesPage } from "./secoes-cadastro/secao-cadastro-oracoes/oracoes/oracoes.page";
 import { AtualizarOracaoComponent } from './atualizar-oracao/atualizar-oracao.component';
+import { EventosPage } from './secoes-cadastro/eventos/eventos.page';
+import { AtualizarEventoPage } from './atualizar-evento/atualizar-evento.page';
+import { NovoEventoPage } from './novo-evento/novo-evento.page';
+import { AtualizarEnsaioPage } from './atualizar-ensaio/atualizar-ensaio.page';
+import { NovoEnsaioPage } from './novo-ensaio/novo-ensaio.page';
+import { EnsaiosPage } from './secoes-cadastro/ensaios/ensaios.page';
+import { AtualizarLembretePage } from './atualizar-lembrete/atualizar-lembrete.page';
+import { LembretesPage } from './secoes-cadastro/lembretes/lembretes.page';
+import { CovalentTextEditorModule } from '@covalent/text-editor';
+import { NovoLembretePage } from './novo-lembrete/novo-lembrete.page';
 
 @NgModule({
   declarations: [
@@ -39,12 +43,16 @@ import { AtualizarOracaoComponent } from './atualizar-oracao/atualizar-oracao.co
     AtualizarEnsaioPage,
     NovoEventoPage,
     EventosPage,
-    AtualizarEventoPage
+    AtualizarEventoPage,
+    LembretesPage,
+    AtualizarLembretePage,
+    NovoLembretePage
   ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    CovalentTextEditorModule,
     ReactiveFormsModule,
     CadastroRoutingModule
   ]

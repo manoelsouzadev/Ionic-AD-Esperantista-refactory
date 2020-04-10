@@ -107,11 +107,15 @@
 <main-header title="Cultos Semanais"></main-header>
 <ion-content>
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/cultos')">
-    <ion-refresher-content refreshing-spinner="dots" refreshing-text="Atualizando" pulling-text="Puxe para atualizar"></ion-refresher-content>
+    <ion-refresher-content
+      refreshing-spinner="dots"
+      refreshing-text="Atualizando"
+      pulling-text="Puxe para atualizar"
+    ></ion-refresher-content>
   </ion-refresher>
 
-  <ion-card id="card" mode="ios" *ngFor="let culto of cultos">
-    <div *ngIf="cultos; else noData">
+  <ng-container *ngIf="showData; else noData">
+    <ion-card id="card" mode="ios" *ngFor="let culto of cultos">
       <img
         [src]="culto.urlImagem"
         *ngIf="culto.urlImagem"
@@ -133,10 +137,30 @@
         <p>{{culto.adicional5}}</p>
         <p>{{culto.adicional6}}</p>
       </ion-card-content>
-    </div>
-  </ion-card>
+    </ion-card>
+  </ng-container>
+  <ng-template #noData>
+    <lottie-animation
+      class="animation-alignment"
+      animationName="happy-emoji.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-template>
+
+  <ng-container *ngIf="showNoData">
+    <lottie-animation
+      class="animation-alignment"
+      animationName="no-data.json"
+      renderer="canvas"
+      autoplay="true"
+      loop="true"
+      size="200"
+      message="{{ message }}"
+    ></lottie-animation>
+  </ng-container>
 </ion-content>
 <!--<tab-menu></tab-menu>-->
-<ng-template #noData>
-  <ion-text id="text-center">Não há cultos para exibir</ion-text>
-</ng-template>

@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start" (click)="redirecionarLembretesCadastrados()">
+      <ion-back-button icon="arrow-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Atualizar Lembrete</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="ion-padding">
+    <form [formGroup]="form">
+    <td-text-editor style="color: rgb(116, 116, 116); background: white;"
+    [formControl]="form.controls['texto']"
+    ></td-text-editor>
+    <ion-button
+      mode="ios"
+      expand="block"
+      (click)="updateLembrete()"
+      class="ion-no-margin btn-salvar"
+     type="submit"
+      >Salvar<ion-icon name="send" mode="ios" slot="end"></ion-icon
+    ></ion-button>
+  </form>
+  </div>
+
+  <div class="ion-padding">
+
+  </div>
+</ion-content>

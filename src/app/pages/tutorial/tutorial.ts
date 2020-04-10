@@ -13,8 +13,6 @@ import { Storage } from "@ionic/storage";
 export class TutorialPage {
   private showSkip: boolean = true;
   private lottieConfig: Object;
-  private anim: any;
-  private animationSpeed: number = 1;
 
   @ViewChild("slides", { static: true }) slides: IonSlides;
 

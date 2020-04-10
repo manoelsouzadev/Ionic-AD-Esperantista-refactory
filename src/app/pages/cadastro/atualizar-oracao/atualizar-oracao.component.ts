@@ -102,7 +102,7 @@ export class AtualizarOracaoComponent implements OnInit {
         this.loadingController.dismiss();
         this.sharedModalService.presentToast(
           "Oração atualizada com sucesso!",
-          "medium",
+          "dark",
           "custom-modal",
           1500
         );
@@ -159,7 +159,7 @@ export class AtualizarOracaoComponent implements OnInit {
         success => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
-            "medium",
+            "dark",
             "custom-modal",
             1500
           );

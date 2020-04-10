@@ -11,6 +11,9 @@ import { SharedHttpService } from './../../../shared/services/shared-http/shared
 })
 export class OracoesPage implements OnInit {
   protected oracoes: any[];
+  private showData: boolean;
+  private message: string = "Carregando...";
+  private showNoData: boolean = false;
 
   constructor(
     private sharedModalService: SharedModalService,
@@ -24,7 +27,21 @@ export class OracoesPage implements OnInit {
   async ionViewWillEnter() {
     await this.oracoesService.list().subscribe(res => {
       this.oracoes = res;
+      this.showData = res.length === 0 ? false : true;
+      if (this.showData === false){
+        this.showData = true;
+         this.sleep(1100).then(res => this.showNoData = true);
+
+        this.message = "Não há orações para exibir no momento.";
+      }else {
+        this.showNoData = false;
+      }
+      this.sharedModalService.showMesageNoticeByListDayOfWeek(this.oracoes);
     });
+  }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   async showMessageNotice() {
