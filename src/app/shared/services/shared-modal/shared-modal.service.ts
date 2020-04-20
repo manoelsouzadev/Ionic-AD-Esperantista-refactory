@@ -256,7 +256,7 @@ export class SharedModalService {
     for (let i = 0; i < data.length; i++) {
       if (data[i].dia === this.semana[new Date().getDay()].trim()) {
         this.presentToast(
-          `${data[i].titulo} é hoje.`,
+          `${data[i].titulo} é hoje às ${data[i].horario}.`,
           "dark",
           "custom-modal",
           4000
@@ -270,11 +270,12 @@ export class SharedModalService {
 
     for (let i = 0; i < data.length; i++) {
       var title = await data[i].titulo;
+      var hour = await data[i].horario;
       var days = await data[i].dia.split(",");
       for (let j = 0; j < days.length; j++) {
         if (days[j].trim() === this.semana[new Date().getDay()].trim()) {
           await this.presentToast(
-            `${title} é hoje, às ${days[j].horario}.`,
+            `${title} é hoje, às ${hour}.`,
             "dark",
             "custom-modal",
             4000

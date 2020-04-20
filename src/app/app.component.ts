@@ -4,7 +4,7 @@ import {
   ViewEncapsulation,
   ViewChildren,
   QueryList,
-  OnDestroy
+  OnDestroy,
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { SwUpdate } from "@angular/service-worker";
@@ -16,7 +16,7 @@ import {
   ActionSheetController,
   ModalController,
   IonRouterOutlet,
-  NavController
+  NavController,
 } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
 import { StatusBar } from "@ionic-native/status-bar/ngx";
@@ -27,66 +27,65 @@ import { Toast } from "@ionic-native/toast/ngx";
 import { Subscription } from "rxjs";
 import { SharedModalService } from "./shared/services/shared-modal/shared-modal.service";
 import { SharedColorService } from "./shared/services/shared-color/shared-color.service";
+import { timer } from "rxjs";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
-  lastTimeBackPress = 0;
-  timePeriodToExit = 2000;
-  subscription: Subscription;
-
+  private lastTimeBackPress: number = 0;
+  private timePeriodToExit: number = 2000;
+  private subscription: Subscription;
+  showSplash: boolean = true;
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
 
   appPages = [
     {
       title: "Home",
       url: "/app/tabs/home",
-      icon: "home"
+      icon: "home",
     },
     {
       title: "Cultos",
       url: "/app/tabs/cultos",
-      icon: "contacts"
+      icon: "contacts",
     },
     {
       title: "Campanhas",
       url: "/listar/campanhas",
-      icon: "flame"
+      icon: "flame",
     },
     {
       title: "Orações",
       url: "/listar/oracoes",
-      icon: "time"
+      icon: "time",
     },
     {
       title: "Ensaios",
       url: "/listar/ensaios",
-      icon: "microphone"
+      icon: "microphone",
     },
     {
       title: "Eventos",
       url: "/listar/tipo-evento",
-      icon: "people"
+      icon: "people",
     },
     {
       title: "Administrador",
       url: "/app/tabs/login",
-      icon: "settings"
+      icon: "settings",
     },
     {
       title: "Sobre",
       url: "/app/tabs/sobre",
-      icon: "information-circle"
-    }
+      icon: "information-circle",
+    },
   ];
   loggedIn = false;
   dark = false;
-
-
 
   constructor(
     private menu: MenuController,
@@ -192,7 +191,7 @@ export class AppComponent implements OnInit {
             this.timePeriodToExit
           ) {
             // this.platform.exitApp(); // Exit from app
-            navigator["app"].exitApp(); // work in ionic 4
+            this.exitApp(); // work in ionic 4
           } else {
             this.sharedModalService.presentToast(
               `Pressione novamente para sair do aplicativo.`,
@@ -213,16 +212,29 @@ export class AppComponent implements OnInit {
     });
   }
 
+  async closeSideMenu() {
+    try {
+      const element = await this.menu.getOpen();
+      if (element !== null) {
+        this.menu.close();
+      }
+    } catch (error) {}
+  }
+
+  exitApp(){
+    navigator["app"].exitApp();
+  }
+
   async ngOnInit() {
     this.checkLoginStatus();
     this.listenForLoginEvents();
 
-    this.swUpdate.available.subscribe(async res => {
+    this.swUpdate.available.subscribe(async (res) => {
       const toast = await this.toastCtrl.create({
         message: "Update available!",
         showCloseButton: true,
         position: "bottom",
-        closeButtonText: `Reload`
+        closeButtonText: `Reload`,
       });
 
       await toast.present();
@@ -238,12 +250,13 @@ export class AppComponent implements OnInit {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      timer(3000).subscribe(() => (this.showSplash = false));
       this.backButtonEvent();
     });
   }
 
   checkLoginStatus() {
-    return this.userData.isLoggedIn().then(loggedIn => {
+    return this.userData.isLoggedIn().then((loggedIn) => {
       return this.updateLoggedInStatus(loggedIn);
     });
   }

@@ -48,6 +48,7 @@ export class HomePage implements OnInit {
   shownSessions: any = [];
   groups: any = [];
   confDate: string;
+  // private lottieConfig;
 
   constructor(
     private menu: MenuController,
@@ -70,6 +71,12 @@ export class HomePage implements OnInit {
     // this.updateSchedule();
     // this.ios = this.config.get('mode') === 'ios';
     //this.backButtonEvent();
+    //  this.lottieConfig = {
+    //   path: 'assets/animations/two-people.json',
+    //   renderer: 'canvas',
+    //   autoplay: true,
+    //   loop: true
+    // };
   }
 
   // updateSchedule() {

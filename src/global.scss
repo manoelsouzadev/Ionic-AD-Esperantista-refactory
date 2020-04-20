@@ -33,7 +33,7 @@
 
 @import "./app/app.scss";
 
-:root { 
+:root {
   .label-image {
     margin-bottom: -14px;
   }
@@ -56,5 +56,9 @@
     align-items: center;
     justify-content: center;
     margin-top: 10%;
+  }
+
+  .animation-margin {
+    margin-top: 25%;
   }
 }

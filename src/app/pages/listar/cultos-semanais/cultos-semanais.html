@@ -114,7 +114,7 @@
     ></ion-refresher-content>
   </ion-refresher>
 
-  <ng-container *ngIf="showData; else noData">
+  <ng-container *ngIf="showData; else loading">
     <ion-card id="card" mode="ios" *ngFor="let culto of cultos">
       <img
         [src]="culto.urlImagem"
@@ -139,26 +139,20 @@
       </ion-card-content>
     </ion-card>
   </ng-container>
-  <ng-template #noData>
+  <ng-template #loading>
     <lottie-animation
-      class="animation-alignment"
-      animationName="happy-emoji.json"
-      renderer="canvas"
-      autoplay="true"
-      loop="true"
-      size="200"
+      class="animation-alignment animation-margin"
+      animationName="loading.json"
+      size="100px"
       message="{{ message }}"
     ></lottie-animation>
   </ng-template>
 
   <ng-container *ngIf="showNoData">
     <lottie-animation
-      class="animation-alignment"
+      class="animation-alignment animation-margin"
       animationName="no-data.json"
-      renderer="canvas"
-      autoplay="true"
-      loop="true"
-      size="200"
+      size="100px"
       message="{{ message }}"
     ></lottie-animation>
   </ng-container>
