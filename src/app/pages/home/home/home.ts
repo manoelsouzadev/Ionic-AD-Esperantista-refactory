@@ -79,6 +79,38 @@ export class HomePage implements OnInit {
     // };
   }
 
+  appPages = [
+    {
+      title: "Cultos",
+      url: "/app/tabs/cultos",
+      icon: "contacts",
+    },
+    {
+      title: "Campanhas",
+      url: "/listar/campanhas",
+      icon: "flame",
+    },
+    {
+      title: "Orações",
+      url: "/listar/oracoes",
+      icon: "time",
+    },
+    {
+      title: "Ensaios",
+      url: "/listar/ensaios",
+      icon: "microphone",
+    },
+    {
+      title: "Eventos",
+      url: "/listar/tipo-evento",
+      icon: "people",
+    }
+  ];
+
+  redirectToRoute(url: string){
+    this.router.navigate([url]);
+  }
+
   // updateSchedule() {
   //   // Close any open sliding items when the schedule updates
   //   if (this.scheduleList) {

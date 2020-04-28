@@ -13,7 +13,15 @@
       <div class="ion-padding">
         <ion-item>
           <ion-label mode="ios" position="stacked">Título</ion-label>
-          <ion-input mode="ios" formControlName="titulo" autocomplete="on" autofocus="true" clearInput="true"  autocapitalize="on" autocorrect="on"></ion-input>
+          <ion-input
+            mode="ios"
+            formControlName="titulo"
+            autocomplete="on"
+            autofocus="true"
+            clearInput="true"
+            autocapitalize="on"
+            autocorrect="on"
+          ></ion-input>
         </ion-item>
 
         <!-- <ion-item>
@@ -172,7 +180,24 @@
             </ion-col>
           </ion-row>
         </ion-grid> -->
+
+        <ion-list lines="none">
+          <ion-item>
+            <ion-label mode="ios" position="stacked">Adicionais</ion-label>
+            <ion-input
+              (click)="openAditionalModal()"
+              formControlName="adicional"
+              readonly
+              placeholder="Não há adicionais para mostrar"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-button (click)="clearAditionalInput()" fill="clear" mode="ios">Excluir<ion-icon name="trash" slot="end"></ion-icon></ion-button>
+          </ion-item>
+        </ion-list>
       </div>
+
       <div class="ion-padding">
         <ion-button
           mode="ios"

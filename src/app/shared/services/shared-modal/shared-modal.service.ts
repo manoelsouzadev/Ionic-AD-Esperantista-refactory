@@ -1,3 +1,4 @@
+import { AditionalModalComponent } from '../../components/aditional-modal/aditional-modal.component';
 import { SharedHttpService } from "./../shared-http/shared-http.service";
 import { Injectable } from "@angular/core";
 import {
@@ -79,6 +80,9 @@ export class SharedModalService {
   }
 
   async showMessageNotice(data) {
+    var currentDate = new Date();
+    var currentHour = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+
     for (let i = 0; i < data.length; i++) {
       var strDataInicial = data[i].dataInicio;
       var strDataFinal = data[i].dataFinal;
@@ -101,16 +105,15 @@ export class SharedModalService {
       ) {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas, e termina hoje.');
-        this.presentToast(
-          data[i].titulo +
-            " começa hoje, às " +
-            data[i].horario +
-            " horas, e termina hoje.",
-          "dark",
-          "custom-modal",
-          4000
-        );
-        await this.delay(5000);
+        if (currentHour === data[i].horario) {
+          this.presentToast(
+            data[i].titulo + " começa agora, e termina hoje.",
+            "dark",
+            "custom-modal",
+            4000
+          );
+          await this.delay(5000);
+        }
       } else if (dataInicial.toString() == dataAtual.toString()) {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas.');
@@ -209,7 +212,7 @@ export class SharedModalService {
           name: "title",
           type: "text",
           placeholder: "Título",
-          value: inputValue !== "" ? inputValue : ""
+          value: inputValue !== "" ? inputValue : "",
         },
       ],
       buttons: [
@@ -267,7 +270,6 @@ export class SharedModalService {
   }
 
   async showMesageNoticeByListDayOfWeek(data) {
-
     for (let i = 0; i < data.length; i++) {
       var title = await data[i].titulo;
       var hour = await data[i].horario;
@@ -284,5 +286,16 @@ export class SharedModalService {
         }
       }
     }
+  }
+
+  async presentAditionalModal(textInput: string, url: string) {
+    const modal = await this.modalController.create({
+      component: AditionalModalComponent,
+      componentProps: {
+        textInput: textInput,
+        url: url
+      }
+    });
+    return await modal.present();
   }
 }

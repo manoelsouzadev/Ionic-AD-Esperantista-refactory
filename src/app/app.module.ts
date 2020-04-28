@@ -20,6 +20,7 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { SharedModule } from './shared/shared.module';
 import { ImageViewerComponent } from './shared/components/image-viewer/image-viewer.component';
+import { AditionalModalComponent } from './shared/components/aditional-modal/aditional-modal.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,7 @@ import { ImageViewerComponent } from './shared/components/image-viewer/image-vie
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
   ],
-  entryComponents: [ ImageViewerComponent ],
+  entryComponents: [ ImageViewerComponent, AditionalModalComponent ],
   declarations: [AppComponent],
   providers: [InAppBrowser, SplashScreen, StatusBar,
     Toast,

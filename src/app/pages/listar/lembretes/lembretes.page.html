@@ -1,0 +1,24 @@
+<main-header title="Lembretes"></main-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event, '/lembretes')">
+    <ion-refresher-content
+      refreshing-spinner="dots"
+      refreshing-text="Atualizando"
+      pulling-text="Puxe para atualizar"
+    ></ion-refresher-content>
+  </ion-refresher>
+  <ng-container *ngIf="showData; else loading">
+  <ion-card *ngFor="let lembrete of lembretes">
+    <ion-card-content [innerHTML]="lembrete" class="text-alignment"> </ion-card-content>
+  </ion-card>
+</ng-container>
+</ion-content>
+<ng-template #loading>
+  <lottie-animation
+    class="animation-alignment animation-margin"
+    animationName="loading.json"
+    size="100px"
+    message="{{ message }}"
+  ></lottie-animation>
+</ng-template>

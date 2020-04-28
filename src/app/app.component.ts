@@ -74,6 +74,11 @@ export class AppComponent implements OnInit {
       icon: "people",
     },
     {
+      title: "Lembretes",
+      url: "/listar/lembretes",
+      icon: "today",
+    },
+    {
       title: "Administrador",
       url: "/app/tabs/login",
       icon: "settings",
@@ -221,7 +226,7 @@ export class AppComponent implements OnInit {
     } catch (error) {}
   }
 
-  exitApp(){
+  exitApp() {
     navigator["app"].exitApp();
   }
 

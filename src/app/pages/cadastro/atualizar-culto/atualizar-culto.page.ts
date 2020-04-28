@@ -1,14 +1,11 @@
-import { CultosSemanaisService } from "./../secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
-import { FirebaseService } from "./../../../shared/services/firebase/firebase.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AtualizarCultoService } from "./atualizar-culto.service";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { LoadingController, ToastController } from "@ionic/angular";
+import { LoadingController } from "@ionic/angular";
+
 import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
-import { SharedHttpService } from "../../../shared/services/shared-http/shared-http.service";
-import { Toast } from "@ionic-native/toast/ngx";
-import { AlertController } from "@ionic/angular";
+import { CultosSemanaisService } from "./../secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
+import { FirebaseService } from "./../../../shared/services/firebase/firebase.service";
 
 @Component({
   selector: "app-atualizar-culto",
@@ -27,16 +24,11 @@ export class AtualizarCultoPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private atualizarCultoService: AtualizarCultoService,
     private formBuilder: FormBuilder,
     private loadingController: LoadingController,
     private sharedModalService: SharedModalService,
-    private sharedHttpService: SharedHttpService,
-    private toastController: ToastController,
-    private toast: Toast,
     private firebaseService: FirebaseService,
-    private cultosSemanaisService: CultosSemanaisService,
-    private alertController: AlertController
+    private cultosSemanaisService: CultosSemanaisService
   ) {}
 
   ngOnInit() {

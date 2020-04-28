@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { SharedModalService } from "../../../shared/services/shared-modal/shared-modal.service";
 import { LoadingController } from "@ionic/angular";
 import { CultosSemanaisService } from "../secoes-cadastro/secao-cadastro-cultos/cultos-semanais/cultos-semanais.service";
@@ -9,7 +9,7 @@ import { FirebaseService } from "../../../shared/services/firebase/firebase.serv
 @Component({
   selector: "app-novo-culto",
   templateUrl: "./novo-culto.page.html",
-  styleUrls: ["./novo-culto.page.scss"]
+  styleUrls: ["./novo-culto.page.scss"],
 })
 export class NovoCultoPage implements OnInit {
   protected form: FormGroup;
@@ -19,10 +19,12 @@ export class NovoCultoPage implements OnInit {
   protected fileImageCamera: string = null;
   private downloadURL: string = "";
   private radioOption: string = "galeria";
+  private haveText: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private sharedModalService: SharedModalService,
     private loadingController: LoadingController,
     private cultosSemanaisService: CultosSemanaisService,
@@ -35,8 +37,32 @@ export class NovoCultoPage implements OnInit {
       horario: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
-      urlImagem: [""]
+      urlImagem: [""],
+      adicional: [""],
     });
+
+    this.route.queryParams.subscribe((queryParams: any) => {
+      this.setValuesOnForm(queryParams["textInputModal"]);
+    });
+  }
+
+  setValuesOnForm(value) {
+    this.form.patchValue({
+      adicional: value,
+    });
+  }
+  
+  clearAditionalInput() {
+    this.form.patchValue({
+      adicional: "",
+    });
+  }
+
+  openAditionalModal() {
+    this.sharedModalService.presentAditionalModal(
+      this.form.get("adicional").value,
+      "/cadastro/novo-culto"
+    );
   }
 
   changeRadioValue(option) {
@@ -65,6 +91,7 @@ export class NovoCultoPage implements OnInit {
   }
 
   async salvarCulto() {
+    console.log(this.form.value);	
     await this.sharedModalService.presentLoadingWithOptions();
 
     // this.downloadURL !== null ||
@@ -85,7 +112,7 @@ export class NovoCultoPage implements OnInit {
     }
 
     await this.cultosSemanaisService.save(this.form.value).subscribe(
-      success => {
+      (success) => {
         this.sharedModalService.presentToast(
           "Culto salvo com sucesso!",
           "dark",
@@ -96,7 +123,7 @@ export class NovoCultoPage implements OnInit {
         this.loadingController.dismiss();
         this.resetarForm();
       },
-      error => {
+      (error) => {
         this.sharedModalService.presentToast(
           "Erro ao salvar culto. Tente novamente!",
           "danger",
@@ -113,7 +140,7 @@ export class NovoCultoPage implements OnInit {
       titulo: null,
       horario: null,
       dia: null,
-      descricao: null
+      descricao: null,
     });
     this.fileImage = null;
     this.fileImageCamera = null;
@@ -127,7 +154,7 @@ export class NovoCultoPage implements OnInit {
   async openGalery() {
     await this.firebaseService
       .openGalery()
-      .then(file => {
+      .then((file) => {
         this.fileImage = file;
       })
       .catch((this.fileImage = null));
@@ -136,14 +163,14 @@ export class NovoCultoPage implements OnInit {
   async uploadPicture() {
     await this.firebaseService
       .uploadPicture("imagens-culto")
-      .then(downURL => (this.downloadURL = downURL))
+      .then((downURL) => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
 
   async takePicture() {
     await this.firebaseService
       .takePicture()
-      .then(file => {
+      .then((file) => {
         //this.fileImage = null;
         this.fileImageCamera = file;
         //this.fileImage = file;
@@ -156,7 +183,7 @@ export class NovoCultoPage implements OnInit {
   async uploadPictureBase64() {
     await this.firebaseService
       .uploadPictureBase64("imagens-culto")
-      .then(downURL => (this.downloadURL = downURL))
+      .then((downURL) => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
 }

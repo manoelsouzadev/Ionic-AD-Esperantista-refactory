@@ -16,11 +16,9 @@
       </ion-header> -->
 
       <ion-header>
+	
         <ion-toolbar mode="ios">
-          <ion-buttons slot="end" fill="clear" (click)="closeSideMenu()">
-            <ion-button><ion-icon name="close" slot="icon-only"></ion-icon></ion-button>
-          </ion-buttons>
-          <ion-title>
+       	  <ion-title>
             Menu
           </ion-title>
         </ion-toolbar>
@@ -49,14 +47,6 @@
           </ion-menu-toggle>
         </ion-list>
 
-        <ion-menu-toggle autoHide="false">
-          <ion-item (click)="exitApp()" routerLinkActive="active" routerDirection="root" detail="false">
-            <ion-icon slot="start" name="log-out"></ion-icon>
-            <ion-label>
-             Sair
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle>
         <!--
         <ion-list *ngIf="loggedIn" lines="none">
           <ion-list-header>
@@ -137,7 +127,7 @@
           </ion-menu-toggle>
         </ion-list>
 
-        <ion-list>
+        <ion-list lines="none">
           <ion-item>
             <ion-label>
               Tema Escuro
@@ -145,6 +135,8 @@
             <ion-toggle [(ngModel)]="dark"></ion-toggle>
           </ion-item>
         </ion-list>
+
+        <ion-button fill="outline" class="btn-exit" (click)="exitApp()">SAIR DO APP</ion-button>
       </ion-content>
     </ion-menu>
 
