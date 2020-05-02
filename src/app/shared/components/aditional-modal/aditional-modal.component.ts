@@ -26,6 +26,6 @@ export class AditionalModalComponent implements OnInit {
   returnForm(){
     let url = this.navParams.get('url');
     this.router.navigate([ url ], { queryParams:{ textInputModal: this.form.get('adicional').value}});
-    this.modalController.dismiss();	
+    this.modalController.dismiss();
   }
 }

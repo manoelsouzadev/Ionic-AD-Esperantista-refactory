@@ -181,7 +181,7 @@
           </ion-row>
         </ion-grid> -->
 
-        <ion-list lines="none">
+        <!-- <ion-list lines="none">
           <ion-item>
             <ion-label mode="ios" position="stacked">Adicionais</ion-label>
             <ion-input
@@ -195,9 +195,10 @@
           <ion-item>
             <ion-button (click)="clearAditionalInput()" fill="clear" mode="ios">Excluir<ion-icon name="trash" slot="end"></ion-icon></ion-button>
           </ion-item>
-        </ion-list>
+        </ion-list> -->
+        <aditional-input [aditional]="aditional" url="/cadastro/novo-culto"></aditional-input>
       </div>
-
+      <!-- (aditional)="setAditionalOnForm($event)" -->
       <div class="ion-padding">
         <ion-button
           mode="ios"

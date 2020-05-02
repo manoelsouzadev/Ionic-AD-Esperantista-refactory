@@ -10,6 +10,8 @@ import { ImageViewerComponent } from "./components/image-viewer/image-viewer.com
 import { LottieAnimationViewModule } from "ng-lottie";
 import { LottieModule } from "ngx-lottie";
 import player from "lottie-web";
+import { AditionalInputComponent } from './components/aditional-input/aditional-input.component';
+import { SharedRoutingModule } from './shared-routing.module';
 // Note we need a separate function as it's required
 // by the AOT compiler.
 export function playerFactory() {
@@ -22,13 +24,15 @@ export function playerFactory() {
     TabMenuComponent,
     ImageViewerComponent,
     LottieAnimationComponent,
-    AditionalModalComponent
+    AditionalModalComponent,
+    AditionalInputComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
     FormsModule,
+    SharedRoutingModule,
     LottieAnimationViewModule.forRoot(),
     LottieModule.forRoot({ player: playerFactory, useCache: true }),
   ],
@@ -37,6 +41,7 @@ export function playerFactory() {
     TabMenuComponent,
     LottieAnimationComponent,
     LottieAnimationViewModule,
+    AditionalInputComponent
   ],
 })
 export class SharedModule {}

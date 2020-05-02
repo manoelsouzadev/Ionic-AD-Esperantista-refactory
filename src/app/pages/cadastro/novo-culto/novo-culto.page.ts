@@ -19,7 +19,8 @@ export class NovoCultoPage implements OnInit {
   protected fileImageCamera: string = null;
   private downloadURL: string = "";
   private radioOption: string = "galeria";
-  private haveText: boolean = false;
+  // private haveText: boolean = false;
+  private aditional: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,29 +42,49 @@ export class NovoCultoPage implements OnInit {
       adicional: [""],
     });
 
+    // this.route.queryParams.subscribe((queryParams: any) => {
+    //   this.setValuesOnForm(queryParams["textInputModal"]);
+    // });
+
     this.route.queryParams.subscribe((queryParams: any) => {
       this.setValuesOnForm(queryParams["textInputModal"]);
     });
   }
 
+
   setValuesOnForm(value) {
     this.form.patchValue({
       adicional: value,
     });
-  }
-  
-  clearAditionalInput() {
-    this.form.patchValue({
-      adicional: "",
-    });
+
+    this.aditional = value;
   }
 
-  openAditionalModal() {
-    this.sharedModalService.presentAditionalModal(
-      this.form.get("adicional").value,
-      "/cadastro/novo-culto"
-    );
-  }
+  // setValuesOnForm(value) {
+  //   this.form.patchValue({
+  //     adicional: value,
+  //   });
+  // }
+
+  // clearAditionalInput() {
+  //   this.form.patchValue({
+  //     adicional: "",
+  //   });
+  // }
+
+  // openAditionalModal() {
+  //   this.sharedModalService.presentAditionalModal(
+  //     this.form.get("adicional").value,
+  //     "/cadastro/novo-culto"
+  //   );
+  // }
+
+  // setAditionalOnForm(value){
+  //   this.form.patchValue({
+  //     adicional: value
+  //   });
+  //   console.log(this.form.value);
+  // }
 
   changeRadioValue(option) {
     this.radioOption = option;
@@ -91,7 +112,7 @@ export class NovoCultoPage implements OnInit {
   }
 
   async salvarCulto() {
-    console.log(this.form.value);	
+    console.log(this.form.value);
     await this.sharedModalService.presentLoadingWithOptions();
 
     // this.downloadURL !== null ||
