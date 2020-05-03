@@ -1,3 +1,4 @@
+import { CovalentTextEditorModule } from '@covalent/text-editor';
 import { AditionalModalComponent } from './components/aditional-modal/aditional-modal.component';
 import { LottieAnimationComponent } from "./components/lottie-animation/lottie-animation.component";
 import { NgModule } from "@angular/core";
@@ -32,6 +33,7 @@ export function playerFactory() {
     IonicModule,
     ReactiveFormsModule,
     FormsModule,
+    CovalentTextEditorModule,
     SharedRoutingModule,
     LottieAnimationViewModule.forRoot(),
     LottieModule.forRoot({ player: playerFactory, useCache: true }),

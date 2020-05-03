@@ -1,22 +1,28 @@
 <form [formGroup]="form">
-<ion-list lines="none">
-    <ion-item>
-    <ion-label mode="ios" position="stacked">Adicionais</ion-label>
-  <ion-label *ngIf="haveText">
-    <ion-button (click)="clearAditionalInput()" fill="clear" mode="ios">Excluir<ion-icon name="trash" slot="end"></ion-icon></ion-button>
-  </ion-label>
+  <ion-list lines="none">
+	<ion-item>
+      <ion-label mode="ios" position="stacked">Adicionais</ion-label>
   
-  <ion-textarea
-      (click)="openAditionalModal()"
-      formControlName="adicional"
-      readonly
-      auto-grow="true"		
-      placeholder="Não há adicionais para mostrar"
-    ></ion-textarea>
-  </ion-item>
+	
+     		
+      <ion-label *ngIf="haveText">
+        <ion-button (click)="clearAditionalInput()" fill="clear" mode="ios"
+          >Excluir<ion-icon name="trash" slot="end"> </ion-icon>
+        </ion-button>
+      </ion-label>
 
-  <!--<ion-item *ngIf="haveText">
+	  
+      <ion-textarea
+        (click)="openAditionalModal()"
+        formControlName="adicional"
+        readonly
+        auto-grow="true"
+        placeholder="Não há adicionais para mostrar"
+      ></ion-textarea>
+  
+</ion-item>
+    <!--<ion-item *ngIf="haveText">
     <ion-button (click)="clearAditionalInput()" fill="clear" mode="ios">Excluir<ion-icon name="trash" slot="end"></ion-icon></ion-button>
   </ion-item>-->
-</ion-list>
+  </ion-list>
 </form>
