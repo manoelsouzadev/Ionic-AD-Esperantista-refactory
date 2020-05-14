@@ -40,7 +40,8 @@ export class AtualizarCultoPage implements OnInit {
 
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
       urlImagem: ["", Validators.required]
@@ -79,7 +80,8 @@ export class AtualizarCultoPage implements OnInit {
     this.form = this.formBuilder.group({
       id: [culto._id],
       titulo: [culto.titulo],
-      horario: [culto.horario],
+      horarioInicio: [culto.horarioInicio],
+      horarioTermino: [culto.horarioTermino],
       dia: [culto.dia],
       descricao: [culto.descricao],
       urlImagem: [culto.urlImagem]
@@ -121,7 +123,8 @@ export class AtualizarCultoPage implements OnInit {
   resetarForm() {
     this.form.patchValue({
       titulo: null,
-      horario: null,
+      horarioInicio: null,
+      horarioTermino: null,
       dia: null,
       descricao: null,
       urlImagem: null

@@ -125,17 +125,10 @@
       <ion-card-header>
         <h5><strong>{{ culto.titulo }}</strong></h5>
         <!-- <h6>{{culto.dia}} - {{ culto.horario }}h</h6> -->
-        <h6>{{culto.dia}} - {{ culto.horario }}h</h6>
+        <h6>{{culto.dia}}, {{ culto.horarioInicio }} às {{ culto.horarioTermino }}</h6>
       </ion-card-header>
       <ion-card-content>
         <p>{{ culto.descricao }}</p>
-        <p>{{ culto.ceia }}</p>
-        <p>{{culto.adicional}}</p>
-        <p>{{culto.adicional2}}</p>
-        <p>{{culto.adicional3}}</p>
-        <p>{{culto.adicional4}}</p>
-        <p>{{culto.adicional5}}</p>
-        <p>{{culto.adicional6}}</p>
       </ion-card-content>
     </ion-card>
   </ng-container>

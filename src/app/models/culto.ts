@@ -1,6 +1,7 @@
 export class Culto {
   titulo: string;
-  horario: string;
+  horarioInicio: string;
+  horarioTermino: string;
   dia: string;
   descricao: string;
   adicional: string;

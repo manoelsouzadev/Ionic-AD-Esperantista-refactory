@@ -1,3 +1,4 @@
+import { Culto } from './../../../models/culto';
 import { Component, ViewEncapsulation } from "@angular/core";
 import { Router } from "@angular/router";
 import { InAppBrowser } from "@ionic-native/in-app-browser/ngx";
@@ -20,7 +21,7 @@ import { delay } from 'rxjs/operators';
 })
 export class CultosSemanaisPage {
   speakers: any[] = [];
-  protected cultos: any[];
+  protected cultos: Culto[];
   private showData: boolean;
   private message: string = "Carregando...";
   private showNoData: boolean = false;

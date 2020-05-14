@@ -35,7 +35,8 @@ export class NovoCultoPage implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
       urlImagem: [""],
@@ -159,7 +160,8 @@ export class NovoCultoPage implements OnInit {
   resetarForm() {
     this.form.patchValue({
       titulo: null,
-      horario: null,
+      horarioInicio: null,
+      horarioTermino: null,
       dia: null,
       descricao: null,
     });
@@ -167,7 +169,8 @@ export class NovoCultoPage implements OnInit {
     this.fileImageCamera = null;
     this.downloadURL = "";
     this.form.get("titulo").markAsUntouched();
-    this.form.get("horario").markAsUntouched();
+    this.form.get("horarioInicio").markAsUntouched();
+    this.form.get("horarioTermino").markAsUntouched();
     this.form.get("dia").markAsUntouched();
     this.form.get("descricao").markAsUntouched();
   }
