@@ -1,4 +1,4 @@
-import { AditionalModalComponent } from '../../components/aditional-modal/aditional-modal.component';
+import { AditionalModalComponent } from "../../components/aditional-modal/aditional-modal.component";
 import { SharedHttpService } from "./../shared-http/shared-http.service";
 import { Injectable } from "@angular/core";
 import {
@@ -82,6 +82,8 @@ export class SharedModalService {
   async showMessageNotice(data) {
     var currentDate = new Date();
     var currentHour = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+    var crtHours = currentDate.getHours();
+    var crtMinutes = currentDate.getMinutes();
 
     for (let i = 0; i < data.length; i++) {
       var strDataInicial = data[i].dataInicio;
@@ -99,6 +101,8 @@ export class SharedModalService {
         partesDataFinal[1] - 1,
         partesDataFinal[2]
       ).toDateString();
+      var dtHours = parseInt(data[i].horario.substring(0, 2));
+      var dtMinutes = data[i].horario.substring(3, 5);
       if (
         dataInicial.toString() == dataAtual.toString() &&
         dataFinal.toString() == dataAtual.toString()
@@ -106,12 +110,54 @@ export class SharedModalService {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas, e termina hoje.');
         if (currentHour === data[i].horario) {
+          // this.presentToast(
+          //   data[i].titulo + " começa agora, e termina hoje.",
+          //   "dark",
+          //   "custom-modal",
+          //   4000
+          // );
+          // await this.delay(5000);
+
           this.presentToast(
-            data[i].titulo + " começa agora, e termina hoje.",
+            `${data[i].titulo} começa agora, e termina hoje.`,
             "dark",
             "custom-modal",
             4000
           );
+          await this.delay(5000);
+        } else if (currentHour < data[i].horario) {
+          this.presentToast(
+            `${data[i].titulo} começa hoje às ${data[i].horario}.`,
+            "dark",
+            "custom-modal",
+            4000
+          );
+          await this.delay(5000);
+        }
+        // else if(crtHours >= data[i].horarioTermino){
+        //         console.log("Culto terminou");
+        // }
+        else if (dtMinutes === "00") {
+          let result = crtHours - dtHours;
+          let msg = this.getMessage(
+            data[i].titulo,
+            result,
+            crtMinutes,
+            dtMinutes
+          );
+          console.log(msg);
+          this.presentToast(msg, "dark", "custom-modal", 4000);
+          await this.delay(5000);
+        } else {
+          let result = crtHours - dtHours;
+          let msg = this.getMessage(
+            data[i].titulo,
+            result,
+            crtMinutes,
+            dtMinutes
+          );
+          console.log(msg);
+          this.presentToast(msg, "dark", "custom-modal", 4000);
           await this.delay(5000);
         }
       } else if (dataInicial.toString() == dataAtual.toString()) {
@@ -136,6 +182,31 @@ export class SharedModalService {
         await this.delay(5000);
       }
     }
+  }
+
+  private getMessage(title, result, currentMinute, dataMinute) {
+    var hourstring = "hora";
+    var minutestring = "minuto";
+    if (result === 0) {
+      result += "0";
+      hourstring = "horas";
+    }
+    if (result === 1) {
+      hourstring = "hora";
+    }
+
+    if (result > 1) {
+      hourstring = "horas";
+    }
+
+    if (currentMinute > "01" || dataMinute > "01") {
+      minutestring = "minutos";
+    }
+
+    //return [result,hourstring,minutestring];
+    return `${title} começou a ${result} ${hourstring} e ${Math.abs(
+      parseInt(dataMinute) - currentMinute
+    )} ${minutestring}.`;
   }
 
   async delay(ms) {
@@ -259,7 +330,7 @@ export class SharedModalService {
     for (let i = 0; i < data.length; i++) {
       if (data[i].dia === this.semana[new Date().getDay()].trim()) {
         this.presentToast(
-          `${data[i].titulo} é hoje às ${data[i].horario}.`,
+          `${data[i].titulo} é hoje às ${data[i].horarioInicio}.`,
           "dark",
           "custom-modal",
           4000
@@ -293,8 +364,8 @@ export class SharedModalService {
       component: AditionalModalComponent,
       componentProps: {
         textInput: textInput,
-        url: url
-      }
+        url: url,
+      },
     });
     return await modal.present();
   }
