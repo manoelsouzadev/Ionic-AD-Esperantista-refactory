@@ -3,7 +3,6 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { SharedModalService } from "../../services/shared-modal/shared-modal.service";
-
 @Component({
   selector: "aditional-input",
   templateUrl: "./aditional-input.component.html",
@@ -33,7 +32,8 @@ export class AditionalInputComponent implements OnInit {
     this.route.queryParams.subscribe((queryParams: any) => {
       this.textInputModal = queryParams["textInputModal"];
       this.setValuesOnForm(this.textInputModal);
-      this.haveText = this.textInputModal !== "" ? true : false;
+      this.haveText = this.textInputModal ? true : false;
+	console.log(this.haveText, this.textInputModal);
     });
   }
 
@@ -42,13 +42,14 @@ export class AditionalInputComponent implements OnInit {
       adicional: value,
     });
 
-    //this.aditional.emit(value);
+    //this.aditional.emit(value);undefined
   }
 
   clearAditionalInput() {
     this.form.patchValue({
       adicional: "",
     });
+    this.haveText = !this.haveText;
   }
 
   openAditionalModal() {
