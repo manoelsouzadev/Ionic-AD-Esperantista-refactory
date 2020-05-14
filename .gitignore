@@ -12,7 +12,7 @@ log.txt
 .vscode/
 npm-debug.log*
 
- environments/
+src/environments/*
 .idea/
 .ionic/
 .sourcemaps/
@@ -35,4 +35,5 @@ $RECYCLE.BIN/
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+
 
