@@ -82,8 +82,10 @@ export class SharedModalService {
   async showMessageNotice(data) {
     var currentDate = new Date();
     var currentHour = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
+    var currentFullDate = `${currentDate.getFullYear()}-${currentDate.getMonth() < 10 ? "0" + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1}-${currentDate.getDate()}`;
     var crtHours = currentDate.getHours();
     var crtMinutes = currentDate.getMinutes();
+    console.log(currentFullDate);
 
     for (let i = 0; i < data.length; i++) {
       var strDataInicial = data[i].dataInicio;
@@ -103,10 +105,12 @@ export class SharedModalService {
       ).toDateString();
       var dtHours = parseInt(data[i].horario.substring(0, 2));
       var dtMinutes = data[i].horario.substring(3, 5);
+	console.log(data[i].dataInicio);
       if (
         dataInicial.toString() == dataAtual.toString() &&
         dataFinal.toString() == dataAtual.toString()
       ) {
+	console.log("Entrou Inicio final");
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas, e termina hoje.');
         if (currentHour === data[i].horario) {
@@ -155,7 +159,8 @@ export class SharedModalService {
       } else if (dataInicial.toString() == dataAtual.toString()) {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas.');
-         if (currentHour === data[i].horario) {
+        console.log("Entrou inicio");
+	if (currentHour === data[i].horario) {
           this.presentToast(
             `${data[i].titulo} começa agora.`,
             "dark",
@@ -201,9 +206,10 @@ export class SharedModalService {
       } else if (dataFinal.toString() == dataAtual.toString()) {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' termina hoje.');
+	console.log("Entrou final");
         if (currentHour === data[i].horario) {
           this.presentToast(
-            `${data[i].titulo} começa agora, e termina hoje.`,
+            `${data[i].titulo} está começando, e termina hoje.`,
             "dark",
             "custom-modal",
             4000
@@ -211,7 +217,7 @@ export class SharedModalService {
           await this.delay(5000);
         } else if (currentHour < data[i].horario) {
           this.presentToast(
-            `${data[i].titulo} começa hoje às ${data[i].horario}.`,
+            `Hoje tem ${data[i].titulo} às ${data[i].horario}.`,
             "dark",
             "custom-modal",
             4000
@@ -244,7 +250,53 @@ export class SharedModalService {
           this.presentToast(msg, "dark", "custom-modal", 4000);
           await this.delay(5000);
         }
-      }//else if(dtAtual > dtInicio && dtAtual < dtFinal ){ lógica das horas}
+      }else if(currentFullDate > data[i].dataInicio && currentFullDate < data[i].dataFinal){
+	console.log("Entrou > <"); 
+	if (currentHour === data[i].horario) {
+          this.presentToast(
+            `${data[i].titulo} está começando.`,
+            "dark",
+            "custom-modal",
+            4000
+          );
+          await this.delay(5000);
+        } else if (currentHour < data[i].horario) {
+          this.presentToast(
+            `Hoje tem ${data[i].titulo} às ${data[i].horario} horas.`,
+            "dark",
+            "custom-modal",
+            4000
+          );
+          await this.delay(5000);
+        }
+        // else if(crtHours >= data[i].horarioTermino){
+        //         console.log("Culto terminou");
+        // }
+        else if (dtMinutes === "00") {
+          let result = crtHours - dtHours;
+          let msg = this.getMessage(
+            data[i].titulo,
+            result,
+            crtMinutes,
+            dtMinutes
+          );
+          console.log(msg);
+          this.presentToast(msg, "dark", "custom-modal", 4000);
+          await this.delay(5000);
+        } else {
+          let result = crtHours - dtHours;
+          let msg = this.getMessage(
+            data[i].titulo,
+            result,
+            crtMinutes,
+            dtMinutes
+          );
+          console.log(msg);
+          this.presentToast(msg, "dark", "custom-modal", 4000);
+          await this.delay(5000);
+        }
+
+      }
     }
   }
 
