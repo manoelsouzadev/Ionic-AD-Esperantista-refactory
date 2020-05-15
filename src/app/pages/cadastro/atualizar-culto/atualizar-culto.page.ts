@@ -20,6 +20,7 @@ export class AtualizarCultoPage implements OnInit {
   private fileImage: any = null;
   private fileImageCamera: string = null;
   private radioOption: string = "galeria";
+  private aditional: string = "teste";
 
   constructor(
     private route: ActivatedRoute,
@@ -44,8 +45,21 @@ export class AtualizarCultoPage implements OnInit {
       horarioTermino: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
-      urlImagem: ["", Validators.required]
+      urlImagem: ["", Validators.required],
+      adicional: [""]
     });
+
+    this.route.queryParams.subscribe((queryParams: any) => {
+      this.setValuesOnForm(queryParams["textInputModal"]);
+    });
+  }
+
+  setValuesOnForm(value) {
+    this.form.patchValue({
+      adicional: value,
+    });
+
+    this.aditional = value;
   }
 
   changeRadioValue(option) {
@@ -77,6 +91,7 @@ export class AtualizarCultoPage implements OnInit {
 
   popularForm(culto) {
     this.id = culto._id;
+    let adicional = culto.adicional;
     this.form = this.formBuilder.group({
       id: [culto._id],
       titulo: [culto.titulo],
@@ -84,9 +99,12 @@ export class AtualizarCultoPage implements OnInit {
       horarioTermino: [culto.horarioTermino],
       dia: [culto.dia],
       descricao: [culto.descricao],
-      urlImagem: [culto.urlImagem]
+      urlImagem: [culto.urlImagem],
+      adicional: [adicional]
     });
+    this.setValuesOnForm(adicional);
     this.urlImagem = culto.urlImagem;
+	console.log(culto, this.aditional);
   }
 
   redirecionarCultosCadastrados() {
@@ -127,7 +145,8 @@ export class AtualizarCultoPage implements OnInit {
       horarioTermino: null,
       dia: null,
       descricao: null,
-      urlImagem: null
+      urlImagem: null,
+      adicional: null
     });
     this.fileImage = null;
     this.fileImageCamera = null;

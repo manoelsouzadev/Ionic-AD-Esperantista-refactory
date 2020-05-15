@@ -62,6 +62,8 @@
         <ion-textarea mode="ios" formControlName="descricao"> </ion-textarea>
       </ion-item>
 
+      <aditional-input [aditional]="aditional" url="/cadastro/atualizar-culto"></aditional-input>
+
       <ion-button
         mode="ios"
         expand="block"
@@ -70,6 +72,7 @@
         (click)="updateCulto()"
         >Salvar<ion-icon name="send" mode="ios" slot="end"></ion-icon
       ></ion-button>
+
     </form>
   </div>
 
@@ -145,7 +148,7 @@
       </ion-list>
     </div>
 
-    <!-- <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
+     <!-- <ion-button mode="ios" expand="block" type="submit" (click)="alterarImagem()"
       >Alterar Imagem<ion-icon name="images" slot="end"></ion-icon
     ></ion-button> -->
   </div>

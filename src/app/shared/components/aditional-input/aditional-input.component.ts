@@ -26,14 +26,13 @@ export class AditionalInputComponent implements OnInit {
     this.form = this.formBuilder.group({
       adicional: [""],
     });
-
+    console.log(this.aditional);
     this.form.get("adicional").setValue(this.aditional);
 
     this.route.queryParams.subscribe((queryParams: any) => {
       this.textInputModal = queryParams["textInputModal"];
       this.setValuesOnForm(this.textInputModal);
       this.haveText = this.textInputModal ? true : false;
-	console.log(this.haveText, this.textInputModal);
     });
   }
 

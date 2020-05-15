@@ -82,7 +82,11 @@ export class SharedModalService {
   async showMessageNotice(data) {
     var currentDate = new Date();
     var currentHour = `${currentDate.getHours()}:${currentDate.getMinutes()}`;
-    var currentFullDate = `${currentDate.getFullYear()}-${currentDate.getMonth() < 10 ? "0" + (currentDate.getMonth() + 1) : currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+    var currentFullDate = `${currentDate.getFullYear()}-${
+      currentDate.getMonth() < 10
+        ? "0" + (currentDate.getMonth() + 1)
+        : currentDate.getMonth() + 1
+    }-${currentDate.getDate()}`;
     var crtHours = currentDate.getHours();
     var crtMinutes = currentDate.getMinutes();
     console.log(currentFullDate);
@@ -105,12 +109,10 @@ export class SharedModalService {
       ).toDateString();
       var dtHours = parseInt(data[i].horario.substring(0, 2));
       var dtMinutes = data[i].horario.substring(3, 5);
-	console.log(data[i].dataInicio);
       if (
         dataInicial.toString() == dataAtual.toString() &&
         dataFinal.toString() == dataAtual.toString()
       ) {
-	console.log("Entrou Inicio final");
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas, e termina hoje.');
         if (currentHour === data[i].horario) {
@@ -159,8 +161,7 @@ export class SharedModalService {
       } else if (dataInicial.toString() == dataAtual.toString()) {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas.');
-        console.log("Entrou inicio");
-	if (currentHour === data[i].horario) {
+        if (currentHour === data[i].horario) {
           this.presentToast(
             `${data[i].titulo} começa agora.`,
             "dark",
@@ -206,7 +207,6 @@ export class SharedModalService {
       } else if (dataFinal.toString() == dataAtual.toString()) {
         //console.log(cultos[i].nome +' é hoje, '+ 'às ' + cultos[i].horario +". "+ i);
         //this.callToast(reuniao[i].titulo + ' termina hoje.');
-	console.log("Entrou final");
         if (currentHour === data[i].horario) {
           this.presentToast(
             `${data[i].titulo} está começando, e termina hoje.`,
@@ -250,9 +250,11 @@ export class SharedModalService {
           this.presentToast(msg, "dark", "custom-modal", 4000);
           await this.delay(5000);
         }
-      }else if(currentFullDate > data[i].dataInicio && currentFullDate < data[i].dataFinal){
-	console.log("Entrou > <"); 
-	if (currentHour === data[i].horario) {
+      } else if (
+        currentFullDate > data[i].dataInicio &&
+        currentFullDate < data[i].dataFinal
+      ) {
+        if (currentHour === data[i].horario) {
           this.presentToast(
             `${data[i].titulo} está começando.`,
             "dark",
@@ -295,7 +297,6 @@ export class SharedModalService {
           this.presentToast(msg, "dark", "custom-modal", 4000);
           await this.delay(5000);
         }
-
       }
     }
   }
@@ -371,10 +372,8 @@ export class SharedModalService {
       textButton2
     );
     if (confirm) {
-      console.log("Deleted");
       return true;
     } else {
-      console.log("Canceled");
       return false;
     }
   }
@@ -434,10 +433,8 @@ export class SharedModalService {
       inputValue
     );
     if (!(title === "")) {
-      console.log("título: " + title);
       return title;
     } else {
-      console.log("título: " + title);
       return title;
     }
   }
