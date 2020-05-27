@@ -23,6 +23,12 @@ export class SharedModalService {
     " Sábado",
   ];
 
+  private currentDate = new Date();
+  private currentHour = `${this.currentDate.getHours()}:${this.currentDate.getMinutes()}`;
+  private currentFullDate = `${this.currentDate.getFullYear()}-${this.currentDate.getMonth() < 10 ? "0" + (this.currentDate.getMonth() + 1) : this.currentDate.getMonth() + 1}-${this.currentDate.getDate()}`;
+  private crtHours = this.currentDate.getHours();
+  private crtMinutes = this.currentDate.getMinutes();
+
   constructor(
     private loadingController: LoadingController,
     private modalController: ModalController,
@@ -117,7 +123,7 @@ export class SharedModalService {
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas, e termina hoje.');
         if (currentHour === data[i].horario) {
           this.presentToast(
-            `${data[i].titulo} começa agora, e termina hoje.`,
+            `${data[i].titulo} inicia agora, e termina hoje.`,
             "dark",
             "custom-modal",
             4000
@@ -125,7 +131,7 @@ export class SharedModalService {
           await this.delay(5000);
         } else if (currentHour < data[i].horario) {
           this.presentToast(
-            `${data[i].titulo} começa hoje às ${data[i].horario} e termina hoje.`,
+            `${data[i].titulo} inicia hoje às ${data[i].horario} e termina hoje.`,
             "dark",
             "custom-modal",
             4000
@@ -163,7 +169,7 @@ export class SharedModalService {
         //this.callToast(reuniao[i].titulo + ' começa hoje, às ' + reuniao[i].horario + ' horas.');
         if (currentHour === data[i].horario) {
           this.presentToast(
-            `${data[i].titulo} começa agora.`,
+            `${data[i].titulo} inicia agora.`,
             "dark",
             "custom-modal",
             4000
@@ -171,7 +177,7 @@ export class SharedModalService {
           await this.delay(5000);
         } else if (currentHour < data[i].horario) {
           this.presentToast(
-            `${data[i].titulo} começa hoje às ${data[i].horario}.`,
+            `${data[i].titulo} inicia hoje às ${data[i].horario}.`,
             "dark",
             "custom-modal",
             4000
@@ -209,7 +215,7 @@ export class SharedModalService {
         //this.callToast(reuniao[i].titulo + ' termina hoje.');
         if (currentHour === data[i].horario) {
           this.presentToast(
-            `${data[i].titulo} está começando, e termina hoje.`,
+            `${data[i].titulo} está iniciando, e termina hoje.`,
             "dark",
             "custom-modal",
             4000
@@ -217,7 +223,7 @@ export class SharedModalService {
           await this.delay(5000);
         } else if (currentHour < data[i].horario) {
           this.presentToast(
-            `Hoje tem ${data[i].titulo} às ${data[i].horario}.`,
+            `${data[i].titulo} inicia às ${data[i].horario}, e termina hoje.`,
             "dark",
             "custom-modal",
             4000
@@ -254,49 +260,50 @@ export class SharedModalService {
         currentFullDate > data[i].dataInicio &&
         currentFullDate < data[i].dataFinal
       ) {
-        if (currentHour === data[i].horario) {
-          this.presentToast(
-            `${data[i].titulo} está começando.`,
-            "dark",
-            "custom-modal",
-            4000
-          );
-          await this.delay(5000);
-        } else if (currentHour < data[i].horario) {
-          this.presentToast(
-            `Hoje tem ${data[i].titulo} às ${data[i].horario} horas.`,
-            "dark",
-            "custom-modal",
-            4000
-          );
-          await this.delay(5000);
-        }
-        // else if(crtHours >= data[i].horarioTermino){
-        //         console.log("Culto terminou");
-        // }
-        else if (dtMinutes === "00") {
-          let result = crtHours - dtHours;
-          let msg = this.getMessage(
-            data[i].titulo,
-            result,
-            crtMinutes,
-            dtMinutes
-          );
-          console.log(msg);
-          this.presentToast(msg, "dark", "custom-modal", 4000);
-          await this.delay(5000);
-        } else {
-          let result = crtHours - dtHours;
-          let msg = this.getMessage(
-            data[i].titulo,
-            result,
-            crtMinutes,
-            dtMinutes
-          );
-          console.log(msg);
-          this.presentToast(msg, "dark", "custom-modal", 4000);
-          await this.delay(5000);
-        }
+      //   if (currentHour === data[i].horario) {
+      //     this.presentToast(
+      //       `${data[i].titulo} está começando.`,
+      //       "dark",
+      //       "custom-modal",
+      //       4000
+      //     );
+      //     await this.delay(5000);
+      //   } else if (currentHour < data[i].horario) {
+      //     this.presentToast(
+      //       `Hoje tem ${data[i].titulo} às ${data[i].horario} horas.`,
+      //       "dark",
+      //       "custom-modal",
+      //       4000
+      //     );
+      //     await this.delay(5000);
+      //   }
+      //   // else if(crtHours >= data[i].horarioTermino){
+      //   //         console.log("Culto terminou");
+      //   // }
+      //   else if (dtMinutes === "00") {
+      //     let result = crtHours - dtHours;
+      //     let msg = this.getMessage(
+      //       data[i].titulo,
+      //       result,
+      //       crtMinutes,
+      //       dtMinutes
+      //     );
+      //     console.log(msg);
+      //     this.presentToast(msg, "dark", "custom-modal", 4000);
+      //     await this.delay(5000);
+      //   } else {
+      //     let result = crtHours - dtHours;
+      //     let msg = this.getMessage(
+      //       data[i].titulo,
+      //       result,
+      //       crtMinutes,
+      //       dtMinutes
+      //     );
+      //     console.log(msg);
+      //     this.presentToast(msg, "dark", "custom-modal", 4000);
+      //     await this.delay(5000);
+      //   }
+      this.showMesageNoticeByListDayOfWeek([data[i]]);
       }
     }
   }
@@ -460,13 +467,59 @@ export class SharedModalService {
       var days = await data[i].dia.split(",");
       for (let j = 0; j < days.length; j++) {
         if (days[j].trim() === this.semana[new Date().getDay()].trim()) {
-          await this.presentToast(
-            `${title} é hoje, às ${hour}.`,
-            "dark",
-            "custom-modal",
-            4000
-          );
-          await this.delay(5000);
+          // await this.presentToast(
+          //   `${title} é hoje, às ${hour}.`,
+          //   "dark",
+          //   "custom-modal",
+          //   4000
+          // );
+          // await this.delay(5000);
+          var dtHours = parseInt(data[i].horario.substring(0, 2));
+          var dtMinutes = data[i].horario.substring(3, 5);
+          if (this.currentHour === data[i].horario) {
+            this.presentToast(
+              `${data[i].titulo} está iniciando.`,
+              "dark",
+              "custom-modal",
+              4000
+            );
+            await this.delay(5000);
+          } else if (this.currentHour < data[i].horario) {
+            this.presentToast(
+              `Hoje tem ${data[i].titulo} às ${data[i].horario} horas. Contamos com sua presença.`,
+              "dark",
+              "custom-modal",
+              4000
+            );
+            await this.delay(5000);
+          }
+          // else if(crtHours >= data[i].horarioTermino){
+          //         console.log("Culto terminou");
+          // }
+          else if (dtMinutes === "00") {
+            let result = this.crtHours - dtHours;
+            let msg = this.getMessage(
+              data[i].titulo,
+              result,
+              this.crtMinutes,
+              dtMinutes
+            );
+            console.log(msg);
+            this.presentToast(msg, "dark", "custom-modal", 4000);
+            await this.delay(5000);
+          } else {
+            let result = this.crtHours - dtHours;
+            let msg = this.getMessage(
+              data[i].titulo,
+              result,
+              this.crtMinutes,
+              dtMinutes
+            );
+            console.log(msg);
+            this.presentToast(msg, "dark", "custom-modal", 4000);
+            await this.delay(5000);
+          }
+
         }
       }
     }
