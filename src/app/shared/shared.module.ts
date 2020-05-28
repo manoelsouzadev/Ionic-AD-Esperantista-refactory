@@ -1,3 +1,4 @@
+import { CollapsibleInputComponent } from './components/collapsible-input/collapsible-input.component';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
 import { AditionalModalComponent } from './components/aditional-modal/aditional-modal.component';
 import { LottieAnimationComponent } from "./components/lottie-animation/lottie-animation.component";
@@ -26,7 +27,8 @@ export function playerFactory() {
     ImageViewerComponent,
     LottieAnimationComponent,
     AditionalModalComponent,
-    AditionalInputComponent
+    AditionalInputComponent,
+    CollapsibleInputComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +45,8 @@ export function playerFactory() {
     TabMenuComponent,
     LottieAnimationComponent,
     LottieAnimationViewModule,
-    AditionalInputComponent
+    AditionalInputComponent,
+    CollapsibleInputComponent
   ],
 })
 export class SharedModule {}

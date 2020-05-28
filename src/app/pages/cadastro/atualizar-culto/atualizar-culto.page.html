@@ -62,6 +62,7 @@
         <ion-textarea mode="ios" formControlName="descricao"> </ion-textarea>
       </ion-item>
 
+      <collapsible-input buttonName="Adicionais" (aditionalValue)="setAditional($event)"></collapsible-input>
       <aditional-input [aditional]="aditional" url="/cadastro/atualizar-culto"></aditional-input>
 
       <ion-button

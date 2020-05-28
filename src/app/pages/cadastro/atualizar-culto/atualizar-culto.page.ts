@@ -62,6 +62,10 @@ export class AtualizarCultoPage implements OnInit {
     this.aditional = value;
   }
 
+  setAditional(value){
+    console.log(value)
+  }
+
   changeRadioValue(option) {
     this.radioOption = option;
     if (option === "galeria") {

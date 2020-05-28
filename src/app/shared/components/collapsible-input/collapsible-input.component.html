@@ -1,0 +1,6 @@
+<button #collapsible class="collapsible" (click)="show()">{{ buttonName }}</button>
+<div class="content">
+  <form [formGroup]="form">
+    <td-text-editor style="color: rgb(116, 116, 116); background: white;" formControlName="aditional" (ngModelChange)="sendValue()"></td-text-editor>
+  </form>
+</div>
