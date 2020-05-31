@@ -16,12 +16,14 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 export class CollapsibleInputComponent implements OnInit {
   private form: FormGroup;
   @Input() buttonName: string;
+  @Input() fieldValue: string;
   @Output() aditionalValue = new EventEmitter();
   @ViewChild("collapsible", { static: true }) collapsible;
 
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    console.log(this.fieldValue);
     this.form = this.formBuilder.group({
       aditional: [""],
     });

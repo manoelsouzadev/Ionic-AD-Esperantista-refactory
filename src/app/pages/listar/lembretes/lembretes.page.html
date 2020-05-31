@@ -13,7 +13,7 @@
     <ion-card-content [innerHTML]="lembrete" class="text-alignment"> </ion-card-content>
   </ion-card>
 </ng-container>
-</ion-content>
+
 <ng-template #loading>
   <lottie-animation
     class="animation-alignment animation-margin"
@@ -22,3 +22,14 @@
     message="{{ message }}"
   ></lottie-animation>
 </ng-template>
+
+<ng-container *ngIf="showNoData">
+  <lottie-animation
+    class="animation-alignment animation-margin"
+    animationName="no-data.json"
+    size="100px"
+    message="{{ message }}"
+  ></lottie-animation>
+</ng-container>
+</ion-content>
+

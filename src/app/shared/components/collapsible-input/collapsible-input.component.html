@@ -1,6 +1,6 @@
-<button #collapsible class="collapsible" (click)="show()">{{ buttonName }}</button>
+<button #collapsible id="collapsible" (click)="show()"><ion-label mode="ios" position="stacked">{{ buttonName }}</ion-label></button>
 <div class="content">
-  <form [formGroup]="form">
+  <form [formGroup]="form" class="ion-padding">
     <td-text-editor style="color: rgb(116, 116, 116); background: white;" formControlName="aditional" (ngModelChange)="sendValue()"></td-text-editor>
   </form>
 </div>

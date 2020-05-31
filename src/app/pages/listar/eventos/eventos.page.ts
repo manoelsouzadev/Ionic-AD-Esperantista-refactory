@@ -37,7 +37,7 @@ export class EventosPage implements OnInit {
       this.eventos = res;
       this.showData = res.length === 0 ? false : true;
       if (this.showData === false){
-         this.showData = true;
+         this.showData = true; 
          this.sleep(1100).then(res => this.showNoData = true);
 
         this.message = "Não há eventos para exibir no momento.";
