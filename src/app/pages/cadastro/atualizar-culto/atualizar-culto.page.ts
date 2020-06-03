@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { LoadingController } from "@ionic/angular";
@@ -20,7 +20,8 @@ export class AtualizarCultoPage implements OnInit {
   private fileImage: any = null;
   private fileImageCamera: string = null;
   private radioOption: string = "galeria";
-  private aditional: string = "teste";
+  private aditional: string;
+  @ViewChild("collapsible", { static: true }) aditionalInput;
 
   constructor(
     private route: ActivatedRoute,
@@ -32,11 +33,13 @@ export class AtualizarCultoPage implements OnInit {
     private cultosSemanaisService: CultosSemanaisService
   ) {}
 
+  private ad;
   ngOnInit() {
+    //this.route.data.subscribe(data => this.aditional = data.culto['adicional']);
     this.route.queryParams.subscribe((queryParams: any) => {
       this.id = queryParams["id"];
     });
-
+    //this.aditional = this.ad['adicional'];
     this.getCultoById(this.id);
 
     this.form = this.formBuilder.group({
@@ -49,22 +52,26 @@ export class AtualizarCultoPage implements OnInit {
       adicional: [""]
     });
 
-    this.route.queryParams.subscribe((queryParams: any) => {
-      this.setValuesOnForm(queryParams["textInputModal"]);
-    });
+    // this.route.queryParams.subscribe((queryParams: any) => {
+    //   this.setValuesOnForm(queryParams["textInputModal"]);
+    // });
   }
 
-  setValuesOnForm(value) {
-    this.form.patchValue({
-      adicional: value,
-    });
+  // setValuesOnForm(value) {
+  //   this.form.patchValue({
+  //     adicional: value,
+  //   });
 
-    this.aditional = value;
-  }
+  //   this.aditional = value;
+  // }
 
-  setAditional(value){
-    console.log(value)
-  }
+  // setAditional(value){
+  //   console.log(value)
+  // }
+
+  // showCollapsible(){
+  //   this.sharedModalService.showCollapsible(this.aditionalInput);
+  // }
 
   changeRadioValue(option) {
     this.radioOption = option;
@@ -106,9 +113,8 @@ export class AtualizarCultoPage implements OnInit {
       urlImagem: [culto.urlImagem],
       adicional: [adicional]
     });
-    this.setValuesOnForm(adicional);
+    // this.setValuesOnForm(adicional);
     this.urlImagem = culto.urlImagem;
-	console.log(culto, this.aditional);
   }
 
   redirecionarCultosCadastrados() {

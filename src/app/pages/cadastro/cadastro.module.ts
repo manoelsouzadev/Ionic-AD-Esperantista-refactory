@@ -1,3 +1,4 @@
+import { CultosSemanaisResolver } from './../../shared/guards/cultos-semanais/cultos-semanais.resolver';
 import { SharedModule } from './../../shared/shared.module';
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";

@@ -590,4 +590,14 @@ export class SharedModalService {
     });
     return await modal.present();
   }
+
+  showCollapsible(collapsible) {
+    collapsible.nativeElement.classList.toggle("active");
+    var content = collapsible.nativeElement.nextElementSibling;
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  }
 }

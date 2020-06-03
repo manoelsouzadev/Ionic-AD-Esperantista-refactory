@@ -1,3 +1,4 @@
+import { CultosSemanaisResolver } from './../../shared/guards/cultos-semanais/cultos-semanais.resolver';
 import { NovoLembretePage } from './novo-lembrete/novo-lembrete.page';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
@@ -28,7 +29,8 @@ const routes: Routes = [
   },
   {
     path: "atualizar-culto",
-    component: AtualizarCultoPage
+    component: AtualizarCultoPage,
+    resolve: { culto : CultosSemanaisResolver }
   },
   {
     path: "atualizar-oracao",

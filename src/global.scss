@@ -62,7 +62,7 @@
     margin-top: 25%;
   }
 
-  .collapsible {
+  #collapsible {
   background-color: #fff;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
   color: #000;
@@ -78,7 +78,7 @@
   background-color: #555;
 }*/
 
-.collapsible:after {
+#collapsible:after {
   content: '\002B';
   color: #000;
   font-weight: bold;

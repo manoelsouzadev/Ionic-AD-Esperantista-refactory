@@ -62,8 +62,9 @@
         <ion-textarea mode="ios" formControlName="descricao"> </ion-textarea>
       </ion-item>
 
-      <collapsible-input buttonName="Adicionais" fieldValue="aditional" (aditionalValue)="setAditional($event)"></collapsible-input>
+      <!-- <collapsible-input buttonName="Adicionais" [fieldValue]="aditional" (aditionalValue)="setAditional($event)"></collapsible-input> -->
       <!-- <aditional-input [aditional]="aditional" url="/cadastro/atualizar-culto"></aditional-input> -->
+      <td-text-editor style="color: rgb(116, 116, 116); background: white;" [formControl]="form.controls['adicional']"></td-text-editor>
 
       <ion-button
         mode="ios"

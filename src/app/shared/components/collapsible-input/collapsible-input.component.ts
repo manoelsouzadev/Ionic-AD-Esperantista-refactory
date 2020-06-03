@@ -25,7 +25,7 @@ export class CollapsibleInputComponent implements OnInit {
   ngOnInit() {
     console.log(this.fieldValue);
     this.form = this.formBuilder.group({
-      aditional: [""],
+      aditional: [this.fieldValue],
     });
   }
 
