@@ -1,8 +1,9 @@
 export class Ensaio {
   titulo: string;
-  horario: string;
+  horarioInicio: string;
+  horarioTermino: string;
   dia: string;
   descricao: string;
-  adicional: string;
   urlImagem: string;
+  adicional: string;
 }

@@ -1,8 +1,10 @@
 export class Campanha {
     titulo: string;
-    horario: string;
+    horarioInicio: string;
+    horarioTermino: string;
     dataInicio: string;
     dataFinal: string;
     descricao: string;
     urlImagem: string;
+    adicional: string;
   }

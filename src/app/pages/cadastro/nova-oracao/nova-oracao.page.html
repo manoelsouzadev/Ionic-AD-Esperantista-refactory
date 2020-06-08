@@ -17,38 +17,24 @@
         </ion-item>
 
         <ion-item>
-          <ion-label mode="ios" position="stacked">Horário</ion-label>
-          <ion-input
-            mode="ios"
-            type="time"
-            formControlName="horario"
-          ></ion-input>
+          <ion-label mode="ios" position="stacked">Horário Início</ion-label>
+          <ion-input mode="ios" type="time" formControlName="horarioInicio"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Horário Término</ion-label>
+          <ion-input mode="ios" type="time" formControlName="horarioTermino"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label mode="ios" position="stacked">Dia da semana</ion-label>
-          <ion-select
-            multiple
-            mode="ios"
-            interface="popover"
-            formControlName="dia"
-          >
+          <ion-select multiple mode="ios" interface="popover" formControlName="dia">
             <ion-select-option value="Domingo">Domingo</ion-select-option>
-            <ion-select-option value="Segunda-feira"
-              >Segunda-feira</ion-select-option
-            >
-            <ion-select-option value="Terça-feira"
-              >Terça-feira</ion-select-option
-            >
-            <ion-select-option value="Quarta-feira"
-              >Quarta-feira</ion-select-option
-            >
-            <ion-select-option value="Quinta-feira"
-              >Quinta-feira</ion-select-option
-            >
-            <ion-select-option value="Sexta-feira"
-              >Sexta-feira</ion-select-option
-            >
+            <ion-select-option value="Segunda-feira">Segunda-feira</ion-select-option>
+            <ion-select-option value="Terça-feira">Terça-feira</ion-select-option>
+            <ion-select-option value="Quarta-feira">Quarta-feira</ion-select-option>
+            <ion-select-option value="Quinta-feira">Quinta-feira</ion-select-option>
+            <ion-select-option value="Sexta-feira">Sexta-feira</ion-select-option>
             <ion-select-option value="Sábado">Sábado</ion-select-option>
           </ion-select>
         </ion-item>
@@ -70,29 +56,20 @@
 
         <ion-list lines="none">
           <ion-item class="label-image">
-            <ion-label mode="ios" position="stacked" id="label-text-top"
-              >Obter imagem pela</ion-label
-            >
+            <ion-label mode="ios" position="stacked" id="label-text-top">Obter imagem pela</ion-label>
           </ion-item>
           <ion-radio-group>
             <ion-row>
               <ion-col>
                 <ion-item>
                   <ion-label>Galeria</ion-label>
-                  <ion-radio
-                    slot="start"
-                    checked
-                    (click)="changeRadioValue('galeria')"
-                  ></ion-radio>
+                  <ion-radio slot="start" checked (click)="changeRadioValue('galeria')"></ion-radio>
                 </ion-item>
               </ion-col>
               <ion-col>
                 <ion-item>
                   <ion-label>Câmera</ion-label>
-                  <ion-radio
-                    slot="start"
-                    (click)="changeRadioValue('camera')"
-                  ></ion-radio>
+                  <ion-radio slot="start" (click)="changeRadioValue('camera')"></ion-radio>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -102,22 +79,10 @@
         <div *ngIf="radioOption == 'galeria'" style="margin-top: -30px;">
           <ion-list>
             <ion-item>
-              <ion-input
-                mode="ios"
-                type="text"
-                [value]="fileImage"
-                readonly
-                placeholder="Escolher imagem"
-              ></ion-input>
-              <ion-button
-                fill="clear"
-                type="button"
-                item-right
-                (click)="clearInputImage('galeria')"
-                *ngIf="fileImage"
-              >
-                <ion-icon name="trash" style="font-size: 22px;"></ion-icon
-              ></ion-button>
+              <ion-input mode="ios" type="text" [value]="fileImage" readonly placeholder="Escolher imagem"></ion-input>
+              <ion-button fill="clear" type="button" item-right (click)="clearInputImage('galeria')" *ngIf="fileImage">
+                <ion-icon name="trash" style="font-size: 22px;"></ion-icon>
+              </ion-button>
             </ion-item>
 
             <ion-button mode="ios" (click)="openGalery()" expand="block">
@@ -129,22 +94,12 @@
         <div *ngIf="radioOption == 'camera'" style="margin-top: -30px;">
           <ion-list>
             <ion-item>
-              <ion-input
-                mode="ios"
-                type="text"
-                [value]="fileImageCamera"
-                readonly
-                placeholder="Capturar imagem"
-              ></ion-input>
-              <ion-button
-                fill="clear"
-                type="button"
-                item-right
-                (click)="clearInputImage('camera')"
-                *ngIf="fileImageCamera"
-              >
-                <ion-icon name="trash" style="font-size: 22px;"></ion-icon
-              ></ion-button>
+              <ion-input mode="ios" type="text" [value]="fileImageCamera" readonly placeholder="Capturar imagem">
+              </ion-input>
+              <ion-button fill="clear" type="button" item-right (click)="clearInputImage('camera')"
+                *ngIf="fileImageCamera">
+                <ion-icon name="trash" style="font-size: 22px;"></ion-icon>
+              </ion-button>
             </ion-item>
             <ion-button mode="ios" (click)="takePicture()" expand="block">
               Câmera<ion-icon name="camera" slot="end"></ion-icon>
@@ -155,16 +110,13 @@
         <!-- <ion-button mode="ios" (click)="openGalery()" expand="block">
           Escolher Imagem<ion-icon name="images" slot="end"></ion-icon>
         </ion-button>-->
+        <td-text-editor style="color: rgb(116, 116, 116); background: white;"
+          [formControl]="form.controls['adicional']"></td-text-editor>
       </div>
       <div class="ion-padding">
-        <ion-button
-          mode="ios"
-          expand="block"
-          type="submit"
-          class="ion-no-margin btn-salvar"
-          (click)="salvarOracao()"
-          >Salvar<ion-icon name="send" mode="ios" slot="end"></ion-icon
-        ></ion-button>
+        <ion-button mode="ios" expand="block" type="submit" class="ion-no-margin btn-salvar" (click)="salvarOracao()">
+          Salvar<ion-icon name="send" mode="ios" slot="end"></ion-icon>
+        </ion-button>
       </div>
     </form>
   </div>

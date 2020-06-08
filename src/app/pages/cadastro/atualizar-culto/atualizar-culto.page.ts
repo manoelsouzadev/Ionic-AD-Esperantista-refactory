@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import { LoadingController } from "@ionic/angular";
@@ -10,7 +10,7 @@ import { FirebaseService } from "./../../../shared/services/firebase/firebase.se
 @Component({
   selector: "app-atualizar-culto",
   templateUrl: "./atualizar-culto.page.html",
-  styleUrls: ["./atualizar-culto.page.scss"]
+  styleUrls: ["./atualizar-culto.page.scss"],
 })
 export class AtualizarCultoPage implements OnInit {
   private form: FormGroup;
@@ -49,7 +49,7 @@ export class AtualizarCultoPage implements OnInit {
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
       urlImagem: ["", Validators.required],
-      adicional: [""]
+      adicional: [""],
     });
 
     // this.route.queryParams.subscribe((queryParams: any) => {
@@ -97,12 +97,12 @@ export class AtualizarCultoPage implements OnInit {
   getCultoById(id) {
     this.cultosSemanaisService
       .loadByID(id)
-      .subscribe(res => this.popularForm(res));
+      .subscribe((res) => this.popularForm(res));
   }
 
   popularForm(culto) {
     this.id = culto._id;
-    let adicional = culto.adicional;
+    //let adicional = culto.adicional;
     this.form = this.formBuilder.group({
       id: [culto._id],
       titulo: [culto.titulo],
@@ -111,7 +111,7 @@ export class AtualizarCultoPage implements OnInit {
       dia: [culto.dia],
       descricao: [culto.descricao],
       urlImagem: [culto.urlImagem],
-      adicional: [adicional]
+      adicional: [culto.adicional],
     });
     // this.setValuesOnForm(adicional);
     this.urlImagem = culto.urlImagem;
@@ -124,7 +124,7 @@ export class AtualizarCultoPage implements OnInit {
   updateCulto() {
     this.sharedModalService.presentLoadingWithOptions();
     this.cultosSemanaisService.save(this.form.value).subscribe(
-      success => {
+      (success) => {
         this.loadingController.dismiss();
         //this.presentToast();
         this.sharedModalService.presentToast(
@@ -137,7 +137,7 @@ export class AtualizarCultoPage implements OnInit {
         this.resetarForm();
         this.redirecionarCultosCadastrados();
       },
-      error =>
+      (error) =>
         this.sharedModalService.presentToast(
           "Erro ao atualizar culto, tente novamente!",
           "danger",
@@ -156,7 +156,7 @@ export class AtualizarCultoPage implements OnInit {
       dia: null,
       descricao: null,
       urlImagem: null,
-      adicional: null
+      adicional: null,
     });
     this.fileImage = null;
     this.fileImageCamera = null;
@@ -184,7 +184,7 @@ export class AtualizarCultoPage implements OnInit {
   async openGalery() {
     await this.firebaseService
       .openGalery()
-      .then(file => (this.fileImage = file))
+      .then((file) => (this.fileImage = file))
       .catch((this.fileImage = null));
   }
 
@@ -239,7 +239,7 @@ export class AtualizarCultoPage implements OnInit {
       await this.form.get("urlImagem").setValue(this.downloadURL);
 
       await this.cultosSemanaisService.save(this.form.value).subscribe(
-        success => {
+        (success) => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
             "dark",
@@ -250,7 +250,7 @@ export class AtualizarCultoPage implements OnInit {
           this.resetarForm();
           this.redirecionarCultosCadastrados();
         },
-        error =>
+        (error) =>
           this.sharedModalService.presentToast(
             "Erro ao alterar imagem, tente novamente!",
             "danger",
@@ -267,7 +267,7 @@ export class AtualizarCultoPage implements OnInit {
   async uploadPicture() {
     await this.firebaseService
       .uploadPicture("imagens-culto")
-      .then(downURL => (this.downloadURL = downURL))
+      .then((downURL) => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
 
@@ -280,7 +280,7 @@ export class AtualizarCultoPage implements OnInit {
   async takePicture() {
     await this.firebaseService
       .takePicture()
-      .then(file => {
+      .then((file) => {
         //this.fileImage = null;
         this.fileImageCamera = file;
         //this.fileImage = file;
@@ -293,7 +293,7 @@ export class AtualizarCultoPage implements OnInit {
   async uploadPictureBase64() {
     await this.firebaseService
       .uploadPictureBase64("imagens-culto")
-      .then(downURL => (this.downloadURL = downURL))
+      .then((downURL) => (this.downloadURL = downURL))
       .catch((this.downloadURL = null));
   }
 
@@ -315,7 +315,7 @@ export class AtualizarCultoPage implements OnInit {
       await this.form.get("urlImagem").setValue(this.downloadURL);
 
       await this.cultosSemanaisService.save(this.form.value).subscribe(
-        success => {
+        (success) => {
           this.sharedModalService.presentToast(
             "Imagem alterada com sucesso!",
             "dark",
@@ -326,7 +326,7 @@ export class AtualizarCultoPage implements OnInit {
           this.resetarForm();
           this.redirecionarCultosCadastrados();
         },
-        error =>
+        (error) =>
           this.sharedModalService.presentToast(
             "Erro ao alterar imagem, tente novamente!",
             "danger",
@@ -348,7 +348,7 @@ export class AtualizarCultoPage implements OnInit {
         "Não",
         "Sim"
       )
-      .then(async del => {
+      .then(async (del) => {
         if (del) {
           await this.firebaseService.deletarImagemStorage(
             "imagens-culto",
@@ -357,7 +357,7 @@ export class AtualizarCultoPage implements OnInit {
 
           await this.form.get("urlImagem").setValue("");
           await this.cultosSemanaisService.save(this.form.value).subscribe(
-            success => {
+            (success) => {
               this.sharedModalService.presentToast(
                 "A imagem foi excluída!",
                 "dark",
@@ -367,7 +367,7 @@ export class AtualizarCultoPage implements OnInit {
               this.resetarForm();
               this.redirecionarCultosCadastrados();
             },
-            error =>
+            (error) =>
               this.sharedModalService.presentToast(
                 "Erro ao excluir imagem, tente novamente!",
                 "danger",

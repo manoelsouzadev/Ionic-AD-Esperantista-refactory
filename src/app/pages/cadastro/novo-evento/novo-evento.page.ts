@@ -31,14 +31,16 @@ export class NovoEventoPage implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       local: ["", Validators.required],
       dataInicio: ["", Validators.required],
       dataFinal: ["", Validators.required],
       dia: ["", Validators.required],
       tipo: ["Interno", Validators.required],
       descricao: ["", Validators.required],
-      urlImagem: ["", Validators.required]
+      urlImagem: ["", Validators.required],
+      adicional: [""]
     });
   }
 
@@ -107,12 +109,14 @@ export class NovoEventoPage implements OnInit {
   resetarForm() {
     this.form.patchValue({
       titulo: null,
-      horario: null,
+      horarioInicio: null,
+      horarioTermino: null,
       local: null,
       dataInicio: null,
       dataFinal: null,
       dia: null,
-      descricao: null
+      descricao: null,
+      adicional: null
     });
     this.fileImage = null;
     this.downloadURL = null;

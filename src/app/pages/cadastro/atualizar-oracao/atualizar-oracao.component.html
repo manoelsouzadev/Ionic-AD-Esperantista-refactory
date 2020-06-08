@@ -22,11 +22,20 @@
         </ion-item>
 
         <ion-item>
-          <ion-label mode="ios" position="stacked">Horário</ion-label>
+          <ion-label mode="ios" position="stacked">Horário Início</ion-label>
           <ion-input
             mode="ios"
             type="time"
-            formControlName="horario"
+            formControlName="horarioInicio"
+          ></ion-input>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label mode="ios" position="stacked">Horário Término</ion-label>
+          <ion-input
+            mode="ios"
+            type="time"
+            formControlName="horarioTermino"
           ></ion-input>
         </ion-item>
 
@@ -157,6 +166,7 @@
       (click)="alterarImagemGaleria()"
       >Alterar Imagem<ion-icon name="images" slot="end"></ion-icon
     ></ion-button> -->
+    <td-text-editor style="color: rgb(116, 116, 116); background: white;" [formControl]="form.controls['adicional']"></td-text-editor>
   </div>
 </ion-content>
 <ng-template #noImage>

@@ -39,12 +39,14 @@ export class AtualizarOracaoComponent implements OnInit {
 
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       dataInicio: ["", Validators.required],
       dataFinal: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
-      urlImagem: ["", Validators.required]
+      urlImagem: ["", Validators.required],
+      adicional: [""]
     });
   }
 
@@ -80,12 +82,14 @@ export class AtualizarOracaoComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: [oracao._id],
       titulo: [oracao.titulo],
-      horario: [oracao.horario],
+      horarioInicio: [oracao.horarioInicio],
+      horarioTermino: [oracao.horarioTermino],
       dataInicio: [oracao.dataInicio],
       dataFinal: [oracao.dataFinal],
       dia: [diaFormatado],
       descricao: [oracao.descricao],
-      urlImagem: [oracao.urlImagem]
+      urlImagem: [oracao.urlImagem],
+      adicional: [oracao.adicional]
     });
     this.urlImagem = oracao.urlImagem;
   }
@@ -125,12 +129,14 @@ export class AtualizarOracaoComponent implements OnInit {
   resetarForm() {
     this.form.patchValue({
       titulo: null,
-      horario: null,
+      horarioInicio: null,
+      horarioTermino: null,
       dataInicio: null,
       dataFinal: null,
       dia: null,
       descricao: null,
-      urlImagem: null
+      urlImagem: null,
+      adicional: null    
     });
     this.fileImage = null;
     this.fileImageCamera = null;

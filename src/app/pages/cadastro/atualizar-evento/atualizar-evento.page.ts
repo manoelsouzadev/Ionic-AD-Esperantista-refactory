@@ -43,14 +43,16 @@ export class AtualizarEventoPage implements OnInit {
 
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       local: ["", Validators.required],
       tipo: ["", Validators.required],
       dataInicio: ["", Validators.required],
       dataFinal: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
-      urlImagem: ["", Validators.required]
+      urlImagem: ["", Validators.required],
+      adicional: [""]
     });
   }
 
@@ -85,14 +87,16 @@ export class AtualizarEventoPage implements OnInit {
     this.form = this.formBuilder.group({
       id: [evento._id],
       titulo: [evento.titulo],
-      horario: [evento.horario],
+      horarioInicio: [evento.horarioInicio],
+      horarioTermino: [evento.horarioTermino],
       local: [evento.local],
       tipo: [evento.tipo],
       dataInicio: [evento.dataInicio],
       dataFinal: [evento.dataFinal],
       dia: [diaFormatado],
       descricao: [evento.descricao],
-      urlImagem: [evento.urlImagem]
+      urlImagem: [evento.urlImagem],
+      adicional: [evento.adicional]
     });
     this.urlImagem = evento.urlImagem;
   }
@@ -132,13 +136,15 @@ export class AtualizarEventoPage implements OnInit {
   resetarForm() {
     this.form.patchValue({
       titulo: null,
-      horario: null,
+      horarioInicio: null,
+      horarioTermino: null,
       local: null,
       dataInicio: null,
       dataFinal: null,
       dia: null,
       descricao: null,
-      urlImagem: null
+      urlImagem: null,
+      adicional: null
     });
     this.fileImage = null;
     this.fileImageCamera = null;

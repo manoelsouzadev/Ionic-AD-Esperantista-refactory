@@ -47,19 +47,19 @@ export class NovoCultoPage implements OnInit {
     //   this.setValuesOnForm(queryParams["textInputModal"]);
     // });
 
-    this.route.queryParams.subscribe((queryParams: any) => {
-      this.setValuesOnForm(queryParams["textInputModal"]);
-    });
+    // this.route.queryParams.subscribe((queryParams: any) => {
+    //   this.setValuesOnForm(queryParams["textInputModal"]);
+    // });
   }
 
 
-  setValuesOnForm(value) {
-    this.form.patchValue({
-      adicional: value,
-    });
+  // setValuesOnForm(value) {
+  //   this.form.patchValue({
+  //     adicional: value,
+  //   });
 
-    this.aditional = value;
-  }
+  //   this.aditional = value;
+  // }
 
   // setValuesOnForm(value) {
   //   this.form.patchValue({
@@ -164,6 +164,7 @@ export class NovoCultoPage implements OnInit {
       horarioTermino: null,
       dia: null,
       descricao: null,
+      adicional: null
     });
     this.fileImage = null;
     this.fileImageCamera = null;

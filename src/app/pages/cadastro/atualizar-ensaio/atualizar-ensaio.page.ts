@@ -39,10 +39,12 @@ export class AtualizarEnsaioPage implements OnInit {
 
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
-      urlImagem: ["", Validators.required]
+      urlImagem: ["", Validators.required],
+      adicional: [""]
     });
   }
 
@@ -77,10 +79,12 @@ export class AtualizarEnsaioPage implements OnInit {
     this.form = this.formBuilder.group({
       id: [ensaio._id],
       titulo: [ensaio.titulo],
-      horario: [ensaio.horario],
+      horarioInicio: [ensaio.horarioInicio],
+      horarioTermino: [ensaio.horarioTermino],
       dia: [diaFormatado],
       descricao: [ensaio.descricao],
-      urlImagem: [ensaio.urlImagem]
+      urlImagem: [ensaio.urlImagem],
+      adicional: [ensaio.adicional]
     });
     this.urlImagem = ensaio.urlImagem;
   }
@@ -120,10 +124,12 @@ export class AtualizarEnsaioPage implements OnInit {
   resetarForm() {
     this.form.patchValue({
       titulo: null,
-      horario: null,
+      horarioInicio: null,
+      horarioTermino: null,
       dia: null,
       descricao: null,
-      urlImagem: null
+      urlImagem: null,
+      adicional: null
     });
     this.fileImage = null;
     this.fileImageCamera = null;

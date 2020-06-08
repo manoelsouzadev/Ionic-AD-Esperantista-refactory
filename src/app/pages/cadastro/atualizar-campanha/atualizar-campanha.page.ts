@@ -46,12 +46,14 @@ export class AtualizarCampanhaPage implements OnInit {
 
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       dataInicio: ["", Validators.required],
       dataFinal: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
-      urlImagem: ["", Validators.required]
+      urlImagem: ["", Validators.required],
+      adicional: [""]
     });
   }
 
@@ -87,12 +89,14 @@ export class AtualizarCampanhaPage implements OnInit {
     this.form = this.formBuilder.group({
       id: [campanha._id],
       titulo: [campanha.titulo],
-      horario: [campanha.horario],
+      horarioInicio: [campanha.horarioInicio],
+      horarioTermino: [campanha.horarioTermino],
       dataInicio: [campanha.dataInicio],
       dataFinal: [campanha.dataFinal],
       dia: [diaFormatado],
       descricao: [campanha.descricao],
-      urlImagem: [campanha.urlImagem]
+      urlImagem: [campanha.urlImagem],
+      adicional: [campanha.adicional]
     });
     this.urlImagem = campanha.urlImagem;
   }
@@ -132,12 +136,14 @@ export class AtualizarCampanhaPage implements OnInit {
   resetarForm() {
     this.form.patchValue({
       titulo: null,
-      horario: null,
+      horarioInicio: null,
+      horarioTermino: null,
       dataInicio: null,
       dataFinal: null,
       dia: null,
       descricao: null,
-      urlImagem: null
+      urlImagem: null,
+      adicional: null
     });
     this.fileImage = null;
     this.fileImageCamera = null;

@@ -30,12 +30,14 @@ export class NovaCampanhaPage implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       dataInicio: ["", Validators.required],
       dataFinal: ["", Validators.required],
       dia: [""],
       descricao: ["", Validators.required],
-      urlImagem: ["", Validators.required]
+      urlImagem: ["", Validators.required],
+      adicional: [""]
     });
   }
 
@@ -108,13 +110,15 @@ export class NovaCampanhaPage implements OnInit {
       dataInicio: null,
       dataFinal: null,
       dia: null,
-      descricao: null
+      descricao: null,
+      adicional: null
     });
     this.fileImage = null;
     this.downloadURL = null;
     this.fileImageCamera = null;
     this.form.get("titulo").markAsUntouched();
-    this.form.get("horario").markAsUntouched();
+    this.form.get("horarioInicio").markAsUntouched();
+    this.form.get("horarioTermino").markAsUntouched();
     this.form.get("dataInicio").markAsUntouched();
     this.form.get("dataFinal").markAsUntouched();
     this.form.get("dia").markAsUntouched();

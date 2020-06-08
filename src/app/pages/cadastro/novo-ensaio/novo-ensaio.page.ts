@@ -32,10 +32,12 @@ export class NovoEnsaioPage implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
-      urlImagem: [""]
+      urlImagem: [""],
+      adicional: [""]
     });
   }
 
@@ -110,9 +112,11 @@ export class NovoEnsaioPage implements OnInit {
   resetarForm() {
     this.form.patchValue({
       titulo: null,
-      horario: null,
+      horarioInicio: null,
+      horarioTermino: null,
       dia: null,
-      descricao: null
+      descricao: null,
+      adicional: null
     });
     this.fileImage = null;
     this.fileImageCamera = null;

@@ -32,10 +32,12 @@ export class NovaOracaoPage implements OnInit {
   ngOnInit() {
     this.form = this.formBuilder.group({
       titulo: ["", Validators.required],
-      horario: ["", Validators.required],
+      horarioInicio: ["", Validators.required],
+      horarioTermino: ["", Validators.required],
       dia: ["", Validators.required],
       descricao: ["", Validators.required],
-      urlImagem: [""]
+      urlImagem: [""],
+      adicional: [""]
     });
   }
 
@@ -65,7 +67,6 @@ export class NovaOracaoPage implements OnInit {
   }
 
   async salvarOracao() {
-    console.log(this.form.value);
     await this.sharedModalService.presentLoadingWithOptions();
     if (this.fileImage !== undefined && this.fileImage !== null) {
       await this.uploadPicture();
@@ -82,7 +83,6 @@ export class NovaOracaoPage implements OnInit {
           "custom-modal",
           1500
         );
-        console.log("Oração salva com sucesso!");
         this.loadingController.dismiss();
         this.resetarForm();
       },
@@ -101,9 +101,11 @@ export class NovaOracaoPage implements OnInit {
   resetarForm() {
     this.form.patchValue({
       titulo: null,
-      horario: null,
+      horarioInicio: null,
+      horarioTermino: null,
       dia: null,
-      descricao: null
+      descricao: null,
+      adicional: null
     });
     this.fileImage = null;
     this.downloadURL = null;

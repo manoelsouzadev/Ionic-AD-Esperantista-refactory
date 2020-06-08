@@ -205,7 +205,8 @@
             <ion-button (click)="clearAditionalInput()" fill="clear" mode="ios">Excluir<ion-icon name="trash" slot="end"></ion-icon></ion-button>
           </ion-item>
         </ion-list> -->
-        <aditional-input [aditional]="aditional" url="/cadastro/novo-culto"></aditional-input>
+        <!-- <aditional-input [aditional]="aditional" url="/cadastro/novo-culto"></aditional-input> -->
+        <td-text-editor style="color: rgb(116, 116, 116); background: white;" [formControl]="form.controls['adicional']"></td-text-editor>
       </div>
       <!-- (aditional)="setAditionalOnForm($event)" -->
       <div class="ion-padding">
