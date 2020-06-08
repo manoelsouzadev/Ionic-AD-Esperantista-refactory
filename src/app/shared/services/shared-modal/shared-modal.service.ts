@@ -26,7 +26,7 @@ export class SharedModalService {
   private currentDate = new Date();
   private crtHours = this.currentDate.getHours();
   private crtMinutes = this.currentDate.getMinutes();
-  private currentHour = `${this.currentDate.getHours() < 10 ? "0" + this.crtHours : crtHours }:${this.currentDate.getMinutes() < 10 ? "0" + this.crtMinutes : this.crtMinutes }`;
+  private currentHour = `${this.currentDate.getHours() < 10 ? "0" + this.crtHours : this.crtHours }:${this.currentDate.getMinutes() < 10 ? "0" + this.crtMinutes : this.crtMinutes }`;
   private currentFullDate = `${this.currentDate.getFullYear()}-${
     this.currentDate.getMonth() < 10
       ? "0" + (this.currentDate.getMonth() + 1)
