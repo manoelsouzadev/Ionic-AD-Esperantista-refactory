@@ -27,6 +27,7 @@ export class OracoesPage implements OnInit {
   async ionViewWillEnter() {
     await this.oracoesService.list().subscribe(res => {
       this.oracoes = res;
+      console.log(res);
       this.showData = res.length === 0 ? false : true;
       if (this.showData === false){
         this.showData = true;

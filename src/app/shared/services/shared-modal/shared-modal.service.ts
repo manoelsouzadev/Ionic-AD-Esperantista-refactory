@@ -461,18 +461,23 @@ export class SharedModalService {
   }
 
   async showMessageNoticeByDayOfWeek(data) {
+    console.log("data: " , data);
     for (let i = 0; i < data.length; i++) {
+      console.log(data[i].dia);
+      console.log(this.semana[new Date().getDay()].trim());
       if (data[i].dia === this.semana[new Date().getDay()].trim()) {
         // this.presentToast(
         //   `${data[i].titulo} é hoje às ${data[i].horarioInicio}.`,
         //   "dark",
         //   "custom-modal",
-        //   4000
+        //   4000await
         // );
         // await this.delay(5000);
 
         var dtHours = parseInt(data[i].horarioInicio.substring(0, 2));
         var dtMinutes = data[i].horarioInicio.substring(3, 5);
+        console.log(this.currentHour);
+        console.log(data[i].horarioInicio);
         if (this.currentHour === data[i].horarioInicio) {
           this.presentToast(
             `${data[i].titulo} já começou. Contamos com sua presença`,
@@ -540,7 +545,10 @@ export class SharedModalService {
           // await this.delay(5000);
           var dtHours = parseInt(data[i].horarioInicio.substring(0, 2));
           var dtMinutes = data[i].horarioInicio.substring(3, 5);
-          if (this.currentHour === data[i].horarioInicio) {
+          console.log(this.currentHour);
+          console.log(data[i].horarioInicio);
+          console.log(data[i].horarioInicio);
+          if (this.currentHour === data[i].horarioTermino) {
             this.presentToast(
               `${data[i].titulo} já começou.`,
               "dark",

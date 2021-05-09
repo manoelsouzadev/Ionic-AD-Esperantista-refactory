@@ -28,6 +28,8 @@ import { Subscription } from "rxjs";
 import { SharedModalService } from "./shared/services/shared-modal/shared-modal.service";
 import { SharedColorService } from "./shared/services/shared-color/shared-color.service";
 import { timer } from "rxjs";
+import { environment } from '../environments/environment.prod';
+
 
 @Component({
   selector: "app-root",
@@ -91,6 +93,10 @@ export class AppComponent implements OnInit {
   ];
   loggedIn = false;
   dark = false;
+
+  private changeMenuColor(): void{
+    console.log(!this.dark);
+  }
 
   constructor(
     private menu: MenuController,

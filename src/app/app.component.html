@@ -132,8 +132,8 @@
             <ion-label>
               Tema Escuro
             </ion-label>
-            <ion-toggle [(ngModel)]="dark"></ion-toggle>
-          </ion-item>
+            <ion-toggle (click)="changeMenuColor()" [(ngModel)]="dark"></ion-toggle>
+          </ion-item> 
         </ion-list>
 
         <ion-button fill="outline" class="btn-exit" (click)="exitApp()">SAIR DO APP</ion-button>

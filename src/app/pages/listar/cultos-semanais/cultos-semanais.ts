@@ -111,8 +111,9 @@ export class CultosSemanaisPage {
   // }
   ngOnInit() {}
 
-  async ionViewWillEnter() {
-    await this.cultosSemanaisService.list().subscribe(res => {
+   ionViewWillEnter() {
+    console.log("Entrou");
+     this.cultosSemanaisService.list().subscribe(res => {
       this.cultos = res;
       this.showData = res.length === 0 ? false : true;
       if (this.showData === false){
